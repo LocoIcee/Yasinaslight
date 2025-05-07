@@ -14,17 +14,17 @@ All shadcn/ui components have been downloaded under `@/components/ui`.
 **Install Dependencies**
 
 ```shell
-pnpm i
+npm i
 ```
 
 **Start Preview**
 
 ```shell
-pnpm run dev
+npm run dev
 ```
 
 **To build**
 
 ```shell
-Pnpm run build
+npm run build
 ```
