@@ -13,7 +13,7 @@ const ImagePlaceholders = {
       style={{
         width,
         height,
-        backgroundImage: "url(/assets/website/yasinas-light.webp)",
+        backgroundImage: "url(/assets/website/tree.webp)",
         backgroundSize: "contain",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
