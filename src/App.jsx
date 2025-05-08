@@ -12,7 +12,7 @@ import ProductsPage from "./components/website/pages/ProductsPage";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Yasinaslight">
       <Routes>
         <Route path="/" element={
           <Layout>
