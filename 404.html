@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <title>Redirecting...</title>
     <script>
-      // Redirect to the app base with the original path
-      location.replace('/Yasinaslight' + location.pathname + location.search + location.hash);
+      const base = '/Yasinaslight';
+      if (!location.pathname.startsWith(base)) {
+        location.replace(base + location.pathname + location.search + location.hash);
+      }
     </script>
   </head>
   <body>
