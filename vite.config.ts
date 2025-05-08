@@ -5,7 +5,7 @@ import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/Yasinaslight/',
+  base: '/Yasinaslight',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
