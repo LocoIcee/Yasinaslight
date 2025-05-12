@@ -6,6 +6,8 @@ import { colors } from "../utils/constants";
 import ImagePlaceholders from "../utils/ImagePlaceholders";
 
 const NavBar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
   // Navigation items
   const navItems = [
     { name: "HOME", path: "/", hasDropdown: false },
@@ -40,33 +42,43 @@ const NavBar = () => {
         </span>
       </div>
 
-      {/* Navigation menu */}
-      <nav>
-        <ul className="flex space-x-1 md:space-x-6">
-          {navItems.map((item, index) => (
-            <li key={index}>
-              <Link
-                to={item.path}
-                className="relative px-2 py-2 inline-block text-xs md:text-sm hover:opacity-90 transition-all group"
-                style={{ 
-                  color: colors.neutral,
-                  position: "relative", 
-                }}
-              >
-                <span className="hidden md:inline">{item.name}</span>
-                <span className="md:hidden">{item.name.substring(0, 1)}</span>
-                {item.hasDropdown && <span className="ml-1">▾</span>}
-                <div
-                  className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"
+      <div className="relative md:static">
+        <button
+          className="md:hidden flex items-center px-3 py-2 border rounded text-white border-white"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <svg className="fill-current h-4 w-4" viewBox="0 0 20 20">
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
+        </button>
+
+        {/* Navigation menu */}
+        <nav>
+          <ul className={`flex-col md:flex-row md:flex space-y-2 md:space-y-0 ${isMobileMenuOpen ? 'flex' : 'hidden'} md:space-x-6 md:items-center`}>
+            {navItems.map((item, index) => (
+              <li key={index}>
+                <Link
+                  to={item.path}
+                  className="relative px-2 py-2 inline-block text-sm hover:opacity-90 transition-all group"
                   style={{ 
-                    backgroundColor: colors.accent,
+                    color: colors.neutral,
+                    position: "relative", 
                   }}
-                ></div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+                >
+                  {item.name}
+                  {item.hasDropdown && <span className="ml-1">▾</span>}
+                  <div
+                    className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"
+                    style={{ 
+                      backgroundColor: colors.accent,
+                    }}
+                  ></div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { colors } from "./constants";
 
-const ASSET_BASE_URL = `${import.meta.env.BASE_URL}assets/website/`;
+const ASSET_BASE_URL = `${import.meta.env.BASE_URL}/assets/website/`;
 
 /**
  * Utility component that provides consistent placeholder images for the website
