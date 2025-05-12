@@ -1,6 +1,8 @@
 import React from "react";
 import { colors } from "./constants";
 
+const ASSET_BASE_URL = `${import.meta.env.BASE_URL}assets/website/`;
+
 /**
  * Utility component that provides consistent placeholder images for the website
  * until actual images are available
@@ -13,7 +15,7 @@ const ImagePlaceholders = {
       style={{
         width,
         height,
-        backgroundImage: "url(./assets/website/tree.webp)",
+        backgroundImage: `url(${ASSET_BASE_URL}tree.webp)`,
         backgroundSize: "contain",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
@@ -26,7 +28,7 @@ const ImagePlaceholders = {
     <div 
       className={`absolute inset-0 z-0 opacity-15 ${className}`}
       style={{
-        backgroundImage: "url(./assets/website/tree.webp)",
+        backgroundImage: `url(${ASSET_BASE_URL}tree.webp)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -56,7 +58,7 @@ const ImagePlaceholders = {
       style={{
         width: size,
         height: size,
-        backgroundImage: "url(./assets/website/tree.webp)",
+        backgroundImage: `url(${ASSET_BASE_URL}tree.webp)`,
         backgroundSize: "contain",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -73,7 +75,7 @@ const ImagePlaceholders = {
       style={{
         width,
         height,
-        backgroundImage: "url(./assets/website/tree.webp)",
+        backgroundImage: `url(${ASSET_BASE_URL}tree.webp)`,
         backgroundSize: "contain",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
@@ -98,7 +100,7 @@ const ImagePlaceholders = {
       style={{
         width: size,
         height: size,
-        backgroundImage: "url(./assets/website/tree.webp)",
+        backgroundImage: `url(${ASSET_BASE_URL}tree.webp)`,
         backgroundSize: "70%",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
@@ -123,7 +125,7 @@ const ImagePlaceholders = {
         <div
           className="w-12 h-12 mb-2 opacity-50"
           style={{
-            backgroundImage: "url(./assets/website/tree.webp)",
+            backgroundImage: `url(${ASSET_BASE_URL}tree.webp)`,
             backgroundSize: "contain",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat"
@@ -151,7 +153,7 @@ const ImagePlaceholders = {
         <div
           className="w-12 h-12 mb-2 opacity-50"
           style={{
-            backgroundImage: "url(./assets/website/tree.webp)",
+            backgroundImage: `url(${ASSET_BASE_URL}tree.webp)`,
             backgroundSize: "contain",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat"
@@ -183,7 +185,7 @@ const ImagePlaceholders = {
         style={{
           width: "60%",
           height: "60%",
-          backgroundImage: "url(./assets/website/tree.webp)",
+          backgroundImage: `url(${ASSET_BASE_URL}tree.webp)`,
           backgroundSize: "contain",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat"
