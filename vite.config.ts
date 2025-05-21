@@ -14,10 +14,10 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',   
-    port: 80, 
-    strictPort: true,              
+    port: 3000, 
+    strictPort: false,              
     hmr: {
-      clientPort: 80        
+      clientPort: 3000        
     },
     allowedHosts: ['yasinaslight.nex.sh']   
   },

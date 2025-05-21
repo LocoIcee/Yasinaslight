@@ -15,7 +15,7 @@ const ImagePlaceholders = {
       style={{
         width,
         height,
-        backgroundImage: `url(${ASSET_BASE_URL}tree.webp)`,
+        backgroundImage: `url(${ASSET_BASE_URL}logo.png)`,
         backgroundSize: "contain",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
@@ -28,7 +28,7 @@ const ImagePlaceholders = {
     <div 
       className={`absolute inset-0 z-0 opacity-15 ${className}`}
       style={{
-        backgroundImage: `url(${ASSET_BASE_URL}tree.webp)`,
+        backgroundImage: `url(${ASSET_BASE_URL}yasinas-light.webp)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -43,7 +43,10 @@ const ImagePlaceholders = {
       className={`crystal-divider my-8 ${className}`}
       style={{
         height: "2px",
-        background: `linear-gradient(to right, transparent, ${colors.secondary}, transparent)`,
+        backgroundImage: `url(${ASSET_BASE_URL}crystal-divider.png)`,
+        backgroundSize: "contain",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         width,
         maxWidth: "200px",
         margin: "2rem auto"
@@ -58,7 +61,7 @@ const ImagePlaceholders = {
       style={{
         width: size,
         height: size,
-        backgroundImage: `url(${ASSET_BASE_URL}tree.webp)`,
+        backgroundImage: `url(${ASSET_BASE_URL}sacred-geometry.png)`,
         backgroundSize: "contain",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -75,7 +78,7 @@ const ImagePlaceholders = {
       style={{
         width,
         height,
-        backgroundImage: `url(${ASSET_BASE_URL}tree.webp)`,
+        backgroundImage: `url(${ASSET_BASE_URL}tree-of-life.png)`,
         backgroundSize: "contain",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
@@ -88,7 +91,10 @@ const ImagePlaceholders = {
     <div 
       className={`absolute inset-0 opacity-20 pointer-events-none ${className}`}
       style={{
-        background: `radial-gradient(circle at top, ${colors.accent}40, transparent 70%)`,
+        backgroundImage: `url(${ASSET_BASE_URL}light-rays.png)`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat"
       }}
     ></div>
   ),
