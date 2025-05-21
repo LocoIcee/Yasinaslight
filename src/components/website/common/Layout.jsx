@@ -1,6 +1,8 @@
 import React from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import Cart from "./Cart";
+import { CartProvider } from "../context/CartContext";
 
 const Layout = ({ children }) => {
   // Add Google Fonts
@@ -30,13 +32,16 @@ const Layout = ({ children }) => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <NavBar />
-      <main className="flex-grow">
-        {children}
-      </main>
-      <Footer />
-    </div>
+    <CartProvider>
+      <div className="flex flex-col min-h-screen">
+        <NavBar />
+        <main className="flex-grow">
+          {children}
+        </main>
+        <Footer />
+        <Cart />
+      </div>
+    </CartProvider>
   );
 };
 
