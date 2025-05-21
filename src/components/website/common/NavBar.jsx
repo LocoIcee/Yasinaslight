@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // Colors from constants.js
 import { colors } from "../utils/constants";
 import ImagePlaceholders from "../utils/ImagePlaceholders";
+import CartButton from "./CartButton";
 
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -76,6 +77,9 @@ const NavBar = () => {
                 </Link>
               </li>
             ))}
+            <li className="ml-2">
+              <CartButton />
+            </li>
           </ul>
         </nav>
       </div>
