@@ -29,7 +29,7 @@ const Cart = () => {
   if (!isCartOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-end">
+    <div className="fixed inset-0 bg-gray-500 bg-opacity-30 z-50 flex justify-end">
       {/* Cart panel */}
       <div 
         className={`w-full md:w-96 h-full bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${isCartOpen ? 'translate-x-0' : 'translate-x-full'}`}
@@ -69,10 +69,10 @@ const Cart = () => {
               </svg>
               <p className="mt-4 text-lg" style={{ color: colors.text }}>Your cart is empty</p>
               <button 
-                className="mt-4 px-4 py-2 rounded-full text-sm"
+                className="mt-4 px-4 py-2 rounded-full text-sm transition-colors duration-200 border hover:opacity-80"
                 style={{
-                  backgroundColor: colors.secondary,
-                  color: colors.neutral,
+                  color: colors.secondary,
+                  borderColor: colors.secondary
                 }}
                 onClick={closeCart}
               >
@@ -126,7 +126,7 @@ const Cart = () => {
                     <div className="mt-auto flex justify-between items-center">
                       <div className="flex items-center border rounded" style={{ borderColor: `${colors.text}30` }}>
                         <button 
-                          className="px-2 py-1 text-sm"
+                          className="px-2 py-1 text-sm transition-colors duration-200 hover:opacity-80"
                           onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
                         >
                           -
@@ -135,7 +135,7 @@ const Cart = () => {
                           {item.quantity}
                         </span>
                         <button 
-                          className="px-2 py-1 text-sm"
+                          className="px-2 py-1 text-sm transition-colors duration-200 hover:opacity-80"
                           onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
                         >
                           +
@@ -151,7 +151,7 @@ const Cart = () => {
               ))}
 
               <button 
-                className="w-full text-sm py-2 text-center"
+                className="w-full text-sm py-2 text-center transition-colors duration-200 hover:opacity-80"
                 style={{ color: colors.accent }}
                 onClick={clearCart}
               >
@@ -178,10 +178,10 @@ const Cart = () => {
             </div>
             
             <button
-              className="w-full py-3 rounded-md text-center font-semibold mt-4"
+              className="w-full py-3 rounded-md text-center font-semibold mt-4 border transition-colors duration-200 hover:opacity-80"
               style={{
-                backgroundColor: colors.accent,
-                color: colors.text
+                color: colors.accent,
+                borderColor: colors.accent
               }}
               onClick={() => {
                 alert('Checkout functionality will be implemented soon!');
@@ -191,7 +191,7 @@ const Cart = () => {
             </button>
             
             <button 
-              className="w-full py-2 mt-2 text-center"
+              className="w-full py-2 mt-2 text-center transition-colors duration-200 hover:opacity-80"
               style={{ color: colors.secondary }}
               onClick={closeCart}
             >
