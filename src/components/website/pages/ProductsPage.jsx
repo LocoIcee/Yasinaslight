@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ImagePlaceholders from "../utils/ImagePlaceholders";
 import { colors } from "../utils/constants";
+import { useCart } from "../context/CartContext";
 
 const ProductsPage = () => {
+   // Get addToCart function from cart context
+  const { addToCart } = useCart();
+  
   // Product categories
   const categories = ["all", "crystals", "oils", "incense", "books", "jewelry"];
   
@@ -342,6 +346,7 @@ const ProductsPage = () => {
                       backgroundColor: colors.secondary,
                       color: colors.neutral,
                     }}
+                    onClick={() => addToCart(product)}
                   >
                     Add to Cart
                   </button>
