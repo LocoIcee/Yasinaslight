@@ -77,9 +77,8 @@ const NavBar = () => {
                 </Link>
               </li>
             ))}
-            <li className="ml-2">
-              <CartButton />
-            </li>
+            {/* Only show cart button when there are items in the cart */}
+            <CartButton />
           </ul>
         </nav>
       </div>
