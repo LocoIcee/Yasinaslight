@@ -15,7 +15,7 @@ const CartButton = () => {
       <button
         className="relative flex items-center justify-center p-2 rounded-full transition-all hover:bg-opacity-80"
         style={{
-          backgroundColor: colors.secondary,
+          backgroundColor: colors.primary,
           color: colors.neutral,
         }}
         onClick={toggleCart}

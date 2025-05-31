@@ -9,6 +9,7 @@ import ServicesPage from "./components/website/pages/ServicesPage";
 import ContactPage from "./components/website/pages/ContactPage";
 import ClassesPage from "./components/website/pages/ClassesPage";
 import ProductsPage from "./components/website/pages/ProductsPage";
+import CalendarPage from "./components/website/pages/CalendarPage";
 
 function App() {
   return (
@@ -42,6 +43,11 @@ function App() {
         <Route path="/products" element={
           <Layout>
             <ProductsPage />
+          </Layout>
+        } />
+         <Route path="/calendar" element={
+          <Layout>
+            <CalendarPage />
           </Layout>
         } />
         {/* Additional routes will be added as pages are developed */}

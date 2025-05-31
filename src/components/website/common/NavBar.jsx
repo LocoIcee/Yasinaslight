@@ -16,6 +16,7 @@ const NavBar = () => {
     { name: "SERVICES", path: "/services", hasDropdown: true },
     { name: "PRODUCTS", path: "/products", hasDropdown: true },
     { name: "CLASSES & EVENTS", path: "/classes", hasDropdown: false },
+    { name: "CALENDAR", path: "/calendar", hasDropdown: false },
     { name: "CONTACT", path: "/contact", hasDropdown: false },
   ];
 

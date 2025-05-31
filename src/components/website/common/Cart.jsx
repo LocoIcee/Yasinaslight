@@ -29,10 +29,10 @@ const Cart = () => {
   if (!isCartOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-500 bg-opacity-30 z-50 flex justify-end">
+    <div className="fixed inset-0 z-50 flex justify-end backdrop-blur-sm bg-white/10 pointer-events-none">
       {/* Cart panel */}
       <div 
-        className={`w-full md:w-96 h-full bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${isCartOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`w-full md:w-96 h-full bg-white shadow-xl transform transition-transform duration-300 ease-in-out pointer-events-auto ${isCartOpen ? 'translate-x-0' : 'translate-x-full'}`}
         style={{ backgroundColor: colors.neutral }}
       >
         {/* Cart header */}
@@ -152,7 +152,7 @@ const Cart = () => {
 
               <button 
                 className="w-full text-sm py-2 text-center transition-colors duration-200 hover:opacity-80"
-                style={{ color: colors.accent }}
+                style={{ color: colors.text }}
                 onClick={clearCart}
               >
                 Clear Cart
@@ -180,8 +180,9 @@ const Cart = () => {
             <button
               className="w-full py-3 rounded-md text-center font-semibold mt-4 border transition-colors duration-200 hover:opacity-80"
               style={{
-                color: colors.accent,
-                borderColor: colors.accent
+                backgroundColor: colors.primary,
+                color: colors.neutral,
+                borderColor: colors.primary
               }}
               onClick={() => {
                 alert('Checkout functionality will be implemented soon!');
@@ -192,7 +193,7 @@ const Cart = () => {
             
             <button 
               className="w-full py-2 mt-2 text-center transition-colors duration-200 hover:opacity-80"
-              style={{ color: colors.secondary }}
+              style={{ color: colors.text }}
               onClick={closeCart}
             >
               Continue Shopping
