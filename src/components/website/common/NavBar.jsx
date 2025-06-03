@@ -1,13 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Colors from constants.js
 import { colors } from "../utils/constants";
 import ImagePlaceholders from "../utils/ImagePlaceholders";
 import CartButton from "./CartButton";
+import { useAuth } from "../../../contexts/AuthContext";
+import { Button } from "../../ui/button";
+import { LogIn, LogOut, User } from "lucide-react";
 
 const NavBar = () => {
+  const { currentUser, signOut } = useAuth();
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
   // Navigation items
   const navItems = [
@@ -16,7 +30,6 @@ const NavBar = () => {
     { name: "SERVICES", path: "/services", hasDropdown: true },
     { name: "PRODUCTS", path: "/products", hasDropdown: true },
     { name: "CLASSES & EVENTS", path: "/classes", hasDropdown: false },
-    { name: "CALENDAR", path: "/calendar", hasDropdown: false },
     { name: "CONTACT", path: "/contact", hasDropdown: false },
   ];
 
@@ -57,7 +70,7 @@ const NavBar = () => {
         {/* Navigation menu */}
         <nav>
           <ul className={`flex-col md:flex-row md:flex space-y-2 md:space-y-0 ${isMobileMenuOpen ? 'flex' : 'hidden'} md:space-x-6 md:items-center`}>
-            {navItems.map((item, index) => (
+            {[...navItems, ...(currentUser ? [{ name: "CALENDAR", path: "/calendar", hasDropdown: false }] : [])].map((item, index) => (
               <li key={index}>
                 <Link
                   to={item.path}
@@ -80,6 +93,41 @@ const NavBar = () => {
             ))}
             {/* Only show cart button when there are items in the cart */}
             <CartButton />
+            
+            {/* Authentication buttons */}
+            {!currentUser ? (
+              <li>
+                <Link to="/login">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="flex items-center space-x-1 text-white hover:text-primary transition-colors duration-200"
+                  >
+                    <LogIn size={16} />
+                    <span>Login</span>
+                  </Button>
+                </Link>
+              </li>
+            ) : (
+              <li className="flex items-center">
+                <div className="mr-2 flex items-center">
+                  <User size={16} className="mr-1" style={{ color: colors.neutral }} />
+                  <span className="text-xs truncate max-w-[100px]" style={{ color: colors.neutral }}>
+                    {currentUser.displayName || currentUser.email.split('@')[0]}
+                  </span>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={handleLogout}
+                  className="flex items-center space-x-1"
+                  style={{ color: colors.neutral }}
+                >
+                  <LogOut size={16} />
+                  <span>Logout</span>
+                </Button>
+              </li>
+            )}
           </ul>
         </nav>
       </div>

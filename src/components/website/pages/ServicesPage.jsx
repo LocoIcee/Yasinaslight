@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthContext";
 import { colors, fonts } from "../utils/constants";
 import PlaceholderImage from "../utils/PlaceholderImage";
 
 const ServicesPage = () => {
+  const { currentUser } = useContext(AuthContext);
   // State for active service (for scrolling to)
   const [activeService, setActiveService] = useState(null);
 
@@ -305,7 +307,7 @@ const ServicesPage = () => {
                   </h3>
                 </div>
                 <Link
-                  to="/contact#booking"
+                  to={currentUser ? "/calendar" : "/login?redirect=/calendar"}
                   className="mt-4 md:mt-0 px-5 py-2 rounded-full text-sm transition-all hover:shadow-md inline-flex items-center gap-2"
                   style={{
                     backgroundColor: colors.secondary,
@@ -422,7 +424,7 @@ const ServicesPage = () => {
                     </div>
                     <div className="p-4 text-center">
                       <Link
-                        to="/contact#booking"
+                        to={currentUser ? "/calendar" : "/login?redirect=/calendar"}
                         className="w-full inline-block px-4 py-2 rounded-md transition-all hover:shadow-md"
                         style={{
                           backgroundColor: colors.secondary,
@@ -544,7 +546,7 @@ const ServicesPage = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
-              to="/contact#booking"
+              to={currentUser ? "/calendar" : "/login?redirect=/calendar"}
               className="px-6 py-3 rounded-md transition-all hover:shadow-lg"
               style={{
                 backgroundColor: colors.secondary,
