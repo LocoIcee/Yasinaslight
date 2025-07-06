@@ -69,7 +69,7 @@ export function NextAuthProvider({ children }) {
       setError(null);
       
       // Get Google client ID from environment variables
-      const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+      const clientId = import.meta.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
       if (!clientId) {
         throw new Error('Google Client ID not found. Check your environment variables.');
       }

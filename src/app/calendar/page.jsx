@@ -22,8 +22,8 @@ const CalendarPage = () => {
   // 3. Enable the Google Calendar API
   // 4. Create OAuth 2.0 credentials and API key
   // 5. Add authorized JavaScript origins and redirect URIs
-  const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY || 'YOUR_API_KEY';
-  const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || 'YOUR_CLIENT_ID';
+  const GOOGLE_API_KEY = import.meta.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+  const GOOGLE_CLIENT_ID = import.meta.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
   
   // Initialize the Google API client
   useEffect(() => {
