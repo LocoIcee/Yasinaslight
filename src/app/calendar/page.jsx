@@ -1,4 +1,3 @@
-'use client';
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Shield } from 'lucide-react';
@@ -7,7 +6,7 @@ import {
   initializeGoogleApi, 
   isAuthenticated as checkIsAuthenticated, 
   requestAuthorization 
-} from '../calendar/GoogleCalendarAPI';
+} from '@/components/calendar/GoogleCalendarAPI';
 
 const CalendarPage = () => {
   const [isInitializing, setIsInitializing] = useState(true);
