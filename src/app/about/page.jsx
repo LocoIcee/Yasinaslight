@@ -129,54 +129,28 @@ const AboutPage = () => {
               </h2>
 
               <h3 className="text-2xl mb-6" style={{ color: colors.text }}>
-                Hello, I'm Yasina
+                Hi, I’m Yasina Bhanji
               </h3>
 
               <div className="space-y-4" style={{ color: colors.text, lineHeight: "1.8" }}>
                 <p>
-                  My journey into energy healing began over 15 years ago during a period of personal health challenges. After conventional treatments left me seeking more holistic solutions, I discovered the transformative power of Reiki and other energy healing modalities. The profound impact these practices had on my own wellbeing inspired me to dedicate myself to helping others find balance and healing.
-                </p>
+                  I help soul-led women move through emotional stuckness, spiritual transitions, and financial limitations—so they can rise into alignment, purpose, and prosperity.
+                  My work is rooted in the belief that when you live from the soul, everything shifts. Clarity rises. Confidence strengthens. Life begins to flow.
+                  And yes—abundance follows.
 
-                <p>
-                  Since establishing Yasina's Light in 2012, I've had the privilege of guiding hundreds of clients through their healing journeys. Every session is approached with deep reverence for the individual's unique needs and energy pattern. My practice combines traditional healing wisdom with contemporary understanding of the mind-body connection.
                 </p>
-
                 <p>
-                  When I'm not in my healing space, you'll find me exploring nature trails, tending to my crystal garden, or deepening my practice through ongoing education. My home in Airdrie provides the perfect balance of community connection and peaceful surroundings that inspire my work.
+                  Whether you're moving through a spiritual awakening, burnout, emotional heaviness, or a season of uncertainty, my work is here to support you. I help you gently release what no longer serves you, regulate your energy, and reconnect with your purpose.
+                  My approach is heart-centered and grounded. I believe healing doesn’t have to be hard—it just needs to be held with compassion and consistency. You already carry the wisdom within you. I'm here to help you hear it more clearly.
+                  I've walked the path of emotional intensity, spiritual growth, and soul transformation myself. I know what it’s like to feel lost in the fog and long for clarity. That’s why I create spaces that are safe, soft, and supportive—where deep healing and soulful realignment can take place.
+                </p>
+                <p>
+                  If you’re ready to feel aligned, empowered, and deeply seen—let’s begin your journey.
                 </p>
               </div>
             </div>
 
-            {/* Certifications */}
-            <div className="mb-6">
-              <h3
-                className="text-lg border-b pb-2 mb-3"
-                style={{ color: colors.secondary, borderColor: colors.secondary + "40" }}
-              >
-                Certifications & Training
-              </h3>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {certifications.map((cert, index) => (
-                  <li
-                    key={index}
-                    className="flex items-start mb-2"
-                  >
-                    <div
-                      className="w-2 h-2 mt-2 mr-2 rounded-full"
-                      style={{ backgroundColor: colors.accent }}
-                    ></div>
-                    <div>
-                      <span className="block font-medium" style={{ color: colors.primary }}>
-                        {cert.title}
-                      </span>
-                      <span className="block text-sm" style={{ color: colors.text + "99" }}>
-                        {cert.organization} • {cert.year}
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            
           </div>
         </div>
 
@@ -188,13 +162,11 @@ const AboutPage = () => {
               style={{ color: colors.primary, fontFamily: fonts.serif }}
             >
               <span className="px-2" style={{ color: colors.accent }}>✧</span>
-              MY HEALING PHILOSOPHY
+              MY MISSION
               <span className="px-2" style={{ color: colors.accent }}>✧</span>
             </h2>
             <p style={{ color: colors.text, lineHeight: "1.8" }}>
-              My approach to healing combines traditional wisdom with modern understanding, 
-              focusing on treating the whole person rather than isolated symptoms. I believe that 
-              true healing comes from within, and my role is to help facilitate that natural process.
+              My mission is to support individuals through life’s pivotal transitions—when clarity feels distant and transformation is calling. Using a blend of all the tools the universe has given me, I help people release what no longer serves them and reconnect with their authentic truth. I hold space with compassion, insight, and grounded presence so you can navigate your journey with more ease, trust, and intuitive flow.
             </p>
           </div>
 
@@ -229,123 +201,9 @@ const AboutPage = () => {
           </div>
         </div>
 
-        {/* Healing Approach */}
-        <div className="mb-20">
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-2">
-              {/* Content column */}
-              <div className="p-8 lg:p-12">
-                <h2
-                  className="text-xl md:text-2xl mb-6"
-                  style={{ color: colors.primary, fontFamily: fonts.serif }}
-                >
-                  My Approach to Energy Healing
-                </h2>
+        
 
-                <div className="space-y-4" style={{ color: colors.text, lineHeight: "1.8" }}>
-                  <p>
-                    I believe that our bodies have an innate wisdom and capacity for healing. My role is to help remove energetic blockages and create the optimal conditions for your natural healing process to occur. Each session begins with a thorough consultation to understand your specific needs and goals.
-                  </p>
-
-                  <p>
-                    <strong style={{ color: colors.primary }}>Personalized Approach:</strong>{" "}
-                    No two healing journeys are alike. I often combine different modalities such as Reiki, reflexology, crystal healing, and intuitive guidance based on what will best serve you at this moment in your healing journey.
-                  </p>
-
-                  <p>
-                    <strong style={{ color: colors.primary }}>Safe Space:</strong>{" "}
-                    Creating a safe, nurturing environment is fundamental to my practice. The healing space is carefully prepared with cleansed energy, soothing music, and aromatherapy to enhance your comfort and the effectiveness of our work together.
-                  </p>
-
-                  <p>
-                    <strong style={{ color: colors.primary }}>Empowerment:</strong>{" "}
-                    While I guide the healing session, I believe in empowering you with knowledge and techniques to continue your healing journey between sessions. This might include simple energy exercises, meditation practices, or lifestyle recommendations.
-                  </p>
-                </div>
-              </div>
-
-              {/* Image column */}
-              <div>
-                <PlaceholderImage
-                  height="100%"
-                  text="Healing Session"
-                  bgColor={colors.secondary + "20"}
-                  icon={true}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Testimonials */}
-        <div className="mb-20">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2
-              className="text-xl md:text-2xl mb-4"
-              style={{ color: colors.primary, fontFamily: fonts.serif }}
-            >
-              <span className="px-2" style={{ color: colors.accent }}>✧</span>
-              CLIENT EXPERIENCES
-              <span className="px-2" style={{ color: colors.accent }}>✧</span>
-            </h2>
-          </div>
-
-          {/* Testimonial Quote */}
-          <div 
-            className="max-w-4xl mx-auto p-8 rounded-lg relative"
-            style={{ 
-              backgroundColor: colors.primary + "08",
-              borderLeft: `4px solid ${colors.accent}`
-            }}
-          >
-            {/* Large quote marks */}
-            <div 
-              className="absolute top-4 left-4 text-6xl leading-none"
-              style={{ color: colors.primary + "15" }}
-            >
-              "
-            </div>
-            <div 
-              className="absolute bottom-4 right-4 text-6xl leading-none"
-              style={{ color: colors.primary + "15" }}
-            >
-              "
-            </div>
-            
-            {/* Quote content */}
-            <div className="pl-8 pr-8">
-              <p 
-                className="text-lg italic mb-6"
-                style={{ color: colors.text, lineHeight: "1.8" }}
-              >
-                Working with Yasina has been truly transformative. Her intuitive abilities and gentle approach helped me navigate a difficult period in my life with grace. The energy work we've done together has relieved my chronic pain and brought a sense of peace I hadn't experienced in years. If you're seeking genuine healing with someone who truly cares, I couldn't recommend Yasina more highly.
-              </p>
-              
-              <div className="flex items-center justify-end">
-                <div 
-                  className="w-10 h-10 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: colors.primary + "20" }}
-                >
-                  <span style={{ color: colors.primary }}>M</span>
-                </div>
-                <div className="ml-3 text-right">
-                  <h4 
-                    className="font-medium"
-                    style={{ color: colors.primary }}
-                  >
-                    Michelle K.
-                  </h4>
-                  <p 
-                    className="text-xs"
-                    style={{ color: colors.text + "99" }}
-                  >
-                    Client since 2019
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
         {/* CTA Section */}
         <div 

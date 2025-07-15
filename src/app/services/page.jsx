@@ -13,6 +13,35 @@ const ServicesPage = () => {
   // Services data
   const services = [
     {
+      id: "soul-alignment",
+      title: "Soul Alignment",
+      category: "Spiritual Guidance",
+      icon: "🔮",
+      shortDesc: "Guidance and insight to help you navigate life's challenges and align with your higher purpose.",
+      longDesc: "An intuitive deep dive into your soul’s blueprint. Together, we clear energetic distortions and reconnect you with your authentic path. These sessions often include channeling, energy work, and guidance for your next aligned steps. Remember your purpose. Align with your truth. This is a heart-centered, soul-led approach to receiving clarity when your mind feels overwhelmed and your emotions are clouded. It’s about tuning into the deeper wisdom that lives within you—the part that knows even when your thoughts are spinning. During a session, I connect with your energy field, emotional patterns, and soul frequency to gently guide you toward the answers that are already within you. It’s not about predicting the future or giving you advice—it’s about creating a safe space for you to access your inner truth with clarity and confidence. Think of it as a conversation between your higher self and your current self—with me holding the bridge between them.",
+      benefits: [
+        "Make aligned decisions with more ease",
+        "Understand what your body and emotions are really trying to tell you",
+        "Receive validation, clarity, and next steps when you feel stuck",
+        "Reconnect with your purpose or soul path",
+        "Gently move through energetic blocks or emotional heaviness"
+      ],
+      sessions: [
+        {
+          title: "Intuitive Guidance Session",
+          duration: "60 minutes",
+          price: "$100",
+          description: "In-depth intuitive reading and personalized guidance."
+        },
+        {
+          title: "Life Path Alignment",
+          duration: "90 minutes",
+          price: "$145",
+          description: "Comprehensive session for major life transitions or decisions."
+        }
+      ]
+    },
+    {
       id: "reiki",
       title: "Reiki Healing",
       category: "Energy Healing",
@@ -67,35 +96,6 @@ const ServicesPage = () => {
           duration: "75 minutes",
           price: "$115",
           description: "Combined approach for enhanced healing and relaxation."
-        }
-      ]
-    },
-    {
-      id: "intuitive-counseling",
-      title: "Intuitive Counseling",
-      category: "Spiritual Guidance",
-      icon: "🔮",
-      shortDesc: "Guidance and insight to help you navigate life's challenges and align with your higher purpose.",
-      longDesc: "Intuitive counseling combines spiritual guidance with practical advice to help you navigate challenging situations, make important decisions, and connect with your higher purpose. Using my intuitive abilities, I can help reveal patterns, blocks, and potentials that may not be immediately obvious to you. This is not a replacement for licensed therapy, but a complementary approach to personal growth and self-understanding.",
-      benefits: [
-        "Gain clarity about life path and purpose",
-        "Receive guidance for important decisions",
-        "Identify and release limiting beliefs",
-        "Develop a deeper connection to your intuition",
-        "Find meaning during challenging transitions"
-      ],
-      sessions: [
-        {
-          title: "Intuitive Guidance Session",
-          duration: "60 minutes",
-          price: "$100",
-          description: "In-depth intuitive reading and personalized guidance."
-        },
-        {
-          title: "Life Path Alignment",
-          duration: "90 minutes",
-          price: "$145",
-          description: "Comprehensive session for major life transitions or decisions."
         }
       ]
     },

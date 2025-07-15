@@ -91,16 +91,12 @@ const HomePage = () => {
             className="text-2xl mb-2"
             style={{ color: colors.neutral, fontFamily: "'Open Sans', sans-serif" }}
           >
-            DEFINE YOUR BEING
+            When you walk in your truth, the universe walks with you.
+            You were created with purpose, there is no failure in being who you truly are.
+            You are not here to fail you are here to shine.
           </h2>
-          <p
-            className="text-lg italic mb-8"
-            style={{ color: colors.neutral, fontFamily: "'Tangerine', cursive", fontSize: "28px" }}
-          >
-            "You cannot fail at being you! Just be true"
-          </p>
           <Link
-            href="/services"
+            href="/about"
             className="px-8 py-3 rounded-full transition-all hover:scale-105 inline-block"
             style={{
               background: `linear-gradient(45deg, ${colors.accent}, #FFC400)`,
@@ -109,77 +105,12 @@ const HomePage = () => {
               boxShadow: "0 0 15px rgba(255,215,0,0.5)",
             }}
           >
-            Begin Your Healing Journey
+            About Me
           </Link>
         </div>
       </div>
 
-      {/* Services preview section */}
-      <div className="p-6 md:p-12 bg-white">
-        <h2
-          className="text-2xl md:text-3xl text-center mb-2"
-          style={{ color: colors.primary, fontFamily: "'Cormorant Garamond', serif" }}
-        >
-          HEALING MODALITIES
-        </h2>
-        <p
-          className="text-center mb-12"
-          style={{ color: colors.text, fontFamily: "'Open Sans', sans-serif" }}
-        >
-          Discover Your Path to Wellness
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {services.map(service => (
-            <div
-              key={service.id}
-              className="p-6 rounded-lg transition-all hover:scale-105"
-              style={{
-                backgroundColor: "rgba(248,245,242,0.9)",
-                border: "1px solid rgba(79,205,196,0.3)",
-                boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
-              }}
-            >
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <ImagePlaceholders.ServiceIcon name={service.title} size="60px" />
-              </div>
-              <h3
-                className="text-lg text-center font-semibold mb-3"
-                style={{ color: colors.primary }}
-              >
-                {service.title}
-              </h3>
-              <p className="text-center text-sm mb-5" style={{ color: colors.text }}>
-                {service.description}
-              </p>
-              <div className="text-center">
-                <Link
-                  href={service.path}
-                  className="inline-block text-sm font-medium pb-1 border-b-2"
-                  style={{ color: colors.secondary, borderColor: colors.secondary }}
-                >
-                  Learn More
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center">
-          <Link
-            href="/services"
-            className="inline-block px-6 py-2 rounded-md transition-all"
-            style={{
-              backgroundColor: "transparent",
-              color: colors.primary,
-              border: `1px solid ${colors.primary}`,
-              fontWeight: "500",
-            }}
-          >
-            View All Services
-          </Link>
-        </div>
-      </div>
+      
 
       {/* Testimonial section */}
       <div
