@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useContext, use } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { colors, fonts } from "@/utils/constants";
@@ -10,15 +10,15 @@ const ServicesPage = () => {
   // State for active service (for scrolling to)
   const [activeService, setActiveService] = useState(null);
 
-  // Services data
+  // Services data - Updated based on the PDF content
   const services = [
     {
       id: "soul-alignment",
       title: "Soul Alignment",
       category: "Spiritual Guidance",
       icon: "🔮",
-      shortDesc: "Guidance and insight to help you navigate life's challenges and align with your higher purpose.",
-      longDesc: "An intuitive deep dive into your soul’s blueprint. Together, we clear energetic distortions and reconnect you with your authentic path. These sessions often include channeling, energy work, and guidance for your next aligned steps. Remember your purpose. Align with your truth. This is a heart-centered, soul-led approach to receiving clarity when your mind feels overwhelmed and your emotions are clouded. It’s about tuning into the deeper wisdom that lives within you—the part that knows even when your thoughts are spinning. During a session, I connect with your energy field, emotional patterns, and soul frequency to gently guide you toward the answers that are already within you. It’s not about predicting the future or giving you advice—it’s about creating a safe space for you to access your inner truth with clarity and confidence. Think of it as a conversation between your higher self and your current self—with me holding the bridge between them.",
+      shortDesc: "An intuitive deep dive into your soul's blueprint to clear energetic distortions and reconnect with your authentic path.",
+      description: "An intuitive deep dive into your soul's blueprint. Together, we clear energetic distortions and reconnect you with your authentic path. These sessions often include channeling, energy work, and guidance for your next aligned steps.\n\nRemember your purpose. Align with your truth.\n\nThis is a heart-centered, soul-led approach to receiving clarity when your mind feels overwhelmed and your emotions are clouded. It's about tuning into the deeper wisdom that lives within you—the part that knows even when your thoughts are spinning.",
       benefits: [
         "Make aligned decisions with more ease",
         "Understand what your body and emotions are really trying to tell you",
@@ -26,18 +26,170 @@ const ServicesPage = () => {
         "Reconnect with your purpose or soul path",
         "Gently move through energetic blocks or emotional heaviness"
       ],
+      keyFeatures: [
+        {
+          title: "Combines Talk Therapy with Intuition",
+          description: "Like traditional counselling, intuitive counselling involves conversation—but I also use intuitive abilities to guide the session."
+        },
+        {
+          title: "Addresses the Whole Person",
+          description: "It considers your mental, emotional, physical, and spiritual well-being, often looking beyond symptoms to root causes."
+        },
+        {
+          title: "Incorporates Spiritual or Energetic Practices",
+          description: "May include tools like energy healing, chakra work, oracle cards, meditation or breathwork, inner child work, and soul-purpose exploration."
+        },
+        {
+          title: "Highly Personalized",
+          description: "Each session is guided by your energy and needs in the moment, making it fluid, adaptable, and intuitive in structure."
+        }
+      ],
       sessions: [
         {
           title: "Intuitive Guidance Session",
-          duration: "60 minutes",
-          price: "$100",
-          description: "In-depth intuitive reading and personalized guidance."
+          duration: "60 minutes"
         },
         {
           title: "Life Path Alignment",
-          duration: "90 minutes",
-          price: "$145",
-          description: "Comprehensive session for major life transitions or decisions."
+          duration: "90 minutes"
+        }
+      ]
+    },
+    {
+      id: "chakra-balancing",
+      title: "Chakra Balancing",
+      category: "Energy Healing",
+      icon: "⚡",
+      shortDesc: "Energy work to align and harmonize your body's energy centers for optimal wellbeing.",
+      description: "Chakra balancing is a form of energy healing that focuses on harmonizing the energy centers of the body. When these chakras are blocked or imbalanced, it can lead to physical discomfort, emotional distress, and mental fog.\n\nTraditionally, we focus on 7 main chakras, but broader energy systems and spiritual teachings recognize more—sometimes 12, 114, or even 88,000 depending on the source and tradition.",
+      benefits: [
+        "Clears energy blockages in the body",
+        "Promotes emotional stability and wellbeing",
+        "Enhances spiritual connection and awareness",
+        "Improves mental clarity and focus",
+        "Supports physical vitality and immune function"
+      ],
+      chakras: [
+        {
+          name: "Root Chakra (Muladhara)",
+          color: "🔴",
+          location: "Base of spine",
+          theme: "Safety, grounding, survival"
+        },
+        {
+          name: "Sacral Chakra (Svadhisthana)",
+          color: "🟠",
+          location: "Lower abdomen",
+          theme: "Emotions, pleasure, creativity"
+        },
+        {
+          name: "Solar Plexus Chakra (Manipura)",
+          color: "🟡",
+          location: "Upper abdomen/stomach",
+          theme: "Confidence, willpower, personal power"
+        },
+        {
+          name: "Heart Chakra (Anahata)",
+          color: "💚",
+          location: "Center of chest",
+          theme: "Love, compassion, forgiveness"
+        },
+        {
+          name: "Throat Chakra (Vishuddha)",
+          color: "🔵",
+          location: "Throat",
+          theme: "Communication, truth, self-expression"
+        },
+        {
+          name: "Third Eye Chakra (Ajna)",
+          color: "🟣",
+          location: "Between the eyebrows",
+          theme: "Intuition, vision, insight"
+        },
+        {
+          name: "Crown Chakra (Sahasrara)",
+          color: "⚪",
+          location: "Top of the head",
+          theme: "Spiritual connection, enlightenment"
+        }
+      ],
+      sessions: [
+        {
+          title: "Chakra Assessment & Balancing",
+          duration: "75 minutes"
+        },
+        {
+          title: "Remote Chakra Tune-Up",
+          duration: "30 minutes"
+        },
+        {
+          title: "In-Person Chakra Session",
+          duration: "75 minutes"
+        }
+      ]
+    },
+    {
+      id: "reflexology",
+      title: "Reflexology",
+      category: "Physical Wellness",
+      icon: "👣",
+      shortDesc: "Therapeutic pressure point technique that promotes healing, balance and relaxation throughout the entire body.",
+      description: "Reflexology is based on the theory that your hands, feet, and ears are connected to certain organs and body systems. It rests on the ancient Chinese belief in qi (pronounced \"chee\"), or \"vital energy.\" According to this belief, qi flows through each person. When a person feels stressed, their body blocks qi, which can cause an imbalance leading to illness.\n\nReflexology aims to keep qi flowing through the body, keeping it balanced and disease-free.",
+      benefits: [
+        "Reduces stress and anxiety",
+        "Alleviates pain, headaches, and sinus congestion",
+        "Improves circulation throughout the body",
+        "Promotes natural detoxification",
+        "Enhances relaxation and improves sleep quality",
+        "Supports hormonal balance"
+      ],
+      additionalBenefits: [
+        "Boosts immune system",
+        "Helps with colds and bacterial infections",
+        "Clears sinus issues",
+        "Assists with back problems",
+        "Corrects hormonal imbalances",
+        "Improves digestion"
+      ],
+      sessions: [
+        {
+          title: "Remote Reflexology Session",
+          duration: "30 minutes"
+        },
+        {
+          title: "In-Person Reflexology",
+          duration: "60 minutes"
+        }
+      ]
+    },
+    {
+      id: "hypnotherapy",
+      title: "Hypnotherapy",
+      category: "Mind-Body Healing",
+      icon: "🧠",
+      shortDesc: "Release the past. Rewire the mind. Reclaim your power.",
+      description: "Hypnotherapy is a gentle and guided process that helps you access your subconscious mind—the space where your deepest beliefs, memories, and emotional patterns live. In this relaxed, meditative state, you're able to release what's no longer serving you and reprogram your inner world with clarity, confidence, and alignment.\n\nContrary to myths, you're always in control during a session. This is your sacred space to connect inward, not to be controlled or manipulated.",
+      benefits: [
+        "Let go of limiting beliefs and self-sabotage",
+        "Heal emotional wounds and past experiences",
+        "Rewire subconscious patterns for confidence and clarity",
+        "Alleviate anxiety, fear, or emotional overwhelm",
+        "Align with your truth, purpose, and inner peace"
+      ],
+      idealFor: [
+        "Those feeling stuck in repetitive cycles",
+        "Anyone experiencing emotional heaviness or energy drain",
+        "People ready for real change but unsure where to begin",
+        "Those called to deeper self-awareness and healing"
+      ],
+      sessions: [
+        {
+          title: "Hypnotherapy Session",
+          duration: "90 minutes"
+        },
+        {
+          title: "Hypnotherapy Package",
+          duration: "3 x 90 minutes"
         }
       ]
     },
@@ -47,7 +199,7 @@ const ServicesPage = () => {
       category: "Energy Healing",
       icon: "✨",
       shortDesc: "Universal energy healing that promotes balance and wellness.",
-      longDesc: "Reiki is a Japanese technique for stress reduction and relaxation that also promotes healing. It's administered by laying hands on or above the body, allowing life force energy to flow through and restore balance. Reiki treats the whole person including body, emotions, mind, and spirit, creating many beneficial effects including relaxation and feelings of peace, security, and wellbeing.",
+      description: "Reiki is a Japanese technique for stress reduction and relaxation that also promotes healing. It's administered by laying hands on or above the body, allowing life force energy to flow through and restore balance. Reiki treats the whole person including body, emotions, mind, and spirit, creating many beneficial effects including relaxation and feelings of peace, security, and wellbeing.",
       benefits: [
         "Reduces stress and promotes deep relaxation",
         "Accelerates the body's natural healing abilities",
@@ -58,112 +210,21 @@ const ServicesPage = () => {
       sessions: [
         {
           title: "Initial Reiki Session",
-          duration: "90 minutes",
-          price: "$120",
-          description: "Includes consultation, full Reiki treatment, and post-session guidance."
+          duration: "90 minutes"
         },
         {
           title: "Follow-up Reiki Session",
-          duration: "60 minutes",
-          price: "$85",
-          description: "Focused energy healing to maintain and deepen the benefits."
-        }
-      ]
-    },
-    {
-      id: "reflexology",
-      title: "Reflexology",
-      category: "Physical Wellness",
-      icon: "👣",
-      shortDesc: "Therapeutic foot massage targeting pressure points connected to organs and systems throughout the body.",
-      longDesc: "Reflexology is a therapeutic method of relieving pain by stimulating predefined pressure points on the feet and hands. This controlled pressure helps restore the free flow of energy throughout the body. The theory behind reflexology is that these reflex points correspond to different body organs and systems, and pressing them creates real benefits for the person's health.",
-      benefits: [
-        "Improves circulation throughout the body",
-        "Reduces tension and stress",
-        "Promotes natural detoxification",
-        "Can help relieve headaches and digestive issues",
-        "Supports hormonal balance"
-      ],
-      sessions: [
-        {
-          title: "Reflexology Session",
-          duration: "60 minutes",
-          price: "$90",
-          description: "Complete foot reflexology treatment with aromatherapy."
-        },
-        {
-          title: "Reflexology with Reiki",
-          duration: "75 minutes",
-          price: "$115",
-          description: "Combined approach for enhanced healing and relaxation."
-        }
-      ]
-    },
-    {
-      id: "chakra-balancing",
-      title: "Chakra Balancing",
-      category: "Energy Healing",
-      icon: "⚡",
-      shortDesc: "Energy work to align and harmonize your body's energy centers for optimal wellbeing.",
-      longDesc: "Chakra balancing is a form of energy healing that focuses on harmonizing the seven main energy centers of the body. When these chakras are blocked or imbalanced, it can lead to physical discomfort, emotional distress, and mental fog. During a chakra balancing session, I use a combination of Reiki, crystals, sound, and guided visualization to clear blockages and restore the natural flow of energy through each center.",
-      benefits: [
-        "Clears energy blockages in the body",
-        "Promotes emotional stability and wellbeing",
-        "Enhances spiritual connection and awareness",
-        "Improves mental clarity and focus",
-        "Supports physical vitality and immune function"
-      ],
-      sessions: [
-        {
-          title: "Chakra Assessment & Balancing",
-          duration: "75 minutes",
-          price: "$110",
-          description: "Complete chakra assessment and targeted energy balancing."
-        },
-        {
-          title: "Crystal Chakra Therapy",
-          duration: "90 minutes",
-          price: "$130",
-          description: "Chakra balancing with crystal layouts and sound healing."
-        }
-      ]
-    },
-    {
-      id: "crystal-healing",
-      title: "Crystal Healing",
-      category: "Energy Healing",
-      icon: "💎",
-      shortDesc: "Harness the natural energy of crystals to promote healing, balance, and positive energy flow.",
-      longDesc: "Crystal healing utilizes the unique vibrational properties of crystals and gemstones to remove energy blockages, stabilize physical and emotional conditions, and promote the free flow of energy throughout the body. Each crystal has specific properties that resonate with different aspects of our being. During a session, carefully selected crystals are placed on or around the body to facilitate healing, balance chakras, and enhance overall wellbeing.",
-      benefits: [
-        "Balances and amplifies your natural energy",
-        "Helps clear negative or stagnant energy",
-        "Promotes deep relaxation and stress relief",
-        "Supports specific healing intentions",
-        "Can be combined with other healing modalities for enhanced effects"
-      ],
-      sessions: [
-        {
-          title: "Crystal Healing Session",
-          duration: "60 minutes",
-          price: "$95",
-          description: "Personalized crystal layout and energy balancing."
-        },
-        {
-          title: "Crystal Grid & Intention Setting",
-          duration: "75 minutes",
-          price: "$115",
-          description: "Custom crystal grid creation with intention setting ritual."
+          duration: "60 minutes"
         }
       ]
     },
     {
       id: "meditation-guidance",
-      title: "Meditation & Mindfulness Guidance",
+      title: "Meditation & Mindfulness",
       category: "Spiritual Guidance",
       icon: "🧘‍♀️",
       shortDesc: "Learn techniques to quiet the mind, reduce stress, and connect with your inner wisdom.",
-      longDesc: "Meditation and mindfulness practices offer powerful tools for reducing stress, improving mental clarity, and connecting with your inner wisdom. Whether you're new to meditation or looking to deepen your practice, I offer personalized guidance to help you develop sustainable techniques that fit your lifestyle. Sessions may include breath work, guided visualization, mantra meditation, mindfulness practices, and tools for incorporating meditation into daily life.",
+      description: "Meditation and mindfulness practices offer powerful tools for reducing stress, improving mental clarity, and connecting with your inner wisdom. Whether you're new to meditation or looking to deepen your practice, I offer personalized guidance to help you develop sustainable techniques that fit your lifestyle. Sessions may include breath work, guided visualization, mantra meditation, mindfulness practices, and tools for incorporating meditation into daily life.",
       benefits: [
         "Reduces stress and anxiety",
         "Improves focus and mental clarity",
@@ -174,18 +235,14 @@ const ServicesPage = () => {
       sessions: [
         {
           title: "Meditation Fundamentals",
-          duration: "60 minutes",
-          price: "$85",
-          description: "Learn basic meditation techniques tailored to your needs."
+          duration: "60 minutes"
         },
         {
           title: "Advanced Meditation & Energy Work",
-          duration: "90 minutes",
-          price: "$125",
-          description: "Deeper practices combined with energy balancing."
+          duration: "90 minutes"
         }
       ]
-    },
+    }
   ];
 
   // Handle clicking on a service link
@@ -202,7 +259,7 @@ const ServicesPage = () => {
     <div>
       {/* Page Header */}
       <div
-        className="py-12 text-center relative overflow-hidden"
+        className="py-16 text-center relative overflow-hidden"
         style={{
           background: `linear-gradient(to right, ${colors.primary}, ${colors.primary}DD)`,
         }}
@@ -218,13 +275,13 @@ const ServicesPage = () => {
         ></div>
 
         <h1
-          className="text-3xl md:text-4xl relative z-10"
+          className="text-4xl md:text-5xl relative z-10 mb-3"
           style={{ color: colors.neutral, fontFamily: fonts.serif }}
         >
           HEALING SERVICES
         </h1>
         <p
-          className="mt-2 text-lg relative z-10"
+          className="mt-2 text-xl relative z-10 max-w-2xl mx-auto"
           style={{ color: `${colors.neutral}DD` }}
         >
           Holistic Therapies for Mind, Body & Spirit
@@ -233,7 +290,7 @@ const ServicesPage = () => {
 
       {/* Services Navigation */}
       <div 
-        className="sticky top-20 z-30 py-4 shadow-sm"
+        className="top-20 z-30 py-4 shadow-md"
         style={{ backgroundColor: colors.neutral }}
       >
         <div className="container mx-auto px-4">
@@ -257,27 +314,46 @@ const ServicesPage = () => {
         </div>
       </div>
 
-      {/* Introduction */}
-      <section className="container mx-auto py-12 px-4 text-center max-w-3xl">
+      {/* Introduction & What to Expect */}
+      <section className="container mx-auto py-16 px-4 text-center max-w-3xl">
         <h2
-          className="text-xl md:text-2xl mb-6"
+          className="text-2xl md:text-3xl mb-6"
           style={{ color: colors.primary, fontFamily: fonts.serif }}
         >
           <span className="px-2" style={{ color: colors.accent }}>✧</span>
           MY APPROACH TO HEALING
           <span className="px-2" style={{ color: colors.accent }}>✧</span>
         </h2>
-        <p className="mb-4" style={{ color: colors.text, lineHeight: "1.8" }}>
+        <p className="mb-6 text-lg" style={{ color: colors.text, lineHeight: "1.8" }}>
           Each service I offer is designed to address specific aspects of your wellbeing while supporting your overall balance and harmony. I believe in a holistic approach that considers the interconnection between physical, emotional, and spiritual health.
         </p>
-        <p style={{ color: colors.text, lineHeight: "1.8" }}>
+        <p className="text-lg" style={{ color: colors.text, lineHeight: "1.8" }}>
           All services begin with a personal consultation to understand your unique needs and goals. Sessions can be enjoyed individually or combined for a more comprehensive healing experience.
         </p>
+
+        {/* What to Expect - Global section */}
+        <div className="mt-10 border-t border-b py-10" style={{ borderColor: colors.primary + "30" }}>
+          <h3 
+            className="text-xl mb-6 font-medium"
+            style={{ color: colors.primary }}
+          >
+            What to Expect During Your Session
+          </h3>
+          <p className="mb-4 text-lg" style={{ color: colors.text, lineHeight: "1.8" }}>
+            Your session begins with a brief consultation to discuss your needs and set intentions. I'll guide you through the process, ensuring you feel comfortable and supported throughout. 
+          </p>
+          <p className="mb-4 text-lg" style={{ color: colors.text, lineHeight: "1.8" }}>
+            For energy healing services like Reiki and Chakra Balancing, you'll relax in a comfortable setting while I work with your energy field. For more interactive modalities like Soul Alignment or Hypnotherapy, we'll work together in a collaborative process.
+          </p>
+          <p className="text-lg" style={{ color: colors.text, lineHeight: "1.8" }}>
+            After your session, we'll discuss what was experienced and I'll provide recommendations for supporting your continued healing at home. It's advisable to drink plenty of water and allow time for rest and integration after your session.
+          </p>
+        </div>
       </section>
 
       {/* Services Detailed Listings */}
       <section className="container mx-auto py-8 px-4">
-        <div className="space-y-24">
+        <div className="space-y-32">
           {services.map((service) => (
             <div 
               key={service.id} 
@@ -286,7 +362,7 @@ const ServicesPage = () => {
             >
               {/* Service Header */}
               <div 
-                className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b mb-8"
+                className="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b mb-8"
                 style={{ borderColor: colors.primary + "30" }}
               >
                 <div>
@@ -300,7 +376,7 @@ const ServicesPage = () => {
                     {service.category}
                   </span>
                   <h3 
-                    className="text-2xl md:text-3xl flex items-center"
+                    className="text-3xl md:text-4xl flex items-center"
                     style={{ color: colors.primary, fontFamily: fonts.serif }}
                   >
                     <span className="mr-3">{service.icon}</span>
@@ -332,18 +408,23 @@ const ServicesPage = () => {
                 {/* Left Column - Service Description */}
                 <div className="lg:col-span-3">
                   <div className="prose max-w-none">
-                    <p className="text-lg mb-4" style={{ color: colors.text, lineHeight: "1.8" }}>
-                      {service.longDesc}
+                    <p className="text-lg mb-6" style={{ color: colors.text, lineHeight: "1.8" }}>
+                      {service.description.split('\n\n').map((paragraph, index) => (
+                        <React.Fragment key={index}>
+                          {paragraph}
+                          {index !== service.description.split('\n\n').length - 1 && <br />}
+                        </React.Fragment>
+                      ))}
                     </p>
 
                     {/* Benefits */}
                     <h4 
-                      className="text-lg mt-8 mb-4 font-medium"
+                      className="text-xl mt-10 mb-4 font-medium"
                       style={{ color: colors.primary }}
                     >
                       Benefits
                     </h4>
-                    <ul className="space-y-2 mb-8" style={{ color: colors.text }}>
+                    <ul className="space-y-3 mb-8" style={{ color: colors.text }}>
                       {service.benefits.map((benefit, index) => (
                         <li key={index} className="flex items-start">
                           <div 
@@ -356,20 +437,101 @@ const ServicesPage = () => {
                         </li>
                       ))}
                     </ul>
-                    
-                    {/* What to expect */}
-                    <h4 
-                      className="text-lg mt-8 mb-4 font-medium"
-                      style={{ color: colors.primary }}
-                    >
-                      What to Expect
-                    </h4>
-                    <p className="mb-4" style={{ color: colors.text, lineHeight: "1.8" }}>
-                      Your session begins with a brief consultation to discuss your needs and set intentions. You'll relax fully clothed in a comfortable setting while I work with your energy field. Most clients report feeling deeply relaxed, with sensations of warmth, tingling, or gentle pulsing during the session.
-                    </p>
-                    <p style={{ color: colors.text, lineHeight: "1.8" }}>
-                      After your session, we'll discuss what was experienced and I'll provide recommendations for supporting your continued healing at home. It's advisable to drink plenty of water and allow time for rest and integration after your session.
-                    </p>
+
+                    {/* Service-specific content */}
+                    {service.id === "chakra-balancing" && service.chakras && (
+                      <div className="mt-10">
+                        <h4 
+                          className="text-xl mb-6 font-medium"
+                          style={{ color: colors.primary }}
+                        >
+                          The 7 Main Chakras
+                        </h4>
+                        <div className="space-y-6">
+                          {service.chakras.map((chakra, index) => (
+                            <div key={index} className="bg-white p-5 rounded-lg shadow-sm">
+                              <h5 className="flex items-center text-lg font-medium mb-2" style={{ color: colors.primary }}>
+                                <span className="mr-2">{chakra.color}</span> 
+                                {chakra.name}
+                              </h5>
+                              <div className="flex flex-wrap gap-x-8 gap-y-1 mb-2 text-sm" style={{ color: colors.text + "99" }}>
+                                <div><strong>Location:</strong> {chakra.location}</div>
+                                <div><strong>Theme:</strong> {chakra.theme}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {service.id === "soul-alignment" && service.keyFeatures && (
+                      <div className="mt-10">
+                        <h4 
+                          className="text-xl mb-6 font-medium"
+                          style={{ color: colors.primary }}
+                        >
+                          Key Features
+                        </h4>
+                        <div className="space-y-6">
+                          {service.keyFeatures.map((feature, index) => (
+                            <div key={index} className="bg-white p-5 rounded-lg shadow-sm">
+                              <h5 className="text-lg font-medium mb-2" style={{ color: colors.primary }}>
+                                {index + 1}. {feature.title}
+                              </h5>
+                              <p style={{ color: colors.text }}>{feature.description}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {service.id === "reflexology" && service.additionalBenefits && (
+                      <div className="mt-10">
+                        <h4 
+                          className="text-xl mb-4 font-medium"
+                          style={{ color: colors.primary }}
+                        >
+                          Additional Reported Benefits
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {service.additionalBenefits.map((benefit, index) => (
+                            <div key={index} className="flex items-center">
+                              <span
+                                className="mr-2 text-lg"
+                                style={{ color: colors.accent }}
+                              >
+                                •
+                              </span>
+                              <span style={{ color: colors.text }}>{benefit}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {service.id === "hypnotherapy" && service.idealFor && (
+                      <div className="mt-10">
+                        <h4 
+                          className="text-xl mb-4 font-medium"
+                          style={{ color: colors.primary }}
+                        >
+                          Perfect For You If You're Feeling
+                        </h4>
+                        <ul className="space-y-3 mb-8" style={{ color: colors.text }}>
+                          {service.idealFor.map((item, index) => (
+                            <li key={index} className="flex items-start">
+                              <div 
+                                className="mr-3 mt-1"
+                                style={{ color: colors.accent }}
+                              >
+                                •
+                              </div>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -386,11 +548,11 @@ const ServicesPage = () => {
 
                   {/* Session Options */}
                   <div 
-                    className="border rounded-lg overflow-hidden"
+                    className="border rounded-lg overflow-hidden shadow-sm"
                     style={{ borderColor: colors.primary + "20" }}
                   >
                     <div 
-                      className="py-3 px-4"
+                      className="py-4 px-5"
                       style={{ backgroundColor: colors.primary + "10" }}
                     >
                       <h4 
@@ -402,31 +564,22 @@ const ServicesPage = () => {
                     </div>
                     <div className="divide-y" style={{ divideColor: colors.primary + "10" }}>
                       {service.sessions.map((session, index) => (
-                        <div key={index} className="p-4">
+                        <div key={index} className="p-5">
                           <div className="flex justify-between items-start mb-2">
                             <h5 className="font-medium" style={{ color: colors.text }}>
                               {session.title}
                             </h5>
-                            <span 
-                              className="font-bold"
-                              style={{ color: colors.secondary }}
-                            >
-                              {session.price}
-                            </span>
                           </div>
-                          <div className="flex justify-between text-sm mb-2" style={{ color: colors.text + "99" }}>
+                          <div className="flex justify-between text-sm mb-3" style={{ color: colors.text + "99" }}>
                             <span>{session.duration}</span>
                           </div>
-                          <p className="text-sm" style={{ color: colors.text + "99" }}>
-                            {session.description}
-                          </p>
                         </div>
                       ))}
                     </div>
-                    <div className="p-4 text-center">
+                    <div className="p-5 text-center">
                       <Link
                         href={currentUser ? "/calendar" : "/login?redirect=/calendar"}
-                        className="w-full inline-block px-4 py-2 rounded-md transition-all hover:shadow-md"
+                        className="w-full inline-block px-4 py-3 rounded-md transition-all hover:shadow-lg font-medium"
                         style={{
                           backgroundColor: colors.secondary,
                           color: colors.neutral,
@@ -443,131 +596,35 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section 
-        className="py-16 mt-12"
-        style={{ backgroundColor: colors.neutral + "80" }}
-      >
-        <div className="container mx-auto px-4">
-          <h2
-            className="text-center text-xl md:text-2xl mb-10"
-            style={{ color: colors.primary, fontFamily: fonts.serif }}
-          >
-            <span className="px-2" style={{ color: colors.accent }}>✧</span>
-            FREQUENTLY ASKED QUESTIONS
-            <span className="px-2" style={{ color: colors.accent }}>✧</span>
-          </h2>
-
-          <div className="max-w-3xl mx-auto">
-            <div className="space-y-6">
-              {/* FAQ Item 1 */}
-              <div 
-                className="bg-white p-6 rounded-lg shadow-sm"
-                style={{ borderLeft: `4px solid ${colors.secondary}` }}
-              >
-                <h3 
-                  className="text-lg font-medium mb-2"
-                  style={{ color: colors.primary }}
-                >
-                  How many sessions will I need?
-                </h3>
-                <p style={{ color: colors.text, lineHeight: "1.7" }}>
-                  This varies greatly depending on your specific goals and condition. Some clients experience significant benefits from a single session, while others benefit from regular ongoing care. After your first session, we'll discuss a recommended treatment plan tailored to your needs.
-                </p>
-              </div>
-
-              {/* FAQ Item 2 */}
-              <div 
-                className="bg-white p-6 rounded-lg shadow-sm"
-                style={{ borderLeft: `4px solid ${colors.secondary}` }}
-              >
-                <h3 
-                  className="text-lg font-medium mb-2"
-                  style={{ color: colors.primary }}
-                >
-                  Is energy healing safe?
-                </h3>
-                <p style={{ color: colors.text, lineHeight: "1.7" }}>
-                  Yes, energy healing is a non-invasive complementary therapy that is generally considered safe for people of all ages. It can be used alongside conventional medical treatments and other therapies. However, it should not replace medical care for serious conditions, and I always recommend maintaining your relationship with healthcare providers.
-                </p>
-              </div>
-
-              {/* FAQ Item 3 */}
-              <div 
-                className="bg-white p-6 rounded-lg shadow-sm"
-                style={{ borderLeft: `4px solid ${colors.secondary}` }}
-              >
-                <h3 
-                  className="text-lg font-medium mb-2"
-                  style={{ color: colors.primary }}
-                >
-                  What should I wear to a session?
-                </h3>
-                <p style={{ color: colors.text, lineHeight: "1.7" }}>
-                  Comfortable, loose-fitting clothing is recommended. You'll remain fully clothed during all sessions. Consider layers as your body temperature may fluctuate during the treatment. Please avoid strong perfumes or colognes as some clients may be sensitive.
-                </p>
-              </div>
-
-              {/* FAQ Item 4 */}
-              <div 
-                className="bg-white p-6 rounded-lg shadow-sm"
-                style={{ borderLeft: `4px solid ${colors.secondary}` }}
-              >
-                <h3 
-                  className="text-lg font-medium mb-2"
-                  style={{ color: colors.primary }}
-                >
-                  Which service is right for me?
-                </h3>
-                <p style={{ color: colors.text, lineHeight: "1.7" }}>
-                  If you're unsure which service would best address your needs, I offer a complimentary 15-minute phone consultation to discuss your goals and recommend the most appropriate treatment. You can also book an initial assessment session where we can explore different modalities and create a personalized wellness plan.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="container mx-auto py-16 px-4">
-        <div 
-          className="bg-white rounded-lg p-8 md:p-12 text-center shadow-sm"
-          style={{ 
-            background: `linear-gradient(to right, ${colors.primary}10, ${colors.secondary}10)`,
+      {/* Call to Action */}
+      <section className="container mx-auto py-16 px-4 text-center">
+        <h2
+          className="text-2xl md:text-3xl mb-6"
+          style={{ color: colors.primary, fontFamily: fonts.serif }}
+        >
+          Ready to Begin Your Healing Journey?
+        </h2>
+        <p className="mb-8 text-lg max-w-3xl mx-auto" style={{ color: colors.text, lineHeight: "1.8" }}>
+          Whether you're seeking physical healing, emotional balance, or spiritual connection, I'm here to support you on your path.
+        </p>
+        <Link
+          href={currentUser ? "/calendar" : "/login?redirect=/calendar"}
+          className="px-8 py-3 rounded-md text-lg transition-all hover:shadow-lg inline-flex items-center gap-2"
+          style={{
+            backgroundColor: colors.secondary,
+            color: colors.neutral,
           }}
         >
-          <h2 
-            className="text-2xl md:text-3xl mb-4"
-            style={{ color: colors.primary, fontFamily: fonts.serif }}
+          Schedule a Session
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-5 w-5" 
+            viewBox="0 0 20 20"
+            fill="currentColor"
           >
-            Ready to Begin Your Healing Journey?
-          </h2>
-          <p className="max-w-2xl mx-auto mb-8" style={{ color: colors.text }}>
-            Take the first step toward balance, wellness, and spiritual growth. Schedule your session today and experience the transformative power of energy healing.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              href={currentUser ? "/calendar" : "/login?redirect=/calendar"}
-              className="px-6 py-3 rounded-md transition-all hover:shadow-lg"
-              style={{
-                backgroundColor: colors.secondary,
-                color: colors.neutral,
-              }}
-            >
-              Book Your Session
-            </Link>
-            <Link
-              href="/contact"
-              className="px-6 py-3 rounded-md border transition-all hover:bg-white/20"
-              style={{
-                borderColor: colors.primary + "40",
-                color: colors.primary,
-              }}
-            >
-              Contact Me
-            </Link>
-          </div>
-        </div>
+            <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+          </svg>
+        </Link>
       </section>
     </div>
   );

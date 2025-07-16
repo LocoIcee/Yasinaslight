@@ -93,7 +93,7 @@ const HomePage = () => {
           >
             When you walk in your truth, the universe walks with you.
             You were created with purpose, there is no failure in being who you truly are.
-            You are not here to fail you are here to shine.
+            You are not here to fail, you are here to shine.
           </h2>
           <Link
             href="/about"
