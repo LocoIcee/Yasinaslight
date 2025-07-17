@@ -1,630 +1,543 @@
 'use client';
-import React, { useState } from "react";
-import Link from "next/link";
-import { useAuth } from "@/contexts/AuthContext";
-import { colors, fonts } from "@/utils/constants";
-import PlaceholderImage from "@/utils/PlaceholderImage";
+
+import React, { useState } from 'react';
+import { ChevronDown, ChevronUp, Heart, Sparkles, Moon, Sun, Eye, Crown, Flower, Zap, Home, Shield, Clock, Star } from 'lucide-react';
 
 const ServicesPage = () => {
-  const { currentUser } = useAuth();
-  // State for active service (for scrolling to)
-  const [activeService, setActiveService] = useState(null);
+  const [expandedChakra, setExpandedChakra] = useState(null);
+  const [expandedService, setExpandedService] = useState(null);
 
-  // Services data - Updated based on the PDF content
+  const chakras = [
+    {
+      name: "Root Chakra",
+      sanskrit: "Muladhara",
+      color: "text-red-600",
+      bgColor: "bg-red-50",
+      icon: <Flower className="w-6 h-6" />,
+      theme: "Safety, grounding, survival",
+      location: "Base of spine",
+      description: "The Root Chakra is your energetic foundation, connected to safety, stability, and your sense of belonging. When blocked, it can lead to insecurity around basic needs, finances, or physical well-being. When balanced, it brings a deep sense of calm, focus, and inner strength. You feel grounded, supported, and clear in your direction."
+    },
+    {
+      name: "Sacral Chakra",
+      sanskrit: "Svadhisthana",
+      color: "text-orange-600",
+      bgColor: "bg-orange-50",
+      icon: <Sparkles className="w-6 h-6" />,
+      theme: "Emotions, pleasure, creativity",
+      location: "Lower abdomen",
+      description: "The Sacral Chakra is your center of passion, creativity, and emotional connection. It governs your ability to feel joy, express desires, and experience intimacy with yourself and others. When balanced, you feel comfortable in your body, open to pleasure, and inspired to create."
+    },
+    {
+      name: "Solar Plexus Chakra",
+      sanskrit: "Manipura",
+      color: "text-yellow-600",
+      bgColor: "bg-yellow-50",
+      icon: <Sun className="w-6 h-6" />,
+      theme: "Confidence, willpower, personal power",
+      location: "Upper abdomen/stomach",
+      description: "The Solar Plexus Chakra is your center of personal power, self-esteem, and inner confidence. It influences how you see yourself, trust your instincts, and make aligned choices. This chakra empowers you to stand in your truth, set boundaries, and stop seeking external approval."
+    },
+    {
+      name: "Heart Chakra",
+      sanskrit: "Anahata",
+      color: "text-green-600",
+      bgColor: "bg-green-50",
+      icon: <Heart className="w-6 h-6" />,
+      theme: "Love, compassion, forgiveness",
+      location: "Center of chest",
+      description: "The Heart Chakra sits at the center of your chest and governs love, compassion, and connection—with yourself, others, and the divine. When balanced, you release past wounds, embrace forgiveness, and open yourself to joy and meaningful relationships."
+    },
+    {
+      name: "Throat Chakra",
+      sanskrit: "Vishuddha",
+      color: "text-blue-600",
+      bgColor: "bg-blue-50",
+      icon: <Zap className="w-6 h-6" />,
+      theme: "Communication, truth, self-expression",
+      location: "Throat",
+      description: "The Throat Chakra empowers you to express your truth with clarity, courage, and compassion. It governs communication on all levels and is closely connected to your Higher Self. When tuned in, your voice becomes a channel for intuition and authenticity."
+    },
+    {
+      name: "Third Eye Chakra",
+      sanskrit: "Ajna",
+      color: "text-purple-600",
+      bgColor: "bg-purple-50",
+      icon: <Eye className="w-6 h-6" />,
+      theme: "Intuition, vision, insight",
+      location: "Between the eyebrows",
+      description: "The Third Eye Chakra is your portal to insight, clarity, and intuitive guidance. It supports your ability to trust the unknown, tap into imagination, and see beyond surface-level reality. Balancing this chakra activates both sides of the brain and fuels all the senses."
+    },
+    {
+      name: "Crown Chakra",
+      sanskrit: "Sahasrara",
+      color: "text-white",
+      bgColor: "bg-gray-50",
+      icon: <Crown className="w-6 h-6" />,
+      theme: "Spiritual connection, enlightenment, divine consciousness",
+      location: "Top of the head",
+      description: "The Crown Chakra is your gateway to higher consciousness, inner peace, and spiritual clarity. When activated, it helps you trust the divine plan, even during uncertain times. You begin to feel deeply present, connected to something greater, and more aligned with your soul's purpose."
+    }
+  ];
+
   const services = [
     {
-      id: "soul-alignment",
-      title: "Soul Alignment",
-      category: "Spiritual Guidance",
-      icon: "🔮",
-      shortDesc: "An intuitive deep dive into your soul's blueprint to clear energetic distortions and reconnect with your authentic path.",
-      description: "An intuitive deep dive into your soul's blueprint. Together, we clear energetic distortions and reconnect you with your authentic path. These sessions often include channeling, energy work, and guidance for your next aligned steps.\n\nRemember your purpose. Align with your truth.\n\nThis is a heart-centered, soul-led approach to receiving clarity when your mind feels overwhelmed and your emotions are clouded. It's about tuning into the deeper wisdom that lives within you—the part that knows even when your thoughts are spinning.",
-      benefits: [
-        "Make aligned decisions with more ease",
-        "Understand what your body and emotions are really trying to tell you",
-        "Receive validation, clarity, and next steps when you feel stuck",
-        "Reconnect with your purpose or soul path",
-        "Gently move through energetic blocks or emotional heaviness"
-      ],
-      keyFeatures: [
+      id: 'soul-alignment',
+      title: 'The Soul Alignment Session',
+      subtitle: 'Feel grounded. Feel lighter. Feel like you again.',
+      duration: '60 minutes',
+      description: 'An intuitive healing experience designed to help you release emotional weight, calm your nervous system, and reconnect with your soul\'s inner truth—gently, safely, and powerfully.',
+      icon: <Star className="w-8 h-8" />,
+      tiers: [
         {
-          title: "Combines Talk Therapy with Intuition",
-          description: "Like traditional counselling, intuitive counselling involves conversation—but I also use intuitive abilities to guide the session."
+          name: 'The Reset',
+          price: '$211',
+          description: 'Perfect if you\'re new to energy healing or need a light tune-up.',
+          includes: [
+            '60-minute intuitive session',
+            'Grounding energy clearing + chakra balance',
+            '1 personalized affirmation',
+            'Brief post-session reflection notes'
+          ]
         },
         {
-          title: "Addresses the Whole Person",
-          description: "It considers your mental, emotional, physical, and spiritual well-being, often looking beyond symptoms to root causes."
+          name: 'The Soul Alignment Experience',
+          price: '$311',
+          description: 'The full, signature experience. Deep support for clarity and transformation.',
+          recommended: true,
+          includes: [
+            '60-minute intuitive healing session',
+            'Reiki, Hypnotherapy or Soul Journey (depends on what you need)',
+            'Energetic body scan + clearing',
+            'Personalized journal prompts + energy message + EFT',
+            '15-min post-call check-in (within 7 days)'
+          ]
         },
         {
-          title: "Incorporates Spiritual or Energetic Practices",
-          description: "May include tools like energy healing, chakra work, oracle cards, meditation or breathwork, inner child work, and soul-purpose exploration."
-        },
-        {
-          title: "Highly Personalized",
-          description: "Each session is guided by your energy and needs in the moment, making it fluid, adaptable, and intuitive in structure."
-        }
-      ],
-      sessions: [
-        {
-          title: "Intuitive Guidance Session",
-          duration: "60 minutes"
-        },
-        {
-          title: "Life Path Alignment",
-          duration: "90 minutes"
-        }
-      ]
-    },
-    {
-      id: "chakra-balancing",
-      title: "Chakra Balancing",
-      category: "Energy Healing",
-      icon: "⚡",
-      shortDesc: "Energy work to align and harmonize your body's energy centers for optimal wellbeing.",
-      description: "Chakra balancing is a form of energy healing that focuses on harmonizing the energy centers of the body. When these chakras are blocked or imbalanced, it can lead to physical discomfort, emotional distress, and mental fog.\n\nTraditionally, we focus on 7 main chakras, but broader energy systems and spiritual teachings recognize more—sometimes 12, 114, or even 88,000 depending on the source and tradition.",
-      benefits: [
-        "Clears energy blockages in the body",
-        "Promotes emotional stability and wellbeing",
-        "Enhances spiritual connection and awareness",
-        "Improves mental clarity and focus",
-        "Supports physical vitality and immune function"
-      ],
-      chakras: [
-        {
-          name: "Root Chakra (Muladhara)",
-          color: "🔴",
-          location: "Base of spine",
-          theme: "Safety, grounding, survival"
-        },
-        {
-          name: "Sacral Chakra (Svadhisthana)",
-          color: "🟠",
-          location: "Lower abdomen",
-          theme: "Emotions, pleasure, creativity"
-        },
-        {
-          name: "Solar Plexus Chakra (Manipura)",
-          color: "🟡",
-          location: "Upper abdomen/stomach",
-          theme: "Confidence, willpower, personal power"
-        },
-        {
-          name: "Heart Chakra (Anahata)",
-          color: "💚",
-          location: "Center of chest",
-          theme: "Love, compassion, forgiveness"
-        },
-        {
-          name: "Throat Chakra (Vishuddha)",
-          color: "🔵",
-          location: "Throat",
-          theme: "Communication, truth, self-expression"
-        },
-        {
-          name: "Third Eye Chakra (Ajna)",
-          color: "🟣",
-          location: "Between the eyebrows",
-          theme: "Intuition, vision, insight"
-        },
-        {
-          name: "Crown Chakra (Sahasrara)",
-          color: "⚪",
-          location: "Top of the head",
-          theme: "Spiritual connection, enlightenment"
-        }
-      ],
-      sessions: [
-        {
-          title: "Chakra Assessment & Balancing",
-          duration: "75 minutes"
-        },
-        {
-          title: "Remote Chakra Tune-Up",
-          duration: "30 minutes"
-        },
-        {
-          title: "In-Person Chakra Session",
-          duration: "75 minutes"
+          name: 'The Reset & Rise Package',
+          price: '$411',
+          description: 'For those ready to go deeper. Includes integration and follow-up support.',
+          includes: [
+            'Everything in Tier 2',
+            '1 x 45-minute follow-up session (within 2–3 weeks)',
+            'Custom guided meditation OR hypno audio',
+            'Text support for 5 days after session'
+          ]
         }
       ]
     },
     {
-      id: "reflexology",
-      title: "Reflexology",
-      category: "Physical Wellness",
-      icon: "👣",
-      shortDesc: "Therapeutic pressure point technique that promotes healing, balance and relaxation throughout the entire body.",
-      description: "Reflexology is based on the theory that your hands, feet, and ears are connected to certain organs and body systems. It rests on the ancient Chinese belief in qi (pronounced \"chee\"), or \"vital energy.\" According to this belief, qi flows through each person. When a person feels stressed, their body blocks qi, which can cause an imbalance leading to illness.\n\nReflexology aims to keep qi flowing through the body, keeping it balanced and disease-free.",
+      id: 'alignment-journey',
+      title: 'The Alignment Journey',
+      subtitle: '4-Week Coaching + Healing Package',
+      duration: '4 weeks',
+      price: '$1033',
+      description: 'A 4-week 1:1 coaching + healing experience for soul-led women ready to move beyond stuckness and step into clarity, confidence, and self-trust.',
+      icon: <Moon className="w-8 h-8" />,
+      includes: [
+        '1x Soul Reset Session to open the journey',
+        '3x Weekly 60-min Integration Calls (can include Reiki, Hypnotherapy, or Coaching)',
+        'Personalized affirmations + journal prompts',
+        'Customized meditation or hypno recording',
+        'Optional text/voice support between sessions (Mon–Fri)',
+        'Additional support based on your initial consultation'
+      ]
+    },
+    {
+      id: 'oracle-readings',
+      title: 'Oracle Readings',
+      subtitle: 'Clarity. Connection. Soul-Led Guidance.',
+      duration: 'Variable',
+      price: '$125',
+      description: 'Sacred conversations with your higher self, your guides, and divine energy. Using intuition, energy, and card symbolism to offer clarity, perspective, and soul-level confirmation.',
+      icon: <Eye className="w-8 h-8" />,
+      includes: [
+        'Intuitive card reading based on your intention',
+        'Clarity & perspective on your situation',
+        'Soul-level confirmation and insights',
+        'Interactive session with conversation and reflection',
+        'Connection to your inner knowing'
+      ]
+    },
+    {
+      id: 'reiki-healing',
+      title: 'Reiki Healing',
+      subtitle: 'Spiritually guided energy for balance, clarity, and renewal',
+      duration: '60 minutes',
+      price: '$75',
+      description: 'An ancient, sacred healing art that channels universal life force energy to support the body, mind, and spirit. Available in-person or distance healing.',
+      icon: <Sparkles className="w-8 h-8" />,
       benefits: [
-        "Reduces stress and anxiety",
-        "Alleviates pain, headaches, and sinus congestion",
-        "Improves circulation throughout the body",
-        "Promotes natural detoxification",
-        "Enhances relaxation and improves sleep quality",
-        "Supports hormonal balance"
-      ],
-      additionalBenefits: [
-        "Boosts immune system",
-        "Helps with colds and bacterial infections",
-        "Clears sinus issues",
-        "Assists with back problems",
-        "Corrects hormonal imbalances",
-        "Improves digestion"
-      ],
-      sessions: [
+        'Deep relaxation and stress relief',
+        'Pain management and physical healing',
+        'Emotional clearing and trauma release',
+        'Improved sleep and increased vitality',
+        'Energetic alignment (chakras, meridians, aura cleansing)',
+        'Immune system support and detoxification',
+        'Spiritual connection and inner clarity'
+      ]
+    },
+    {
+      id: 'chakra-balancing',
+      title: 'Chakra Balancing Session',
+      subtitle: 'Realign your energy. Reconnect to your truth. Restore your flow.',
+      duration: '60 minutes',
+      price: '$125',
+      description: 'A gentle, intuitive healing experience that helps restore harmony to your entire energetic system using energy work, crystals, sound, and aromatherapy.',
+      icon: <Flower className="w-8 h-8" />,
+      includes: [
+        'Intuitive scan of your chakras to identify imbalances',
+        'Hands-on or remote energy healing',
+        'Chakra-specific tools (crystals, sound, affirmations, essential oils)',
+        'Personalized insights and messages',
+        'Deep sense of calm, clarity, and inner alignment'
+      ]
+    },
+    {
+      id: 'energy-clearings',
+      title: 'Energy & Entity Clearings',
+      subtitle: 'Cleanse your space. Reclaim your energy. Restore your peace.',
+      duration: 'Variable',
+      price: 'Contact for pricing',
+      description: 'Intuitive clearing sessions for homes, businesses, and personal energy fields to release heavy energy, emotional residue, and unwanted spiritual attachments.',
+      icon: <Shield className="w-8 h-8" />,
+      types: [
         {
-          title: "Remote Reflexology Session",
-          duration: "30 minutes"
+          name: 'Home Clearings',
+          description: 'Cleanse old imprints and bring harmony back to your living space'
         },
         {
-          title: "In-Person Reflexology",
-          duration: "60 minutes"
+          name: 'Business Clearings',
+          description: 'Reset workspace energy to support success and abundance'
+        },
+        {
+          name: 'Personal Entity & Energy Clearings',
+          description: 'Remove spiritual attachments, cut cords, and restore your sense of self'
         }
       ]
     },
     {
-      id: "hypnotherapy",
-      title: "Hypnotherapy",
-      category: "Mind-Body Healing",
-      icon: "🧠",
-      shortDesc: "Release the past. Rewire the mind. Reclaim your power.",
-      description: "Hypnotherapy is a gentle and guided process that helps you access your subconscious mind—the space where your deepest beliefs, memories, and emotional patterns live. In this relaxed, meditative state, you're able to release what's no longer serving you and reprogram your inner world with clarity, confidence, and alignment.\n\nContrary to myths, you're always in control during a session. This is your sacred space to connect inward, not to be controlled or manipulated.",
-      benefits: [
-        "Let go of limiting beliefs and self-sabotage",
-        "Heal emotional wounds and past experiences",
-        "Rewire subconscious patterns for confidence and clarity",
-        "Alleviate anxiety, fear, or emotional overwhelm",
-        "Align with your truth, purpose, and inner peace"
-      ],
-      idealFor: [
-        "Those feeling stuck in repetitive cycles",
-        "Anyone experiencing emotional heaviness or energy drain",
-        "People ready for real change but unsure where to begin",
-        "Those called to deeper self-awareness and healing"
-      ],
-      sessions: [
-        {
-          title: "Hypnotherapy Session",
-          duration: "90 minutes"
-        },
-        {
-          title: "Hypnotherapy Package",
-          duration: "3 x 90 minutes"
-        }
+      id: 'past-life-healing',
+      title: 'Past Life Energy & Soul Healing',
+      subtitle: 'Release the past so your soul can rise in the present.',
+      duration: '90 minutes',
+      price: '$222',
+      description: 'Soul clearing sessions to release karmic ties, soul contracts, and energetic imprints from past lives that may be impacting your present path.',
+      icon: <Clock className="w-8 h-8" />,
+      includes: [
+        'Past Life Exploration or Regression',
+        'Akashic Record insight',
+        'Oracle or intuitive card guidance',
+        'Energy clearing & cord cutting',
+        'Soul contract release or rewriting',
+        'Guided meditation and healing activations'
       ]
     },
     {
-      id: "reiki",
-      title: "Reiki Healing",
-      category: "Energy Healing",
-      icon: "✨",
-      shortDesc: "Universal energy healing that promotes balance and wellness.",
-      description: "Reiki is a Japanese technique for stress reduction and relaxation that also promotes healing. It's administered by laying hands on or above the body, allowing life force energy to flow through and restore balance. Reiki treats the whole person including body, emotions, mind, and spirit, creating many beneficial effects including relaxation and feelings of peace, security, and wellbeing.",
+      id: 'hypnotherapy',
+      title: 'Hypnotherapy',
+      subtitle: 'Release the past. Rewire the mind. Reclaim your power.',
+      duration: '60-90 minutes',
+      price: '$250 and up',
+      description: 'A gentle, guided process to access your subconscious mind and release limiting beliefs, heal emotional wounds, and align with your truth.',
+      icon: <Moon className="w-8 h-8" />,
       benefits: [
-        "Reduces stress and promotes deep relaxation",
-        "Accelerates the body's natural healing abilities",
-        "Helps alleviate pain and discomfort",
-        "Balances energy centers (chakras)",
-        "Supports emotional healing and clarity"
-      ],
-      sessions: [
-        {
-          title: "Initial Reiki Session",
-          duration: "90 minutes"
-        },
-        {
-          title: "Follow-up Reiki Session",
-          duration: "60 minutes"
-        }
+        'Let go of limiting beliefs and self-sabotage',
+        'Heal emotional wounds and past experiences',
+        'Rewire subconscious patterns for confidence',
+        'Alleviate anxiety, fear, or emotional overwhelm',
+        'Align with your truth, purpose, and inner peace'
       ]
     },
     {
-      id: "meditation-guidance",
-      title: "Meditation & Mindfulness",
-      category: "Spiritual Guidance",
-      icon: "🧘‍♀️",
-      shortDesc: "Learn techniques to quiet the mind, reduce stress, and connect with your inner wisdom.",
-      description: "Meditation and mindfulness practices offer powerful tools for reducing stress, improving mental clarity, and connecting with your inner wisdom. Whether you're new to meditation or looking to deepen your practice, I offer personalized guidance to help you develop sustainable techniques that fit your lifestyle. Sessions may include breath work, guided visualization, mantra meditation, mindfulness practices, and tools for incorporating meditation into daily life.",
+      id: 'reflexology',
+      title: 'Reflexology',
+      subtitle: 'Ancient healing through pressure point therapy',
+      duration: '30 or 60 minutes',
+      price: '$75',
+      description: 'Based on the theory that hands, feet, and ears are connected to organs and body systems. Promotes qi flow and overall well-being.',
+      icon: <Heart className="w-8 h-8" />,
       benefits: [
-        "Reduces stress and anxiety",
-        "Improves focus and mental clarity",
-        "Promotes emotional regulation",
-        "Deepens spiritual connection",
-        "Develops tools for self-care and inner peace"
-      ],
-      sessions: [
-        {
-          title: "Meditation Fundamentals",
-          duration: "60 minutes"
-        },
-        {
-          title: "Advanced Meditation & Energy Work",
-          duration: "90 minutes"
-        }
+        'Stress reduction and anxiety relief',
+        'Pain relief and improved circulation',
+        'Enhanced relaxation and better sleep',
+        'Detoxification and immune support',
+        'Hormonal balance and digestive improvement'
       ]
     }
   ];
 
-  // Handle clicking on a service link
-  const handleServiceClick = (serviceId) => {
-    setActiveService(serviceId);
-    // Smooth scroll to the service section
-    const element = document.getElementById(serviceId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const toggleChakra = (index) => {
+    setExpandedChakra(expandedChakra === index ? null : index);
+  };
+
+  const toggleService = (id) => {
+    setExpandedService(expandedService === id ? null : id);
   };
 
   return (
-    <div>
-      {/* Page Header */}
-      <div
-        className="py-16 text-center relative overflow-hidden"
-        style={{
-          background: `linear-gradient(to right, ${colors.primary}, ${colors.primary}DD)`,
-        }}
-      >
-        {/* Background pattern */}
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `url(/assets/sacred-geometry.png)`,
-            backgroundSize: "cover",
-            mixBlendMode: "overlay",
-          }}
-        ></div>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-teal-50">
+      {/* Hero Section */}
+      <section className="py-20 px-4 text-center">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-5xl font-bold text-purple-900 mb-6">
+            ✧ MY APPROACH TO HEALING ✧
+          </h1>
+          <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+            My approach to healing is intuitive, integrative, and deeply personal. I hold space for the whole
+            of you—body, mind, and soul—recognizing that true transformation happens when all aspects of
+            your being are seen, heard, and supported.
+          </p>
+          <div className="w-32 h-1 bg-gradient-to-r from-purple-400 to-teal-400 mx-auto rounded-full"></div>
+        </div>
+      </section>
 
-        <h1
-          className="text-4xl md:text-5xl relative z-10 mb-3"
-          style={{ color: colors.neutral, fontFamily: fonts.serif }}
-        >
-          HEALING SERVICES
-        </h1>
-        <p
-          className="mt-2 text-xl relative z-10 max-w-2xl mx-auto"
-          style={{ color: `${colors.neutral}DD` }}
-        >
-          Holistic Therapies for Mind, Body & Spirit
-        </p>
-      </div>
+      {/* Healing Philosophy */}
+      <section className="py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+            <h2 className="text-3xl font-bold text-purple-900 mb-6 text-center">Healing Is a Journey, Not a One-Time Fix</h2>
+            <p className="text-lg text-gray-700 mb-8 text-center max-w-4xl mx-auto">
+              While one session can spark powerful shifts, lasting transformation often unfolds over time.
+              Deep-rooted patterns, energetic imprints, and past life wounds can take more than one session
+              to fully release and integrate.
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-6 mt-12">
+              <div className="text-center p-6 bg-gradient-to-br from-purple-100 to-blue-100 rounded-xl">
+                <Star className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-purple-900 mb-2">Multi-Session Bundles</h3>
+                <p className="text-gray-700">Receive a discount when booking 3 or more sessions</p>
+              </div>
+              <div className="text-center p-6 bg-gradient-to-br from-blue-100 to-teal-100 rounded-xl">
+                <Moon className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-blue-900 mb-2">Soul Alignment Package</h3>
+                <p className="text-gray-700">A full journey of healing, clearing, intuitive support & soul reconnection</p>
+              </div>
+              <div className="text-center p-6 bg-gradient-to-br from-teal-100 to-purple-100 rounded-xl">
+                <Sparkles className="w-12 h-12 text-teal-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-teal-900 mb-2">Custom Packages</h3>
+                <p className="text-gray-700">We can build a plan based on your unique energetic needs</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Services Navigation */}
-      <div 
-        className="top-20 z-30 py-4 shadow-md"
-        style={{ backgroundColor: colors.neutral }}
-      >
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-2">
-            {services.map(service => (
-              <button
-                key={service.id}
-                onClick={() => handleServiceClick(service.id)}
-                className={`px-4 py-2 rounded-full text-sm transition-all ${
-                  activeService === service.id ? "shadow-md" : "hover:shadow-sm"
-                }`}
-                style={{
-                  backgroundColor: activeService === service.id ? colors.primary : colors.primary + "15",
-                  color: activeService === service.id ? colors.neutral : colors.primary,
-                }}
-              >
-                {service.icon} {service.title}
-              </button>
+      {/* Services Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-purple-900 mb-12 text-center">Healing Services</h2>
+          
+          <div className="space-y-8">
+            {services.map((service) => (
+              <div key={service.id} className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden">
+                <div className="p-8">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center space-x-4">
+                      <div className="p-3 bg-gradient-to-br from-purple-100 to-blue-100 rounded-full">
+                        {service.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-purple-900">{service.title}</h3>
+                        <p className="text-lg text-gray-600 italic">{service.subtitle}</p>
+                        <div className="flex items-center space-x-4 mt-2">
+                          <span className="text-sm text-gray-500">Duration: {service.duration}</span>
+                          {service.price && (
+                            <span className="text-lg font-semibold text-purple-700">{service.price}</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => toggleService(service.id)}
+                      className="p-2 hover:bg-purple-50 rounded-full transition-colors"
+                    >
+                      {expandedService === service.id ? (
+                        <ChevronUp className="w-6 h-6 text-purple-600" />
+                      ) : (
+                        <ChevronDown className="w-6 h-6 text-purple-600" />
+                      )}
+                    </button>
+                  </div>
+                  
+                  <p className="text-gray-700 mb-6">{service.description}</p>
+                  
+                  {expandedService === service.id && (
+                    <div className="border-t pt-6">
+                      {service.tiers && (
+                        <div className="grid md:grid-cols-3 gap-6 mb-6">
+                          {service.tiers.map((tier, index) => (
+                            <div key={index} className={`p-6 rounded-xl ${tier.recommended ? 'bg-gradient-to-br from-purple-50 to-blue-50 ring-2 ring-purple-200' : 'bg-gray-50'}`}>
+                              {tier.recommended && (
+                                <div className="text-center mb-3">
+                                  <span className="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                    Recommended
+                                  </span>
+                                </div>
+                              )}
+                              <h4 className="text-xl font-semibold text-purple-900 mb-2">{tier.name}</h4>
+                              <p className="text-2xl font-bold text-purple-700 mb-3">{tier.price}</p>
+                              <p className="text-gray-600 mb-4">{tier.description}</p>
+                              <ul className="space-y-2">
+                                {tier.includes.map((item, idx) => (
+                                  <li key={idx} className="flex items-start space-x-2">
+                                    <span className="text-purple-600 mt-1">•</span>
+                                    <span className="text-gray-700">{item}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {service.includes && (
+                        <div className="mb-6">
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">What's Included:</h4>
+                          <ul className="grid md:grid-cols-2 gap-2">
+                            {service.includes.map((item, idx) => (
+                              <li key={idx} className="flex items-start space-x-2">
+                                <span className="text-purple-600 mt-1">•</span>
+                                <span className="text-gray-700">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      
+                      {service.benefits && (
+                        <div className="mb-6">
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Benefits:</h4>
+                          <ul className="grid md:grid-cols-2 gap-2">
+                            {service.benefits.map((benefit, idx) => (
+                              <li key={idx} className="flex items-start space-x-2">
+                                <span className="text-green-600 mt-1">✓</span>
+                                <span className="text-gray-700">{benefit}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      
+                      {service.types && (
+                        <div className="mb-6">
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Types Available:</h4>
+                          <div className="grid md:grid-cols-3 gap-4">
+                            {service.types.map((type, idx) => (
+                              <div key={idx} className="p-4 bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg">
+                                <h5 className="font-semibold text-purple-900 mb-2">{type.name}</h5>
+                                <p className="text-gray-700 text-sm">{type.description}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Introduction & What to Expect */}
-      <section className="container mx-auto py-16 px-4 text-center max-w-3xl">
-        <h2
-          className="text-2xl md:text-3xl mb-6"
-          style={{ color: colors.primary, fontFamily: fonts.serif }}
-        >
-          <span className="px-2" style={{ color: colors.accent }}>✧</span>
-          MY APPROACH TO HEALING
-          <span className="px-2" style={{ color: colors.accent }}>✧</span>
-        </h2>
-        <p className="mb-6 text-lg" style={{ color: colors.text, lineHeight: "1.8" }}>
-          Each service I offer is designed to address specific aspects of your wellbeing while supporting your overall balance and harmony. I believe in a holistic approach that considers the interconnection between physical, emotional, and spiritual health.
-        </p>
-        <p className="text-lg" style={{ color: colors.text, lineHeight: "1.8" }}>
-          All services begin with a personal consultation to understand your unique needs and goals. Sessions can be enjoyed individually or combined for a more comprehensive healing experience.
-        </p>
-
-        {/* What to Expect - Global section */}
-        <div className="mt-10 border-t border-b py-10" style={{ borderColor: colors.primary + "30" }}>
-          <h3 
-            className="text-xl mb-6 font-medium"
-            style={{ color: colors.primary }}
-          >
-            What to Expect During Your Session
-          </h3>
-          <p className="mb-4 text-lg" style={{ color: colors.text, lineHeight: "1.8" }}>
-            Your session begins with a brief consultation to discuss your needs and set intentions. I'll guide you through the process, ensuring you feel comfortable and supported throughout. 
+      {/* Chakra System Section */}
+      <section className="py-16 px-4 bg-gradient-to-br from-purple-100/50 to-blue-100/50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-purple-900 mb-8 text-center">
+            🌈 The 7 Main Chakras
+          </h2>
+          <p className="text-lg text-gray-700 mb-12 text-center max-w-3xl mx-auto">
+            Your chakras are the energy centers of your body, each connected to different aspects of your 
+            physical, emotional, and spiritual well-being. Understanding them helps in your healing journey.
           </p>
-          <p className="mb-4 text-lg" style={{ color: colors.text, lineHeight: "1.8" }}>
-            For energy healing services like Reiki and Chakra Balancing, you'll relax in a comfortable setting while I work with your energy field. For more interactive modalities like Soul Alignment or Hypnotherapy, we'll work together in a collaborative process.
-          </p>
-          <p className="text-lg" style={{ color: colors.text, lineHeight: "1.8" }}>
-            After your session, we'll discuss what was experienced and I'll provide recommendations for supporting your continued healing at home. It's advisable to drink plenty of water and allow time for rest and integration after your session.
-          </p>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {chakras.map((chakra, index) => (
+              <div key={index} className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden">
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className={`p-3 rounded-full ${chakra.bgColor}`}>
+                      <div className={chakra.color}>
+                        {chakra.icon}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => toggleChakra(index)}
+                      className="p-2 hover:bg-purple-50 rounded-full transition-colors"
+                    >
+                      {expandedChakra === index ? (
+                        <ChevronUp className="w-5 h-5 text-purple-600" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5 text-purple-600" />
+                      )}
+                    </button>
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-purple-900 mb-1">{chakra.name}</h3>
+                  <p className="text-sm text-gray-600 mb-2">{chakra.sanskrit}</p>
+                  <p className="text-sm text-gray-500 mb-3">{chakra.location}</p>
+                  <p className="text-sm font-medium text-purple-700">{chakra.theme}</p>
+                  
+                  {expandedChakra === index && (
+                    <div className="mt-4 pt-4 border-t">
+                      <p className="text-gray-700 text-sm leading-relaxed">{chakra.description}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+            <p className="text-gray-600 mb-4">
+              Chakra Balancing Session: 30-minute touch-up (remote) - $50 | In-person with session - $75
+            </p>
+            <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all transform hover:scale-105">
+              Book Chakra Balancing
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Services Detailed Listings */}
-      <section className="container mx-auto py-8 px-4">
-        <div className="space-y-32">
-          {services.map((service) => (
-            <div 
-              key={service.id} 
-              id={service.id}
-              className="scroll-mt-32"
-            >
-              {/* Service Header */}
-              <div 
-                className="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b mb-8"
-                style={{ borderColor: colors.primary + "30" }}
-              >
-                <div>
-                  <span 
-                    className="inline-block mb-2 px-3 py-1 rounded-full text-xs"
-                    style={{ 
-                      backgroundColor: colors.secondary + "20",
-                      color: colors.secondary
-                    }}
-                  >
-                    {service.category}
-                  </span>
-                  <h3 
-                    className="text-3xl md:text-4xl flex items-center"
-                    style={{ color: colors.primary, fontFamily: fonts.serif }}
-                  >
-                    <span className="mr-3">{service.icon}</span>
-                    {service.title}
-                  </h3>
-                </div>
-                <Link
-                  href={currentUser ? "/calendar" : "/login?redirect=/calendar"}
-                  className="mt-4 md:mt-0 px-5 py-2 rounded-full text-sm transition-all hover:shadow-md inline-flex items-center gap-2"
-                  style={{
-                    backgroundColor: colors.secondary,
-                    color: colors.neutral,
-                  }}
-                >
-                  Book This Service
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className="h-4 w-4" 
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </Link>
+      {/* Booking Information */}
+      <section className="py-16 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-purple-900 mb-8">Ready to Begin Your Healing Journey?</h2>
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+            <p className="text-lg text-gray-700 mb-6">
+              Healing isn't linear, and you're never alone in it. If you're ready to commit to your growth, 
+              I'm here to walk beside you—one aligned step at a time. 💖
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="p-6 bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl">
+                <Home className="w-8 h-8 text-purple-600 mx-auto mb-3" />
+                <h3 className="text-xl font-semibold text-purple-900 mb-2">In-Person Sessions</h3>
+                <p className="text-gray-700">Available in Calgary, Alberta</p>
               </div>
-
-              {/* Service Content */}
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-                {/* Left Column - Service Description */}
-                <div className="lg:col-span-3">
-                  <div className="prose max-w-none">
-                    <p className="text-lg mb-6" style={{ color: colors.text, lineHeight: "1.8" }}>
-                      {service.description.split('\n\n').map((paragraph, index) => (
-                        <React.Fragment key={index}>
-                          {paragraph}
-                          {index !== service.description.split('\n\n').length - 1 && <br />}
-                        </React.Fragment>
-                      ))}
-                    </p>
-
-                    {/* Benefits */}
-                    <h4 
-                      className="text-xl mt-10 mb-4 font-medium"
-                      style={{ color: colors.primary }}
-                    >
-                      Benefits
-                    </h4>
-                    <ul className="space-y-3 mb-8" style={{ color: colors.text }}>
-                      {service.benefits.map((benefit, index) => (
-                        <li key={index} className="flex items-start">
-                          <div 
-                            className="mr-3 mt-1"
-                            style={{ color: colors.accent }}
-                          >
-                            ✓
-                          </div>
-                          <span>{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* Service-specific content */}
-                    {service.id === "chakra-balancing" && service.chakras && (
-                      <div className="mt-10">
-                        <h4 
-                          className="text-xl mb-6 font-medium"
-                          style={{ color: colors.primary }}
-                        >
-                          The 7 Main Chakras
-                        </h4>
-                        <div className="space-y-6">
-                          {service.chakras.map((chakra, index) => (
-                            <div key={index} className="bg-white p-5 rounded-lg shadow-sm">
-                              <h5 className="flex items-center text-lg font-medium mb-2" style={{ color: colors.primary }}>
-                                <span className="mr-2">{chakra.color}</span> 
-                                {chakra.name}
-                              </h5>
-                              <div className="flex flex-wrap gap-x-8 gap-y-1 mb-2 text-sm" style={{ color: colors.text + "99" }}>
-                                <div><strong>Location:</strong> {chakra.location}</div>
-                                <div><strong>Theme:</strong> {chakra.theme}</div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {service.id === "soul-alignment" && service.keyFeatures && (
-                      <div className="mt-10">
-                        <h4 
-                          className="text-xl mb-6 font-medium"
-                          style={{ color: colors.primary }}
-                        >
-                          Key Features
-                        </h4>
-                        <div className="space-y-6">
-                          {service.keyFeatures.map((feature, index) => (
-                            <div key={index} className="bg-white p-5 rounded-lg shadow-sm">
-                              <h5 className="text-lg font-medium mb-2" style={{ color: colors.primary }}>
-                                {index + 1}. {feature.title}
-                              </h5>
-                              <p style={{ color: colors.text }}>{feature.description}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {service.id === "reflexology" && service.additionalBenefits && (
-                      <div className="mt-10">
-                        <h4 
-                          className="text-xl mb-4 font-medium"
-                          style={{ color: colors.primary }}
-                        >
-                          Additional Reported Benefits
-                        </h4>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          {service.additionalBenefits.map((benefit, index) => (
-                            <div key={index} className="flex items-center">
-                              <span
-                                className="mr-2 text-lg"
-                                style={{ color: colors.accent }}
-                              >
-                                •
-                              </span>
-                              <span style={{ color: colors.text }}>{benefit}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {service.id === "hypnotherapy" && service.idealFor && (
-                      <div className="mt-10">
-                        <h4 
-                          className="text-xl mb-4 font-medium"
-                          style={{ color: colors.primary }}
-                        >
-                          Perfect For You If You're Feeling
-                        </h4>
-                        <ul className="space-y-3 mb-8" style={{ color: colors.text }}>
-                          {service.idealFor.map((item, index) => (
-                            <li key={index} className="flex items-start">
-                              <div 
-                                className="mr-3 mt-1"
-                                style={{ color: colors.accent }}
-                              >
-                                •
-                              </div>
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Right Column - Image & Session Info */}
-                <div className="lg:col-span-2">
-                  {/* Service Image */}
-                  <div className="rounded-lg overflow-hidden shadow-md mb-8">
-                    <PlaceholderImage 
-                      height="250px" 
-                      text={`${service.title} Image`}
-                      bgColor={colors.primary + "15"}
-                    />
-                  </div>
-
-                  {/* Session Options */}
-                  <div 
-                    className="border rounded-lg overflow-hidden shadow-sm"
-                    style={{ borderColor: colors.primary + "20" }}
-                  >
-                    <div 
-                      className="py-4 px-5"
-                      style={{ backgroundColor: colors.primary + "10" }}
-                    >
-                      <h4 
-                        className="text-lg font-medium"
-                        style={{ color: colors.primary }}
-                      >
-                        Session Options
-                      </h4>
-                    </div>
-                    <div className="divide-y" style={{ divideColor: colors.primary + "10" }}>
-                      {service.sessions.map((session, index) => (
-                        <div key={index} className="p-5">
-                          <div className="flex justify-between items-start mb-2">
-                            <h5 className="font-medium" style={{ color: colors.text }}>
-                              {session.title}
-                            </h5>
-                          </div>
-                          <div className="flex justify-between text-sm mb-3" style={{ color: colors.text + "99" }}>
-                            <span>{session.duration}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="p-5 text-center">
-                      <Link
-                        href={currentUser ? "/calendar" : "/login?redirect=/calendar"}
-                        className="w-full inline-block px-4 py-3 rounded-md transition-all hover:shadow-lg font-medium"
-                        style={{
-                          backgroundColor: colors.secondary,
-                          color: colors.neutral,
-                        }}
-                      >
-                        Book Now
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+              <div className="p-6 bg-gradient-to-br from-blue-50 to-teal-50 rounded-xl">
+                <Zap className="w-8 h-8 text-blue-600 mx-auto mb-3" />
+                <h3 className="text-xl font-semibold text-blue-900 mb-2">Virtual Sessions</h3>
+                <p className="text-gray-700">Available worldwide via Zoom</p>
               </div>
             </div>
-          ))}
+            
+            <p className="text-gray-600 mb-8">
+              💛 Sliding scale may be available for single moms, or those in need—just ask
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all transform hover:scale-105">
+                Book a Session
+              </button>
+              <button className="border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-50 transition-all">
+                Schedule Consultation
+              </button>
+            </div>
+          </div>
         </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="container mx-auto py-16 px-4 text-center">
-        <h2
-          className="text-2xl md:text-3xl mb-6"
-          style={{ color: colors.primary, fontFamily: fonts.serif }}
-        >
-          Ready to Begin Your Healing Journey?
-        </h2>
-        <p className="mb-8 text-lg max-w-3xl mx-auto" style={{ color: colors.text, lineHeight: "1.8" }}>
-          Whether you're seeking physical healing, emotional balance, or spiritual connection, I'm here to support you on your path.
-        </p>
-        <Link
-          href={currentUser ? "/calendar" : "/login?redirect=/calendar"}
-          className="px-8 py-3 rounded-md text-lg transition-all hover:shadow-lg inline-flex items-center gap-2"
-          style={{
-            backgroundColor: colors.secondary,
-            color: colors.neutral,
-          }}
-        >
-          Schedule a Session
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-5 w-5" 
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-          </svg>
-        </Link>
       </section>
     </div>
   );
