@@ -38,26 +38,6 @@ const HomePage = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      id: 1,
-      text: "Working with Yasina helped me see clearly after a difficult time. Her intuitive guidance illuminated my path forward with remarkable clarity and compassion.",
-      author: "Sarah M., Calgary"
-    },
-    {
-      id: 2,
-      text: "The energy healing sessions with Yasina transformed not just my physical wellbeing but my entire outlook on life. I've never felt more balanced.",
-      author: "Michael K., Edmonton"
-    },
-    {
-      id: 3,
-      text: "Yasina has a true gift. Her reflexology treatments addressed chronic pain I've had for years that no traditional medicine could resolve. I'm forever grateful.",
-      author: "Jessica T., Vancouver"
-    }
-  ];
-
-  // Current testimonial state
-  const [currentTestimonial, setCurrentTestimonial] = React.useState(0);
 
   return (
     <>
@@ -181,7 +161,7 @@ const HomePage = () => {
                   lineHeight: '1.7'
                 }}
               >
-                You were born with a unique purpose. In reconnecting with your authentic self, you unlock the clarity, peace, and power that guide you forward. You're not here to struggle; you're here to shine, aligned with your true essence and the universe's support.
+                You were born with a unique purpose. In reconnecting with your authentic self, you unlock the clarity, peace, and power that guides you forward. You're not here to struggle; you're here to shine, aligned with your true essence and the universe's support.
               </p>
               <div className="absolute -bottom-4 -right-4 text-6xl font-serif text-teal-400 opacity-30 rotate-180">"</div>
             </div>

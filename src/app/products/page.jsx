@@ -11,7 +11,7 @@ const ProductsPage = () => {
       id: 'intention-coasters',
       title: 'Intention Coasters',
       subtitle: 'Infuse Your Food & Drink with the Frequency of Your Highest Good',
-      description: 'Imagine if every sip of water or bite of food could help you align with your manifestations, heal your energy, and reconnect with your soul\'s purpose. With Intention Coasters, this isn\'t just a dream—it\'s an energetic reality.',
+      description: `Imagine if every sip of water or bite of food could help you align with your manifestations, heal your energy, and reconnect with your soul's purpose. With Intention Coasters, this isn't just a dream—it's an energetic reality. Your thoughts, emotions, and energetic state don't just affect your mood—they imprint into everything you touch, cook, drink, or eat. According to energy studies like Dr. Emoto’s water experiment, water is especially responsive to emotional frequencies, creating beautiful crystalline structures when exposed to love, gratitude, or hope—and distorted ones when exposed to fear, anger, or stress. Now imagine what happens when you drink water, any drink or eat food while thinking about your to-do list, stress, or past hurts. That energy goes right back into your body. That’s where Intention Coasters come in.`,
       icon: <Sparkles className="w-8 h-8 text-purple-600" />,
       pricing: [
         { option: 'One Coaster', price: 15, id: 'one-coaster' },
@@ -33,7 +33,15 @@ const ProductsPage = () => {
         'Crafted with unique designs and symbols to visually connect to your energetic body',
         'Clears, balances, and activates—without effort or memorization'
       ],
-      howToUse: 'Place your glass, mug, plate, or food container directly on the coaster for a few moments before consuming. No need to write anything down, speak affirmations, or control your emotions—the coaster does the energetic reset for you.',
+      whyTheyMatter: [
+        'Manifest more effortlessly',
+        'Eat and drink with intention',
+        'Heal emotional and energetic imprints',
+        'Reconnect with their divine purpose through everyday rituals'
+      ],
+      howToUse: `Place your glass, mug, plate, or food container directly on the coaster for a few moments before consuming. No need to write anything down, speak affirmations, or control your emotions—the coaster does the energetic reset for you.
+
+Want to amplify a specific chakra or manifestation? Use the coaster aligned to your primary chakra—the one that governs your soul’s expression and manifestation power. (Don’t worry if you’re not sure—we’ll help you discover it!)`,
       chakras: [
         { name: 'Root Chakra', sanskrit: 'Muladhara', color: '🔴', theme: 'Safety, grounding, survival' },
         { name: 'Sacral Chakra', sanskrit: 'Svadhisthana', color: '🟠', theme: 'Emotions, pleasure, creativity' },
@@ -43,7 +51,8 @@ const ProductsPage = () => {
         { name: 'Third Eye Chakra', sanskrit: 'Ajna', color: '🟣', theme: 'Intuition, vision, insight' },
         { name: 'Crown Chakra', sanskrit: 'Sahasrara', color: '⚪', theme: 'Spiritual connection, enlightenment, divine consciousness' }
       ],
-      note: 'Not sure which chakra is your main manifestation center? Contact me and I\'ll guide you to the one that\'s most aligned with your soul\'s journey.'
+      note: `Not sure which chakra is your main manifestation center? Contact me and I'll guide you to the one that's most aligned with your soul's journey.`,
+      yasinaNote: `I created these coasters after realizing how much my own thoughts—especially the unconscious, stressful ones—were being absorbed into what I ate and drank. Once I began placing my water on an intention-charged surface, everything shifted: I felt lighter, more supported, and more aligned with what I was calling in. These coasters are a gift from the universe, created to help you remember that you are the vibration that leads the way.`
     },
     {
       id: 'custom-meditations',
@@ -134,7 +143,7 @@ const ProductsPage = () => {
         'Please allow 1–2 weeks for creation and channeling process',
         'I will reach out to collect your photo or schedule a brief call before painting begins'
       ],
-      yasinaNote: 'This is more than art—it\'s soul medicine. Every Soul Painting is a co-creation between you, me, and the Universe. I simply become the channel so your soul can show itself to you.'
+      yasinaNote: `This is more than art—it’s soul medicine. Every Soul Painting is a co-creation between you, me, and the Universe. I simply become the channel so your soul can show itself to you. If you're seeking alignment, clarity, or a tangible reminder of who you truly are… this is your invitation home.`
     },
     {
       id: 'soul-soothe-oil',
@@ -160,7 +169,7 @@ const ProductsPage = () => {
       id: 'radiance-glow-oil',
       title: 'Radiance Glow Oil',
       subtitle: 'Nourish. Cleanse. Restore.',
-      description: 'This luxurious multi-use skin elixir is your all-in-one daily ritual for glowing, balanced, and deeply nourished skin. Whether you use it to melt away makeup, moisturize your face and body, or protect your skin from environmental stress, Radiance Glow Oil does it all—naturally.',
+      description: 'This luxurious multi-use skin elixir is your all-in-one daily ritual for glowing, balanced, and deeply nourished skin. Whether you use it to melt away makeup, moisturize your face and body, or protect your skin from environmental stress, Radiance Glow Oil does it all—naturally.Infused with a blend of potent plant-based oils, each ingredient is chosen for its healing, soothing, and rejuvenating properties. Lightweight yet deeply hydrating, this oil leaves your skin feeling soft, smooth, and radiant without clogging pores or leaving a greasy residue.',
       icon: <Sun className="w-8 h-8 text-purple-600" />,
       pricing: [
         { option: 'Glow Oil', price: 'Contact for pricing', id: 'radiance-glow-oil' }
@@ -333,6 +342,23 @@ const ProductsPage = () => {
                         </div>
                       )}
 
+                      {product.whyTheyMatter && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3 flex items-center">
+                            <Sparkles className="w-5 h-5 mr-2 text-purple-600" />
+                            Why They Matter:
+                          </h4>
+                          <ul className="grid md:grid-cols-2 gap-3">
+                            {product.whatMakesUnique.map((unique, idx) => (
+                              <li key={idx} className="flex items-start space-x-2">
+                                <span className="text-amber-500 mt-1">💎</span>
+                                <span className="text-gray-700">{unique}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
                       {product.howToUse && (
                         <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-6">
                           <h4 className="text-lg font-semibold text-purple-900 mb-3">How to Use:</h4>
@@ -418,6 +444,9 @@ const ProductsPage = () => {
                       {product.whyGetOne && (
                         <div>
                           <h4 className="text-lg font-semibold text-purple-900 mb-3">Why Get a Soul Painting:</h4>
+                          <p className="text-gray-700 mb-4">
+                            Sometimes we feel disconnected from who we are or where we’re going. A Soul Painting bypasses the busy mind and brings you back into harmony with your heart and higher self.
+                          </p>
                           <ul className="grid md:grid-cols-2 gap-3">
                             {product.whyGetOne.map((reason, idx) => (
                               <li key={idx} className="flex items-start space-x-2">
@@ -426,6 +455,10 @@ const ProductsPage = () => {
                               </li>
                             ))}
                           </ul>
+                          <p className="text-gray-700 mt-4">
+                            It’s like catching a glimpse of your soul in visual form—a reminder of who you truly are, beyond fear, beyond doubt, beyond the noise.
+                            Whenever you’re feeling out of alignment, simply return to your Soul Painting. Let it hold you, guide you, and remind you: you are already whole.
+                          </p>
                         </div>
                       )}
 
