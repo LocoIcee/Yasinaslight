@@ -349,7 +349,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
                             Why They Matter:
                           </h4>
                           <ul className="grid md:grid-cols-2 gap-3">
-                            {product.whatMakesUnique.map((unique, idx) => (
+                            {product.whyTheyMatter.map((unique, idx) => (
                               <li key={idx} className="flex items-start space-x-2">
                                 <span className="text-amber-500 mt-1">💎</span>
                                 <span className="text-gray-700">{unique}</span>
