@@ -136,7 +136,7 @@ const ServicesPage = () => {
       icon: <Moon className="w-8 h-8" />,
       includes: [
         '1x Soul Reset Session to open the journey',
-        '3x Weekly 60-min Integration Calls (can include Reiki, Hypnotherapy, or Coaching)',
+        '3x Weekly 60-min Integration Calls',
         'Personalized affirmations + journal prompts',
         'Customized meditation or hypno recording',
         'Optional text/voice support between sessions (Mon–Fri)',
@@ -147,7 +147,7 @@ const ServicesPage = () => {
       id: 'oracle-readings',
       title: 'Oracle Readings',
       subtitle: 'Clarity. Connection. Soul-Led Guidance.',
-      duration: 'Variable',
+      duration: '60 minutes',
       price: '$125',
       description: 'Sacred conversations with your higher self, your guides, and divine energy. Using intuition, energy, and card symbolism to offer clarity, perspective, and soul-level confirmation.',
       icon: <Eye className="w-8 h-8" />,
@@ -191,7 +191,9 @@ const ServicesPage = () => {
         'Chakra-specific tools (crystals, sound, affirmations, essential oils)',
         'Personalized insights and messages',
         'Deep sense of calm, clarity, and inner alignment'
-      ]
+      ],
+      chakrasTypes: [chakras[0], chakras[1], chakras[2], chakras[3], chakras[4], chakras[5], chakras[6]]
+      
     },
     {
       id: 'energy-clearings',
@@ -220,7 +222,7 @@ const ServicesPage = () => {
       id: 'past-life-healing',
       title: 'Past Life Energy & Soul Healing',
       subtitle: 'Release the past so your soul can rise in the present.',
-      duration: '90 minutes',
+      duration: 'Variable',
       price: '$222',
       description: 'Soul clearing sessions to release karmic ties, soul contracts, and energetic imprints from past lives that may be impacting your present path.',
       icon: <Clock className="w-8 h-8" />,
@@ -237,7 +239,7 @@ const ServicesPage = () => {
       id: 'hypnotherapy',
       title: 'Hypnotherapy',
       subtitle: 'Release the past. Rewire the mind. Reclaim your power.',
-      duration: '60-90 minutes',
+      duration: 'Variable',
       price: '$250 and up',
       description: 'A gentle, guided process to access your subconscious mind and release limiting beliefs, heal emotional wounds, and align with your truth.',
       icon: <Moon className="w-8 h-8" />,
@@ -433,70 +435,49 @@ const ServicesPage = () => {
                           </div>
                         </div>
                       )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Chakra System Section */}
-      <section className="py-16 px-4 bg-gradient-to-br from-purple-100/50 to-blue-100/50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-purple-900 mb-8 text-center">
-            🌈 The 7 Main Chakras
-          </h2>
-          <p className="text-lg text-gray-700 mb-12 text-center max-w-3xl mx-auto">
-            Your chakras are the energy centers of your body, each connected to different aspects of your 
-            physical, emotional, and spiritual well-being. Understanding them helps in your healing journey.
-          </p>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {chakras.map((chakra, index) => (
-              <div key={index} className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden">
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`p-3 rounded-full ${chakra.bgColor}`}>
-                      <div className={chakra.color}>
-                        {chakra.icon}
+                      {service.id === 'chakra-balancing' && service.chakrasTypes && (
+                      <div className="mt-10">
+                        <h4 className="text-lg font-semibold text-purple-900 mb-4">The 7 Main Chakras</h4>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                          {service.chakrasTypes.map((chakra, index) => (
+                            <div key={index} className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden">
+                              <div className="p-6">
+                                <div className="flex items-center justify-between mb-4">
+                                  <div className={`p-3 rounded-full ${chakra.bgColor}`}>
+                                    <div className={chakra.color}>{chakra.icon}</div>
+                                  </div>
+                                  <button
+                                    onClick={() => toggleChakra(index)}
+                                    className="p-2 hover:bg-purple-50 rounded-full transition-colors"
+                                  >
+                                    {expandedChakra === index ? (
+                                      <ChevronUp className="w-5 h-5 text-purple-600" />
+                                    ) : (
+                                      <ChevronDown className="w-5 h-5 text-purple-600" />
+                                    )}
+                                  </button>
+                                </div>
+                                <h3 className="text-xl font-bold text-purple-900 mb-1">{chakra.name}</h3>
+                                <p className="text-sm text-gray-600 mb-2">{chakra.sanskrit}</p>
+                                <p className="text-sm text-gray-500 mb-3">{chakra.location}</p>
+                                <p className="text-sm font-medium text-purple-700">{chakra.theme}</p>
+                                {expandedChakra === index && (
+                                  <div className="mt-4 pt-4 border-t">
+                                    <p className="text-gray-700 text-sm leading-relaxed">{chakra.description}</p>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                    <button
-                      onClick={() => toggleChakra(index)}
-                      className="p-2 hover:bg-purple-50 rounded-full transition-colors"
-                    >
-                      {expandedChakra === index ? (
-                        <ChevronUp className="w-5 h-5 text-purple-600" />
-                      ) : (
-                        <ChevronDown className="w-5 h-5 text-purple-600" />
-                      )}
-                    </button>
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-purple-900 mb-1">{chakra.name}</h3>
-                  <p className="text-sm text-gray-600 mb-2">{chakra.sanskrit}</p>
-                  <p className="text-sm text-gray-500 mb-3">{chakra.location}</p>
-                  <p className="text-sm font-medium text-purple-700">{chakra.theme}</p>
-                  
-                  {expandedChakra === index && (
-                    <div className="mt-4 pt-4 border-t">
-                      <p className="text-gray-700 text-sm leading-relaxed">{chakra.description}</p>
+                    )}
                     </div>
                   )}
                 </div>
               </div>
             ))}
-          </div>
-          
-          <div className="mt-12 text-center">
-            <p className="text-gray-600 mb-4">
-              Chakra Balancing Session: 30-minute touch-up (remote) - $50 | In-person with session - $75
-            </p>
-            <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all transform hover:scale-105">
-              Book Chakra Balancing
-            </button>
           </div>
         </div>
       </section>

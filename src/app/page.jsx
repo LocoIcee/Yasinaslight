@@ -91,9 +91,7 @@ const HomePage = () => {
             className="text-2xl mb-2"
             style={{ color: colors.neutral, fontFamily: "'Open Sans', sans-serif" }}
           >
-            When you walk in your truth, the universe walks with you.
-            You were created with purpose, there is no failure in being who you truly are.
-            You are not here to fail, you are here to shine.
+            Embrace Your Truth and Let Your Soul Shine.
           </h2>
           <Link
             href="/about"
@@ -112,7 +110,7 @@ const HomePage = () => {
 
       
 
-      {/* Testimonial section */}
+      {/* Brief intro section */}
       <div
         className="p-8 md:p-12"
         style={{
@@ -123,26 +121,7 @@ const HomePage = () => {
       >
         <ImagePlaceholders.SacredGeometry size="300px" className="top-0 right-0" opacity={0.1} />
         <ImagePlaceholders.SacredGeometry size="250px" className="bottom-0 left-0" opacity={0.08} />
-
-        <h2
-          className="text-2xl md:text-3xl text-center mb-2 relative z-10"
-          style={{ color: colors.primary, fontFamily: "'Cormorant Garamond', serif" }}
-        >
-          <span className="px-2" style={{ color: colors.accent }}>
-            ✧
-          </span>{" "}
-          TRANSFORMATIVE JOURNEYS{" "}
-          <span className="px-2" style={{ color: colors.accent }}>
-            ✧
-          </span>
-        </h2>
-        <p
-          className="text-center mb-8 relative z-10"
-          style={{ color: colors.text, fontFamily: "'Open Sans', sans-serif" }}
-        >
-          Client Healing Experiences
-        </p>
-
+        
         <div
           className="max-w-3xl mx-auto p-8 rounded-lg relative z-10"
           style={{
@@ -150,46 +129,15 @@ const HomePage = () => {
             boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
           }}
         >
-          <div
-            className="text-4xl leading-none mb-4"
-            style={{ color: colors.accent, fontFamily: "'Tangerine', cursive" }}
-          >
-            "
-          </div>
+         
           <p
             className="text-center text-lg italic mb-4"
             style={{ color: colors.text, fontFamily: "'Open Sans', sans-serif" }}
           >
-            {testimonials[currentTestimonial].text}
+            You were born with a unique purpose. In reconnecting with your authentic self, you unlock the clarity, peace, and power that guide you forward. You’re not here to struggle; you’re here to shine, aligned with your true essence and the universe's support.
           </p>
-          <div
-            className="text-4xl leading-none text-right"
-            style={{ color: colors.accent, fontFamily: "'Tangerine', cursive" }}
-          >
-            "
-          </div>
-          <div className="flex justify-center items-center gap-3 mt-4">
-            <ImagePlaceholders.TestimonialAvatar size="45px" />
-            <p className="font-medium" style={{ color: colors.primary }}>
-              - {testimonials[currentTestimonial].author}
-            </p>
-          </div>
         </div>
 
-        <div className="flex justify-center gap-2 mt-6">
-          {testimonials.map((_, index) => (
-            <div
-              key={index}
-              className="w-3 h-3 rounded-full cursor-pointer"
-              onClick={() => setCurrentTestimonial(index)}
-              style={{ 
-                backgroundColor: currentTestimonial === index 
-                  ? colors.primary 
-                  : "rgba(86,61,124,0.3)" 
-              }}
-            ></div>
-          ))}
-        </div>
       </div>
     </>
   );
