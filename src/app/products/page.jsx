@@ -1,410 +1,438 @@
 'use client';
-import React, { useState, useEffect } from "react";
-import ImagePlaceholders from "@/utils/ImagePlaceholders";
-import { colors } from "@/utils/constants";
-import { useCart } from "@/contexts/CartContext";
+import React, { useState } from 'react';
+import { ChevronDown, ChevronUp, Heart, Sparkles, Moon, Sun, Eye, Crown, Flower, Zap, Star, Palette, Shield, Gem } from 'lucide-react';
 
 const ProductsPage = () => {
-   // Get addToCart function from cart context
-  const { addToCart } = useCart();
-  
-  // Product categories
-  const categories = ["all", "crystals", "oils", "incense", "books", "jewelry"];
-  
-  // Sort options
-  const sortOptions = [
-    { value: "featured", label: "Featured" },
-    { value: "price-asc", label: "Price: Low to High" },
-    { value: "price-desc", label: "Price: High to Low" },
-    { value: "newest", label: "Newest" },
-  ];
-  
-  // State for filtering and sorting
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [activeSort, setActiveSort] = useState("featured");
-  const [products, setProducts] = useState([]);
-  
-  // Product data (mock data)
-  const productData = [
+  const [expandedProduct, setExpandedProduct] = useState(null);
+
+  const products = [
     {
-      id: "amethyst-points",
-      name: "Amethyst Crystal Points",
-      category: "crystals",
-      price: 24.99,
-      featured: true,
-      isNew: false,
-      description: "Natural amethyst points for healing, meditation, and spiritual growth. Each crystal is unique and carefully selected.",
+      id: 'intention-coasters',
+      title: 'Intention Coasters',
+      subtitle: 'Infuse Your Food & Drink with the Frequency of Your Highest Good',
+      description: 'Imagine if every sip of water or bite of food could help you align with your manifestations, heal your energy, and reconnect with your soul\'s purpose. With Intention Coasters, this isn\'t just a dream—it\'s an energetic reality.',
+      icon: <Sparkles className="w-8 h-8" />,
+      pricing: [
+        { option: 'One Coaster', price: '$15' },
+        { option: 'Four Coasters', price: '$50' },
+        { option: 'Seven Coasters', price: '$75' }
+      ],
+      features: [
+        'Clear unwanted or misaligned frequencies from your food or drink',
+        'Balance your energy with the correct chakra frequency',
+        'Infuse your nourishment with healing vibrations of love, clarity, and abundance',
+        'Strengthen your main manifestation chakra and align your entire energetic system',
+        'Elevate your manifestation power by supporting clean, high-vibrational intake'
+      ],
+      whatMakesUnique: [
+        'Infused with Reiki and Blue Light Healing',
+        'Tuned to the frequencies of each chakra',
+        'Designed with copper and the five elements (Air, Water, Fire, Earth & Spirit)',
+        'Energetically programmed to work on your behalf—no matter your emotional state',
+        'Crafted with unique designs and symbols to visually connect to your energetic body',
+        'Clears, balances, and activates—without effort or memorization'
+      ],
+      howToUse: 'Place your glass, mug, plate, or food container directly on the coaster for a few moments before consuming. No need to write anything down, speak affirmations, or control your emotions—the coaster does the energetic reset for you.',
+      chakras: [
+        { name: 'Root Chakra', sanskrit: 'Muladhara', color: '🔴', theme: 'Safety, grounding, survival' },
+        { name: 'Sacral Chakra', sanskrit: 'Svadhisthana', color: '🟠', theme: 'Emotions, pleasure, creativity' },
+        { name: 'Solar Plexus Chakra', sanskrit: 'Manipura', color: '🟡', theme: 'Confidence, willpower, personal power' },
+        { name: 'Heart Chakra', sanskrit: 'Anahata', color: '💚', theme: 'Love, compassion, forgiveness' },
+        { name: 'Throat Chakra', sanskrit: 'Vishuddha', color: '🔵', theme: 'Communication, truth, self-expression' },
+        { name: 'Third Eye Chakra', sanskrit: 'Ajna', color: '🟣', theme: 'Intuition, vision, insight' },
+        { name: 'Crown Chakra', sanskrit: 'Sahasrara', color: '⚪', theme: 'Spiritual connection, enlightenment, divine consciousness' }
+      ]
     },
     {
-      id: "sage-bundle",
-      name: "White Sage Smudge Bundle",
-      category: "incense",
-      price: 12.50,
-      featured: true,
-      isNew: false,
-      description: "Traditional white sage smudge bundle for cleansing energy and purifying spaces.",
+      id: 'custom-meditations',
+      title: 'Custom Meditations & Mindful Guidance',
+      subtitle: 'Sacred support for your soul\'s unique journey',
+      description: 'Whether you\'re moving through a season of growth, seeking inner clarity, or simply craving deeper connection, I offer soul-aligned meditations and intuitive guidance crafted with your energy in mind.',
+      icon: <Moon className="w-8 h-8" />,
+      pricing: [
+        { option: 'Custom Meditation', price: '$13 - $55' }
+      ],
+      features: [
+        'Intuitively created based on what you\'re currently navigating—emotionally, energetically, and spiritually',
+        'Perfect for emotional healing and release',
+        'Energetic realignment (chakra support, grounding, clearing)',
+        'Boosting confidence, clarity, and intuitive trust',
+        'Integration after energy healing or coaching sessions'
+      ],
+      whatYouReceive: [
+        'A fully personalized audio meditation (10–20 minutes)',
+        'Soothing background music or nature sounds',
+        'Intuitive language tailored to your goals, energy, and life situation'
+      ],
+      preRecordedCollections: [
+        'Chakra Balancing Series',
+        'Soul Reset Meditations',
+        'Abundance & Worthiness Activation',
+        'Grounding & Protection Practices',
+        'Emotional Calm & Nervous System Regulation',
+        'Morning Activation & Evening Wind-Down'
+      ],
+      perfectFor: [
+        'Quiet your mind',
+        'Boost confidence',
+        'Heal past wounds',
+        'Open your heart',
+        'Balance your chakras',
+        'Connect with your higher self'
+      ]
     },
     {
-      id: "chakra-bracelet",
-      name: "7 Chakra Healing Bracelet",
-      category: "jewelry",
-      price: 29.99,
-      featured: false,
-      isNew: true,
-      description: "Handcrafted bracelet with 7 natural stone beads representing each chakra energy center.",
+      id: 'crystal-packages',
+      title: 'Crystal Packages',
+      subtitle: 'For Every Season, Shift, or Soul Calling',
+      description: 'These thoughtfully curated crystal bundles are designed to support you through whatever life is bringing your way—whether you\'re navigating a block, going through a transition, or simply seeking extra energetic support.',
+      icon: <Gem className="w-8 h-8" />,
+      pricing: [
+        { option: 'Crystal Package', price: '$15' }
+      ],
+      packageExamples: [
+        'Job', 'Relationship', 'Feminine Issues', 'Male Issues', 'Exams', 'Stress', 'Anxiety', 'Anger', 'Grounding', 'Shielding', 'Friendship', 'Blockages and Awareness', 'New Home', 'Confidence', 'Protection for: home, office or person', 'Breaking attachments', 'Abundance'
+      ],
+      whatsIncluded: [
+        'Minimum 5 crystals that pertain to the topic',
+        'Complete information on each crystal and its properties',
+        'A personalized affirmation to help with your specific topic',
+        'Energetic intention infused into each package'
+      ]
     },
     {
-      id: "essential-oil-set",
-      name: "Essential Oil Starter Set",
-      category: "oils",
-      price: 45.99,
-      featured: true,
-      isNew: true,
-      description: "Set of 6 pure essential oils including lavender, eucalyptus, tea tree, lemon, peppermint, and frankincense.",
+      id: 'soul-paintings',
+      title: 'Soul Paintings',
+      subtitle: 'A visual channeling of your soul\'s essence',
+      description: 'A Soul Painting is a channeled piece of art created through direct transmission from the Universe, expressed through my hands as a reflection of your soul\'s energy. Every brushstroke, color, and texture is intuitively guided by spirit—nothing is planned, and nothing is forced.',
+      icon: <Palette className="w-8 h-8" />,
+      pricing: [
+        { option: '10x10 Canvas', price: '$105' },
+        { option: '14x14 Canvas', price: '$175' }
+      ],
+      whatYouReceive: [
+        'A one-of-a-kind soul painting, intuitively channeled and divinely guided',
+        'A personal soul message—this may include soul purpose insight, spiritual guidance, or a message your higher self wants you to know',
+        'A custom affirmation to anchor your connection',
+        'Optional: sealing of your painting if requested (otherwise left in its raw, natural state)'
+      ],
+      whyGetOne: [
+        'Raise your vibration',
+        'Reconnect you to your soul\'s truth',
+        'Shift emotional blocks or resistance',
+        'Spark inspiration, clarity, or healing',
+        'Ground your energy in times of transition'
+      ],
+      specialNote: 'This is great as a gift for someone, a painting of a soul that has moved on, for yourself and for animals as well.',
+      details: [
+        'Each painting is done on canvas or mixed media paper',
+        'Shipping available worldwide',
+        'Please allow 1–2 weeks for creation and channeling process',
+        'I will reach out to collect your photo or schedule a brief call before painting begins'
+      ]
     },
     {
-      id: "tarot-deck",
-      name: "Ethereal Light Tarot Deck",
-      category: "books",
-      price: 32.50,
-      featured: false,
-      isNew: false,
-      description: "78-card tarot deck with intuitive imagery and guidebook for spiritual readings and self-discovery.",
+      id: 'soul-soothe-oil',
+      title: 'Soul Soothe Healing Oil',
+      subtitle: 'Deep Relief for Muscles, Joints & Energy Flow',
+      description: 'Crafted with intention and ancient wisdom, this healing oil blend brings powerful relief to sore muscles, stiff joints, and stagnant energy. Infused with nature\'s most potent anti-inflammatory and circulatory herbs, each drop is designed to activate healing on both a physical and energetic level.',
+      icon: <Heart className="w-8 h-8" />,
+      keyBenefits: [
+        'Relieves muscle and joint pain with the natural heat of cayenne and the anti-inflammatory power of arnica',
+        'Supports circulation and detoxification with castor oil and black seed oil, known for reducing swelling and promoting cellular repair',
+        'Soothes inflammation and strengthens tissue with neem oil—a powerful ally for chronic pain and skin conditions',
+        'Calms the nervous system and relaxes tension with lavender and frankincense, supporting both body and spirit',
+        'Energetically cleansing, this oil helps release blocked energy and invites peace, ease, and flow into your body'
+      ],
+      ingredients: [
+        'Castor Oil', 'Cayenne Pepper', 'Neem Oil', 'Arnica Oil', 'Black Seed Oil', 'Lavender Essential Oil', 'Frankincense Essential Oil'
+      ]
     },
     {
-      id: "selenite-wand",
-      name: "Selenite Cleansing Wand",
-      category: "crystals",
-      price: 18.99,
-      featured: true,
-      isNew: false,
-      description: "Natural selenite wand for energy clearing, chakra alignment, and amplifying healing energies.",
-    },
-    {
-      id: "meditation-book",
-      name: "Introduction to Energy Meditation",
-      category: "books",
-      price: 22.95,
-      featured: false,
-      isNew: true,
-      description: "Comprehensive guide to energy meditation techniques with practical exercises for beginners.",
-    },
-    {
-      id: "palo-santo",
-      name: "Palo Santo Wood Sticks",
-      category: "incense",
-      price: 14.50,
-      featured: true,
-      isNew: false,
-      description: "Sustainably harvested palo santo wood sticks for sacred cleansing rituals and aromatherapy.",
-    },
-    {
-      id: "moon-necklace",
-      name: "Lunar Phase Necklace",
-      category: "jewelry",
-      price: 38.00,
-      featured: false,
-      isNew: true,
-      description: "Sterling silver necklace featuring delicate moon phases, symbolizing personal growth and transformation.",
-    },
-    {
-      id: "lavender-oil",
-      name: "Organic Lavender Essential Oil",
-      category: "oils",
-      price: 16.99,
-      featured: false,
-      isNew: false,
-      description: "100% pure therapeutic grade lavender essential oil for relaxation, sleep support, and aromatherapy.",
-    },
-    {
-      id: "rose-quartz",
-      name: "Rose Quartz Heart Stone",
-      category: "crystals",
-      price: 15.50,
-      featured: true,
-      isNew: false,
-      description: "Polished rose quartz heart, known as the stone of unconditional love and emotional healing.",
-    },
-    {
-      id: "chakra-guide",
-      name: "Chakra Balancing Guide",
-      category: "books",
-      price: 19.99,
-      featured: false,
-      isNew: false,
-      description: "Illustrated guide to understanding and balancing the seven chakras with practical healing techniques.",
-    },
-  ];
-  
-  // Filter and sort products
-  useEffect(() => {
-    let filtered = [...productData];
-    
-    // Apply category filter
-    if (activeCategory !== "all") {
-      filtered = filtered.filter(product => product.category === activeCategory);
+      id: 'radiance-glow-oil',
+      title: 'Radiance Glow Oil',
+      subtitle: 'Nourish. Cleanse. Restore.',
+      description: 'This luxurious multi-use skin elixir is your all-in-one daily ritual for glowing, balanced, and deeply nourished skin. Whether you use it to melt away makeup, moisturize your face and body, or protect your skin from environmental stress, Radiance Glow Oil does it all—naturally.',
+      icon: <Sun className="w-8 h-8" />,
+      keyBenefits: [
+        'Gently removes makeup (even waterproof) while calming the skin with lavender, frankincense, and peppermint',
+        'Daily moisturizer for face and body, balancing oil production and improving skin elasticity',
+        'Soothes inflammation and reduces redness with neem and black seed oil',
+        'Brightens and protects with rosehip and raspberry seed oil, rich in antioxidants and natural SPF properties',
+        'Heals and nourishes with coconut oil, leaving skin soft and visibly refreshed'
+      ],
+      ingredients: [
+        'Neem Oil', 'Black Seed Oil', 'Frankincense', 'Lavender Essential Oil', 'Coconut Oil', 'Peppermint', 'Rosehip Oil', 'Raspberry Seed Oil'
+      ]
     }
-    
-    // Apply sorting
-    switch (activeSort) {
-      case "price-asc":
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case "price-desc":
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-      case "newest":
-        filtered.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
-        break;
-      case "featured":
-      default:
-        filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
-        break;
-    }
-    
-    setProducts(filtered);
-  }, [activeCategory, activeSort]);
-  
+  ];
+
+  const toggleProduct = (id) => {
+    setExpandedProduct(expandedProduct === id ? null : id);
+  };
+
   return (
-    <div>
-      {/* Page Header */}
-      <div
-        className="py-12 text-center relative overflow-hidden"
-        style={{
-          background: `linear-gradient(to right, ${colors.primary}, ${colors.primary}DD)`,
-        }}
-      >
-        {/* Sacred geometry overlay pattern */}
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `url(/assets/sacred-geometry.png)`,
-            backgroundSize: "cover",
-            mixBlendMode: "overlay",
-          }}
-        ></div>
-
-        <h1
-          className="text-3xl md:text-4xl relative z-10"
-          style={{ color: colors.neutral, fontFamily: "'Cormorant Garamond', serif" }}
-        >
-          HOLISTIC PRODUCTS
-        </h1>
-        <p
-          className="mt-2 text-lg relative z-10"
-          style={{ color: `${colors.neutral}DD` }}
-        >
-          Tools for Your Healing Journey
-        </p>
-      </div>
-
-      {/* Products Content */}
-      <div className="container mx-auto py-12 px-4">
-        {/* Introduction */}
-        <div className="max-w-3xl mx-auto mb-12 text-center">
-          <h2
-            className="text-xl md:text-2xl mb-4"
-            style={{ color: colors.primary, fontFamily: "'Cormorant Garamond', serif" }}
-          >
-            <span className="px-2" style={{ color: colors.accent }}>✧</span>
-            CURATED WITH INTENTION
-            <span className="px-2" style={{ color: colors.accent }}>✧</span>
-          </h2>
-          <p style={{ color: colors.text, lineHeight: "1.8" }}>
-            Each product in our collection has been thoughtfully selected to support your spiritual practice
-            and healing journey. From ethically sourced crystals to organic essential oils, we offer only
-            the highest quality holistic tools to enhance your well-being.
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-teal-50">
+      {/* Hero Section */}
+      <section className="py-20 px-4 text-center">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-5xl font-bold text-purple-900 mb-6">
+            ✧ HOLISTIC PRODUCTS ✧
+          </h1>
+          <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+            Each product is energetically designed to support your healing journey, raise your vibration, 
+            and reconnect you to your soul's truth. Created with intention, infused with healing energy, 
+            and crafted to meet you exactly where you are.
           </p>
+          <div className="w-32 h-1 bg-gradient-to-r from-purple-400 to-teal-400 mx-auto rounded-full"></div>
         </div>
+      </section>
 
-        {/* Filters and Sort */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm transition-all ${
-                  activeCategory === category ? "shadow-md" : ""
-                }`}
-                style={{
-                  backgroundColor: activeCategory === category ? colors.primary : `${colors.primary}20`,
-                  color: activeCategory === category ? colors.neutral : colors.primary,
-                  border: activeCategory === category ? "none" : `1px solid ${colors.primary}40`,
-                }}
-              >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </button>
+      {/* Products Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="space-y-8">
+            {products.map((product) => (
+              <div key={product.id} className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden">
+                <div className="p-8">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center space-x-4">
+                      <div className="p-3 bg-gradient-to-br from-purple-100 to-blue-100 rounded-full">
+                        {product.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-purple-900">{product.title}</h3>
+                        <p className="text-lg text-gray-600 italic">{product.subtitle}</p>
+                        {product.pricing && (
+                          <div className="flex items-center space-x-4 mt-2">
+                            {product.pricing.map((price, idx) => (
+                              <span key={idx} className="text-sm text-purple-700 font-semibold">
+                                {price.option}: {price.price}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => toggleProduct(product.id)}
+                      className="p-2 hover:bg-purple-50 rounded-full transition-colors"
+                    >
+                      {expandedProduct === product.id ? (
+                        <ChevronUp className="w-6 h-6 text-purple-600" />
+                      ) : (
+                        <ChevronDown className="w-6 h-6 text-purple-600" />
+                      )}
+                    </button>
+                  </div>
+                  
+                  <p className="text-gray-700 mb-6">{product.description}</p>
+                  
+                  {expandedProduct === product.id && (
+                    <div className="border-t pt-6 space-y-6">
+                      {product.features && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">What It Does:</h4>
+                          <ul className="grid md:grid-cols-2 gap-2">
+                            {product.features.map((feature, idx) => (
+                              <li key={idx} className="flex items-start space-x-2">
+                                <span className="text-purple-600 mt-1">•</span>
+                                <span className="text-gray-700">{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {product.whatMakesUnique && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">What Makes These Unique:</h4>
+                          <ul className="grid md:grid-cols-2 gap-2">
+                            {product.whatMakesUnique.map((unique, idx) => (
+                              <li key={idx} className="flex items-start space-x-2">
+                                <span className="text-gold-600 mt-1">💎</span>
+                                <span className="text-gray-700">{unique}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {product.howToUse && (
+                        <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-6">
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">How to Use:</h4>
+                          <p className="text-gray-700">{product.howToUse}</p>
+                        </div>
+                      )}
+
+                      {product.chakras && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-purple-900 mb-4">The 7 Main Chakras:</h4>
+                          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {product.chakras.map((chakra, idx) => (
+                              <div key={idx} className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-purple-100">
+                                <div className="flex items-center space-x-2 mb-2">
+                                  <span className="text-2xl">{chakra.color}</span>
+                                  <div>
+                                    <h5 className="font-semibold text-purple-900">{chakra.name}</h5>
+                                    <p className="text-sm text-gray-600">{chakra.sanskrit}</p>
+                                  </div>
+                                </div>
+                                <p className="text-sm text-gray-700">{chakra.theme}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {product.whatYouReceive && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">What You'll Receive:</h4>
+                          <ul className="space-y-2">
+                            {product.whatYouReceive.map((item, idx) => (
+                              <li key={idx} className="flex items-start space-x-2">
+                                <span className="text-green-600 mt-1">✓</span>
+                                <span className="text-gray-700">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {product.preRecordedCollections && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Pre-Recorded Collections:</h4>
+                          <div className="grid md:grid-cols-2 gap-2">
+                            {product.preRecordedCollections.map((collection, idx) => (
+                              <div key={idx} className="flex items-start space-x-2">
+                                <span className="text-blue-600 mt-1">🎵</span>
+                                <span className="text-gray-700">{collection}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {product.packageExamples && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Package Examples:</h4>
+                          <div className="grid md:grid-cols-4 gap-2">
+                            {product.packageExamples.map((example, idx) => (
+                              <span key={idx} className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg px-3 py-2 text-sm text-purple-900 font-medium">
+                                {example}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {product.whatsIncluded && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">What's Included:</h4>
+                          <ul className="space-y-2">
+                            {product.whatsIncluded.map((item, idx) => (
+                              <li key={idx} className="flex items-start space-x-2">
+                                <span className="text-green-600 mt-1">✓</span>
+                                <span className="text-gray-700">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {product.whyGetOne && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Why Get a Soul Painting:</h4>
+                          <ul className="grid md:grid-cols-2 gap-2">
+                            {product.whyGetOne.map((reason, idx) => (
+                              <li key={idx} className="flex items-start space-x-2">
+                                <span className="text-pink-600 mt-1">💖</span>
+                                <span className="text-gray-700">{reason}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {product.keyBenefits && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Key Benefits:</h4>
+                          <ul className="space-y-2">
+                            {product.keyBenefits.map((benefit, idx) => (
+                              <li key={idx} className="flex items-start space-x-2">
+                                <span className="text-green-600 mt-1">✓</span>
+                                <span className="text-gray-700">{benefit}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {product.ingredients && (
+                        <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-xl p-6">
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Ingredients:</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {product.ingredients.map((ingredient, idx) => (
+                              <span key={idx} className="bg-white/80 rounded-full px-3 py-1 text-sm text-gray-700 border border-teal-200">
+                                {ingredient}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {product.specialNote && (
+                        <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 border border-yellow-200">
+                          <p className="text-gray-700 italic">
+                            <span className="font-semibold text-orange-800">Special Note:</span> {product.specialNote}
+                          </p>
+                        </div>
+                      )}
+
+                      {product.details && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Details:</h4>
+                          <ul className="space-y-2">
+                            {product.details.map((detail, idx) => (
+                              <li key={idx} className="flex items-start space-x-2">
+                                <span className="text-blue-600 mt-1">ℹ️</span>
+                                <span className="text-gray-700">{detail}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
             ))}
           </div>
-          
-          {/* Sort Dropdown */}
-          <div className="relative">
-            <select
-              value={activeSort}
-              onChange={(e) => setActiveSort(e.target.value)}
-              className="pl-4 pr-10 py-2 rounded-md appearance-none cursor-pointer"
-              style={{
-                backgroundColor: colors.neutral,
-                border: `1px solid ${colors.secondary}40`,
-                color: colors.text,
-                outline: "none",
-              }}
-            >
-              {sortOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <div
-              className="absolute right-3 top-1/2 transform -translate-y-1/2"
-              style={{ color: colors.secondary }}
-            >
-              ▼
-            </div>
-          </div>
         </div>
+      </section>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="rounded-lg overflow-hidden transition-all hover:shadow-lg"
-              style={{
-                backgroundColor: colors.neutral,
-                border: `1px solid ${colors.secondary}30`,
-                boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
-              }}
-            >
-              {/* Product Image */}
-              <div className="relative">
-                <ImagePlaceholders.ProductImage name={product.name} />
-                
-                {/* Product Tags */}
-                <div className="absolute top-0 left-0 p-2 flex gap-2">
-                  {product.isNew && (
-                    <span
-                      className="px-3 py-1 text-xs rounded-full"
-                      style={{
-                        backgroundColor: colors.accent,
-                        color: colors.text,
-                      }}
-                    >
-                      New
-                    </span>
-                  )}
-                  {product.featured && !product.isNew && (
-                    <span
-                      className="px-3 py-1 text-xs rounded-full"
-                      style={{
-                        backgroundColor: `${colors.primary}E6`,
-                        color: colors.neutral,
-                      }}
-                    >
-                      Featured
-                    </span>
-                  )}
-                </div>
-              </div>
-              
-              {/* Product Content */}
-              <div className="p-5">
-                <h3
-                  className="text-lg font-medium mb-1"
-                  style={{ color: colors.primary, fontFamily: "'Cormorant Garamond', serif" }}
-                >
-                  {product.name}
-                </h3>
-                
-                <span
-                  className="text-xs"
-                  style={{ color: `${colors.text}70` }}
-                >
-                  {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
-                </span>
-                
-                <p 
-                  className="mt-2 text-sm" 
-                  style={{ color: `${colors.text}99`, maxHeight: "3em", overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}
-                >
-                  {product.description}
-                </p>
-                
-                <div className="mt-4 flex justify-between items-center">
-                  <span
-                    className="font-bold"
-                    style={{ color: colors.primary }}
-                  >
-                    ${product.price.toFixed(2)}
-                  </span>
-                  
-                  <button
-                    className="px-4 py-1 rounded-full text-sm transition-all hover:shadow-md"
-                    style={{
-                      backgroundColor: colors.secondary,
-                      color: colors.neutral,
-                    }}
-                    onClick={() => addToCart(product)}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        {/* Empty state */}
-        {products.length === 0 && (
-          <div 
-            className="text-center py-16"
-            style={{ color: colors.text }}
-          >
-            <h3 className="text-xl mb-2">No products found</h3>
-            <p>Please try another category or reset your filters.</p>
-          </div>
-        )}
-        
-        {/* Featured Collection Banner */}
-        <div 
-          className="mt-16 p-8 rounded-lg"
-          style={{
-            background: `linear-gradient(135deg, ${colors.primary}20, ${colors.secondary}20)`,
-          }}
-        >
-          <div className="flex flex-col md:flex-row items-center gap-6">
-            <div className="w-full md:w-1/3">
-              <ImagePlaceholders.ProductImage name="Crystal Collection" />
-            </div>
-            <div className="w-full md:w-2/3">
-              <h3
-                className="text-xl md:text-2xl mb-3"
-                style={{ color: colors.primary, fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                Featured Collection: Healing Crystal Sets
-              </h3>
-              <p className="mb-4" style={{ color: colors.text }}>
-                Discover our curated crystal collections, designed to support specific healing intentions.
-                Each set includes ethically sourced crystals, a cleansing kit, and a detailed guide on
-                how to work with your crystals for maximum benefit.
-              </p>
-              <a
-                href="/products/collections/healing-crystals"
-                className="inline-block px-6 py-2 rounded-md transition-all hover:shadow-md"
-                style={{
-                  backgroundColor: colors.primary,
-                  color: colors.neutral,
-                }}
-              >
-                Explore Collection
-              </a>
+      {/* Call to Action */}
+      <section className="py-16 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-purple-900 mb-8">Ready to Elevate Your Energy?</h2>
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+            <p className="text-lg text-gray-700 mb-6">
+              Each product is created with love, intention, and deep respect for your healing journey. 
+              Whether you're seeking energetic support, physical healing, or spiritual connection, 
+              these sacred tools are here to support you every step of the way.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all transform hover:scale-105">
+                Shop Products
+              </button>
+              <button className="border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-50 transition-all">
+                Contact for Custom Orders
+              </button>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
