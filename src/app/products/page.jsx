@@ -1,22 +1,35 @@
-'use client';
-import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, Heart, Sparkles, Moon, Sun, Palette, Shield, Gem, ShoppingCart, Plus, Minus } from 'lucide-react';
+'use client'
+import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
+import { ChevronDown, ChevronUp, Heart, Sparkles, Moon, Sun, Palette, Shield, Gem, ShoppingCart, Plus, Minus, X } from 'lucide-react';
+import { createPortal } from 'react-dom';
+import ImageCarousel from '@/components/ui/carousel';
 
-const ProductsPage = () => {
-  const [expandedProduct, setExpandedProduct] = useState(null);
-  const [selectedOptions, setSelectedOptions] = useState({});
-
-  const products = [
+ const products = [
     {
       id: 'intention-coasters',
       title: 'Intention Coasters',
       subtitle: 'Infuse Your Food & Drink with the Frequency of Your Highest Good',
       description: `Imagine if every sip of water or bite of food could help you align with your manifestations, heal your energy, and reconnect with your soul's purpose. With Intention Coasters, this isn't just a dream—it's an energetic reality. Your thoughts, emotions, and energetic state don't just affect your mood—they imprint into everything you touch, cook, drink, or eat. According to energy studies like Dr. Emoto’s water experiment, water is especially responsive to emotional frequencies, creating beautiful crystalline structures when exposed to love, gratitude, or hope—and distorted ones when exposed to fear, anger, or stress. Now imagine what happens when you drink water, any drink or eat food while thinking about your to-do list, stress, or past hurts. That energy goes right back into your body. That’s where Intention Coasters come in.`,
+      images: [
+      "/assets/products/IC1.jpeg",
+      "/assets/products/IC2.jpeg",
+      "/assets/products/IC3.jpeg"
+      ],
       icon: <Sparkles className="w-8 h-8 text-purple-600" />,
       pricing: [
         { option: 'One Coaster', price: 15, id: 'one-coaster' },
         { option: 'Four Coasters', price: 50, id: 'four-coasters' },
         { option: 'Seven Coasters', price: 75, id: 'seven-coasters' }
+      ],
+      details: [
+      "Each coaster is hand-crafted and infused with specific healing intentions",
+      "Made from natural materials including wood and resin",
+      "Features sacred geometry patterns and healing symbols",
+      "Perfect for placing under water glasses to infuse with positive energy",
+      "Set of 4 coasters, each with different healing properties",
+      "Includes a guide explaining how to use them for maximum benefit",
+      "Durable and water-resistant finish"
       ],
       features: [
         'Clear unwanted or misaligned frequencies from your food or drink',
@@ -63,6 +76,16 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       pricing: [
         { option: 'Custom Meditation', price: '$13 - $55', id: 'custom-meditation' }
       ],
+       details: [
+      "Completely personalized meditation created just for you",
+      "Based on your specific goals, challenges, and spiritual needs",
+      "Includes consultation to understand your meditation preferences",
+      "High-quality audio recording (20-30 minutes)",
+      "Available in various styles: manifestation, healing, chakra balancing, stress relief",
+      "Delivered digitally in MP3 format",
+      "Includes written affirmations and meditation notes",
+      "Unlimited access - yours to keep forever"
+      ],
       features: [
         'Intuitively created based on what you\'re currently navigating—emotionally, energetically, and spiritually',
         'Perfect for emotional healing and release',
@@ -105,7 +128,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       packageExamples: [
         'Job', 'Relationship', 'Feminine Issues', 'Male Issues', 'Exams', 'Stress', 'Anxiety', 'Anger', 'Grounding', 'Shielding', 'Friendship', 'Blockages and Awareness', 'New Home', 'Confidence', 'Protection (home, office, or person)', 'Breaking attachments', 'Abundance'
       ],
-      whatsIncluded: [
+      details: [
         'Minimum 5 crystals that pertain to the topic',
         'Complete information on each crystal and its properties',
         'A personalized affirmation to help with your specific topic',
@@ -123,6 +146,12 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
         { option: '10x10 Canvas', price: 105, id: 'soul-painting-10x10' },
         { option: '14x14 Canvas', price: 175, id: 'soul-painting-14x14' }
       ],
+      details: [
+        'Each painting is done on canvas or mixed media paper',
+        'Shipping available worldwide',
+        'Please allow 1–2 weeks for creation and channeling process',
+        'I will reach out to collect your photo or schedule a brief call before painting begins'
+      ],
       whatYouReceive: [
         'A one-of-a-kind soul painting, intuitively channeled and divinely guided',
         'A personal soul message—this may include soul purpose insight, spiritual guidance, or a message your higher self wants you to know',
@@ -137,12 +166,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
         'Ground your energy in times of transition'
       ],
       specialNote: 'This is great as a gift for someone, a painting of a soul that has moved on, for yourself and for animals as well.',
-      details: [
-        'Each painting is done on canvas or mixed media paper',
-        'Shipping available worldwide',
-        'Please allow 1–2 weeks for creation and channeling process',
-        'I will reach out to collect your photo or schedule a brief call before painting begins'
-      ],
+      
       yasinaNote: `This is more than art—it’s soul medicine. Every Soul Painting is a co-creation between you, me, and the Universe. I simply become the channel so your soul can show itself to you. If you're seeking alignment, clarity, or a tangible reminder of who you truly are… this is your invitation home.`
     },
     {
@@ -153,6 +177,16 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       icon: <Heart className="w-8 h-8 text-purple-600" />,
       pricing: [
         { option: 'Healing Oil', price: 'Contact for pricing', id: 'soul-soothe-oil' }
+      ],
+       details: [
+      "Original artwork channeled specifically for your soul's current journey",
+      "Created through intuitive connection with your energy and higher self",
+      "Each painting is unique and holds specific healing frequencies",
+      "Size: 11x14 inches on high-quality canvas or watercolor paper",
+      "Includes a detailed explanation of the symbols and messages in your painting",
+      "Perfect for meditation focus or as healing artwork for your space",
+      "Process includes initial consultation and energy reading",
+      "Completed within 2-3 weeks of order"
       ],
       keyBenefits: [
         'Relieves muscle and joint pain with the natural heat of cayenne and the anti-inflammatory power of arnica',
@@ -174,6 +208,14 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       pricing: [
         { option: 'Glow Oil', price: 'Contact for pricing', id: 'radiance-glow-oil' }
       ],
+      details: [
+      "Each oil blend is created specifically for your healing intentions",
+      "Made with high-quality, therapeutic-grade essential oils",
+      "Includes detailed instructions for use and application",
+      "Available for emotional healing, physical ailments, chakra balancing, and more",
+      "Comes in a 10ml amber glass bottle with roller top for easy application",
+      "All natural ingredients with no synthetic additives"
+      ],
       keyBenefits: [
         'Gently removes makeup (even waterproof) while calming the skin with lavender, frankincense, and peppermint',
         'Daily moisturizer for face and body, balancing oil production and improving skin elasticity',
@@ -187,8 +229,25 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
     }
   ];
 
-  const toggleProduct = (id) => {
-    setExpandedProduct(expandedProduct === id ? null : id);
+export default function Products() {
+  const [expandedProducts, setExpandedProducts] = useState({});
+  const [modalProduct, setModalProduct] = useState(null);
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const modalRef = useRef(null);
+  
+  const toggleProduct = (productId) => {
+    setExpandedProducts(prev => ({
+      ...prev,
+      [productId]: !prev[productId]
+    }));
+  };
+
+  const openModal = (product) => {
+    setModalProduct(product);
+  };
+
+  const closeModal = () => {
+    setModalProduct(null);
   };
 
   const selectOption = (productId, optionId) => {
@@ -204,379 +263,433 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       alert('Please select an option before adding to cart');
       return;
     }
-    
-    // This is where you would integrate with your cart system
-    console.log('Adding to cart:', {
-      productId: product.id,
-      selectedOption: selectedOption || product.pricing[0].id,
-      product: product.title
-    });
-    
-    // For now, show a simple alert
-    alert(`Added ${product.title} to cart!`);
+  }
+
+  useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      closeModal();
+    }
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100">
-      {/* Hero Section */}
-      <section className="py-20 px-4 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-800 to-purple-600 bg-clip-text text-transparent mb-6">
-            ✧ Holistic Products ✧
-          </h1>
-          <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-            Each product is energetically designed to support your healing journey, raise your vibration, 
-            and reconnect you to your soul's truth. Created with intention, infused with healing energy, 
-            and crafted to meet you exactly where you are.
-          </p>
-          <div className="w-32 h-1 bg-gradient-to-r from-purple-500 to-purple-300 mx-auto rounded-full"></div>
-        </div>
-      </section>
+  if (modalProduct) {
+    document.addEventListener('mousedown', handleClickOutside);
+  }
 
-      {/* Products Section */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="space-y-8">
-            {products.map((product) => (
-              <div key={product.id} className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-purple-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                <div className="p-8">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="p-3 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full">
-                        {product.icon}
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-purple-900">{product.title}</h3>
-                        <p className="text-lg text-purple-600 italic">{product.subtitle}</p>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => toggleProduct(product.id)}
-                      className="p-2 hover:bg-purple-50 rounded-full transition-colors"
-                    >
-                      {expandedProduct === product.id ? (
+  return () => {
+    document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, [modalProduct]);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 py-12">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-purple-800 mb-4">Sacred Products</h1>
+          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+            Discover our collection of handcrafted spiritual tools and personalized healing products, 
+            each created with love and intention to support your spiritual journey.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.map((product) => (
+            <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="aspect-square relative bg-gradient-to-br from-purple-100 to-pink-100">
+                <Image
+                  src="/assets/products/IC17.jpeg"
+                  alt={product.title}
+                  fill
+                  className="object-contain p-8"
+                />
+              </div>
+              
+              <div className="p-6">
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="text-xl font-semibold text-purple-800">{product.title}</h3>
+                  <span className="text-2xl font-bold text-pink-600">{product.pricing[0].price}</span>
+                  <button
+                  onClick={() => toggleProduct(product.id)}
+                  className="p-2 hover:bg-purple-50 rounded-full transition-colors"
+                >
+                  {expandedProducts[product.id] ? (
                         <ChevronUp className="w-6 h-6 text-purple-600" />
                       ) : (
                         <ChevronDown className="w-6 h-6 text-purple-600" />
                       )}
-                    </button>
+                </button>
+                </div>
+                
+                <p className="text-gray-600 mb-4">{product.subtitle}</p>
+                <button
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-colors duration-300 mb-4"
+                >
+                  Add to Cart
+                </button>
+                
+                {expandedProducts[product.id] && (
+                  <>
+                  <div className="mt-4 p-4 bg-purple-50 rounded-lg">
+                    <h4 className="font-semibold text-purple-800 mb-2">Details:</h4>
+                    <ul className="space-y-2">
+                      {product.details.map((detail, index) => (
+                        <li key={index} className="text-sm text-gray-700 flex items-start">
+                          <span className="text-pink-500 mr-2">•</span>
+                          {detail}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  
-                  <p className="text-gray-700 mb-6 leading-relaxed">{product.description}</p>
-                  
-                  {/* Pricing and Add to Cart */}
-                  <div className="bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-6 mb-6">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                      <div className="space-y-2">
-                        <h4 className="text-lg font-semibold text-purple-900">Pricing Options:</h4>
-                        <div className="space-y-2">
-                          {product.pricing.map((price, idx) => (
-                            <div key={idx} className="flex items-center space-x-3">
-                              {product.pricing.length > 1 && (
-                                <input
-                                  type="radio"
-                                  id={`${product.id}-${price.id}`}
-                                  name={`${product.id}-option`}
-                                  value={price.id}
-                                  checked={selectedOptions[product.id] === price.id}
-                                  onChange={() => selectOption(product.id, price.id)}
-                                  className="text-purple-600 focus:ring-purple-500"
-                                />
-                              )}
-                              <label 
-                                htmlFor={`${product.id}-${price.id}`}
-                                className="flex items-center space-x-2 cursor-pointer"
-                              >
-                                <span className="text-purple-800 font-medium">{price.option}:</span>
-                                <span className="text-2xl font-bold text-purple-900">
-                                  {typeof price.price === 'number' ? `$${price.price}` : price.priceRange ? `$${price.priceRange}` : price.price}
-                                </span>
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                   <div className="mt-5 w-full rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 p-[2px]">
+                    <div className="w-full bg-white rounded-lg">
                       <button
-                        onClick={() => addToCart(product)}
-                        className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-purple-800 transition-all transform hover:scale-105 flex items-center space-x-2 shadow-lg"
+                        onClick={() => openModal(product)}
+                        className="w-full text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 font-semibold py-2 px-4 rounded-lg transition-all duration-300 hover:shadow-md"
                       >
-                        <ShoppingCart className="w-5 h-5" />
-                        <span>Add to Cart</span>
+                        Learn More
                       </button>
                     </div>
                   </div>
-                  
-                  {expandedProduct === product.id && (
-                    <div className="border-t border-purple-100 pt-6 space-y-6">
-                      {product.features && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3 flex items-center">
-                            <Sparkles className="w-5 h-5 mr-2 text-purple-600" />
-                            What It Does:
-                          </h4>
-                          <ul className="grid md:grid-cols-2 gap-3">
-                            {product.features.map((feature, idx) => (
-                              <li key={idx} className="flex items-start space-x-2">
-                                <span className="text-purple-600 mt-1 text-lg">•</span>
-                                <span className="text-gray-700">{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
+                  </>
+                )}
+              </div>
 
-                      {product.whatMakesUnique && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3 flex items-center">
-                            <Gem className="w-5 h-5 mr-2 text-purple-600" />
-                            What Makes These Unique:
-                          </h4>
-                          <ul className="grid md:grid-cols-2 gap-3">
-                            {product.whatMakesUnique.map((unique, idx) => (
-                              <li key={idx} className="flex items-start space-x-2">
-                                <span className="text-amber-500 mt-1">💎</span>
-                                <span className="text-gray-700">{unique}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
+              {/* Modal */}
+              {modalProduct && createPortal(
+                <div className="fixed inset-0 z-50 flex items-center justify-center px-4 overflow-y-auto backdrop-blur-md bg-black/10">
+                  <div ref={modalRef} className="bg-white/80 backdrop-blur-xl rounded-xl w-[80vw] max-w-7xl max-h-[80vh] p-6 relative overflow-y-auto">
+                    <button
+                      onClick={closeModal}
+                      className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
+                    >
+                      <X className="w-6 h-6" />
+                    </button>
+                     <div className="relative aspect-video mb-4">
+                      <ImageCarousel 
+                      images={modalProduct.images} 
+                      />
+                      </div>
 
-                      {product.whyTheyMatter && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3 flex items-center">
-                            <Sparkles className="w-5 h-5 mr-2 text-purple-600" />
-                            Why They Matter:
-                          </h4>
-                          <ul className="grid md:grid-cols-2 gap-3">
-                            {product.whyTheyMatter.map((unique, idx) => (
-                              <li key={idx} className="flex items-start space-x-2">
-                                <span className="text-amber-500 mt-1">💎</span>
-                                <span className="text-gray-700">{unique}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {product.howToUse && (
-                        <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-6">
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3">How to Use:</h4>
-                          <p className="text-gray-700 leading-relaxed">{product.howToUse}</p>
-                        </div>
-                      )}
-
-                      {product.chakras && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-purple-900 mb-4">The 7 Main Chakras:</h4>
-                          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {product.chakras.map((chakra, idx) => (
-                              <div key={idx} className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-purple-100 hover:border-purple-200 transition-colors">
-                                <div className="flex items-center space-x-3 mb-2">
-                                  <span className="text-3xl">{chakra.color}</span>
-                                  <div>
-                                    <h5 className="font-semibold text-purple-900">{chakra.name}</h5>
-                                    <p className="text-sm text-purple-600 italic">{chakra.sanskrit}</p>
+                                  {/* Products Section */}
+                    <section className="py-16 px-4">
+                      <div className="max-w-6xl mx-auto">
+                        <div className="space-y-8">
+                            <div key={modalProduct.id} className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-purple-100 overflow-hidden hover:shadow-2xl transition-shadow">
+                              <div className="p-8">
+                                <div className="flex items-center justify-between mb-6">
+                                  <div className="flex items-center space-x-4">
+                                    <div className="p-3 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full">
+                                      {modalProduct.icon}
+                                    </div>
+                                    <div>
+                                      <h3 className="text-2xl font-bold text-purple-900">{modalProduct.title}</h3>
+                                      <p className="text-lg text-purple-600 italic">{modalProduct.subtitle}</p>
+                                    </div>
                                   </div>
                                 </div>
-                                <p className="text-sm text-gray-700">{chakra.theme}</p>
+                                
+                                <p className="text-gray-700 mb-6 leading-relaxed">{modalProduct.description}</p>
+                                
+                                {/* Pricing and Add to Cart */}
+                                <div className="bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-6 mb-6">
+                                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                    <div className="space-y-2">
+                                      <h4 className="text-lg font-semibold text-purple-900">Pricing Options:</h4>
+                                      <div className="space-y-2">
+                                        {modalProduct.pricing.map((price, idx) => (
+                                          <div key={idx} className="flex items-center space-x-3">
+                                            {modalProduct.pricing.length > 1 && (
+                                              <input
+                                                type="radio"
+                                                id={`${modalProduct.id}-${price.id}`}
+                                                name={`${modalProduct.id}-option`}
+                                                value={price.id}
+                                                checked={selectedOptions[modalProduct.id] === price.id}
+                                                onChange={() => selectOption(modalProduct.id, price.id)}
+                                                className="text-purple-600 focus:ring-purple-500"
+                                              />
+                                            )}
+                                            <label 
+                                              htmlFor={`${modalProduct.id}-${price.id}`}
+                                              className="flex items-center space-x-2 cursor-pointer"
+                                            >
+                                              <span className="text-purple-800 font-medium">{price.option}:</span>
+                                              <span className="text-2xl font-bold text-purple-900">
+                                                {typeof price.price === 'number' ? `$${price.price}` : price.priceRange ? `$${price.priceRange}` : price.price}
+                                              </span>
+                                            </label>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                    <button
+                                      onClick={() => addToCart(modalProduct)}
+                                      className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-purple-800 transition-all transform hover:scale-105 flex items-center space-x-2 shadow-lg"
+                                    >
+                                      <ShoppingCart className="w-5 h-5" />
+                                      <span>Add to Cart</span>
+                                    </button>
+                                  </div>
+                                </div>
+                                
+                               
+                                <div className="border-t border-purple-100 pt-6 space-y-6">
+                                    {modalProduct.features && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3 flex items-center">
+                                          <Sparkles className="w-5 h-5 mr-2 text-purple-600" />
+                                          What It Does:
+                                        </h4>
+                                        <ul className="grid md:grid-cols-2 gap-3">
+                                          {modalProduct.features.map((feature, idx) => (
+                                            <li key={idx} className="flex items-start space-x-2">
+                                              <span className="text-purple-600 mt-1 text-lg">•</span>
+                                              <span className="text-gray-700">{feature}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.whatMakesUnique && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3 flex items-center">
+                                          <Gem className="w-5 h-5 mr-2 text-purple-600" />
+                                          What Makes These Unique:
+                                        </h4>
+                                        <ul className="grid md:grid-cols-2 gap-3">
+                                          {modalProduct.whatMakesUnique.map((unique, idx) => (
+                                            <li key={idx} className="flex items-start space-x-2">
+                                              <span className="text-amber-500 mt-1">💎</span>
+                                              <span className="text-gray-700">{unique}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.whyTheyMatter && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3 flex items-center">
+                                          <Sparkles className="w-5 h-5 mr-2 text-purple-600" />
+                                          Why They Matter:
+                                        </h4>
+                                        <ul className="grid md:grid-cols-2 gap-3">
+                                          {modalProduct.whyTheyMatter.map((unique, idx) => (
+                                            <li key={idx} className="flex items-start space-x-2">
+                                              <span className="text-amber-500 mt-1">💎</span>
+                                              <span className="text-gray-700">{unique}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.howToUse && (
+                                      <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-6">
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">How to Use:</h4>
+                                        <p className="text-gray-700 leading-relaxed">{modalProduct.howToUse}</p>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.chakras && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-4">The 7 Main Chakras:</h4>
+                                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                          {modalProduct.chakras.map((chakra, idx) => (
+                                            <div key={idx} className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-purple-100 hover:border-purple-200 transition-colors">
+                                              <div className="flex items-center space-x-3 mb-2">
+                                                <span className="text-3xl">{chakra.color}</span>
+                                                <div>
+                                                  <h5 className="font-semibold text-purple-900">{chakra.name}</h5>
+                                                  <p className="text-sm text-purple-600 italic">{chakra.sanskrit}</p>
+                                                </div>
+                                              </div>
+                                              <p className="text-sm text-gray-700">{chakra.theme}</p>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.whatYouReceive && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">What You'll Receive:</h4>
+                                        <ul className="space-y-2">
+                                          {modalProduct.whatYouReceive.map((item, idx) => (
+                                            <li key={idx} className="flex items-start space-x-2">
+                                              <span className="text-green-500 mt-1">✓</span>
+                                              <span className="text-gray-700">{item}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.preRecordedCollections && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">Pre-Recorded Collections:</h4>
+                                        <div className="grid md:grid-cols-2 gap-3">
+                                          {modalProduct.preRecordedCollections.map((collection, idx) => (
+                                            <div key={idx} className="flex items-start space-x-2">
+                                              <span className="text-blue-500 mt-1">🎵</span>
+                                              <span className="text-gray-700">{collection}</span>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.packageExamples && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">Package Examples:</h4>
+                                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                                          {modalProduct.packageExamples.map((example, idx) => (
+                                            <span key={idx} className="bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg px-3 py-2 text-sm text-purple-900 font-medium text-center">
+                                              {example}
+                                            </span>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.whatsIncluded && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">What's Included:</h4>
+                                        <ul className="space-y-2">
+                                          {modalProduct.whatsIncluded.map((item, idx) => (
+                                            <li key={idx} className="flex items-start space-x-2">
+                                              <span className="text-green-500 mt-1">✓</span>
+                                              <span className="text-gray-700">{item}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.whyGetOne && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">Why Get a Soul Painting:</h4>
+                                        <p className="text-gray-700 mb-4">
+                                          Sometimes we feel disconnected from who we are or where we’re going. A Soul Painting bypasses the busy mind and brings you back into harmony with your heart and higher self.
+                                        </p>
+                                        <ul className="grid md:grid-cols-2 gap-3">
+                                          {modalProduct.whyGetOne.map((reason, idx) => (
+                                            <li key={idx} className="flex items-start space-x-2">
+                                              <span className="text-pink-500 mt-1">💖</span>
+                                              <span className="text-gray-700">{reason}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                        <p className="text-gray-700 mt-4">
+                                          It’s like catching a glimpse of your soul in visual form—a reminder of who you truly are, beyond fear, beyond doubt, beyond the noise.
+                                          Whenever you’re feeling out of alignment, simply return to your Soul Painting. Let it hold you, guide you, and remind you: you are already whole.
+                                        </p>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.keyBenefits && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">Key Benefits:</h4>
+                                        <ul className="space-y-2">
+                                          {modalProduct.keyBenefits.map((benefit, idx) => (
+                                            <li key={idx} className="flex items-start space-x-2">
+                                              <span className="text-green-500 mt-1">✓</span>
+                                              <span className="text-gray-700">{benefit}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.ingredients && (
+                                      <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6">
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">Ingredients:</h4>
+                                        <div className="flex flex-wrap gap-2">
+                                          {modalProduct.ingredients.map((ingredient, idx) => (
+                                            <span key={idx} className="bg-white/80 rounded-full px-3 py-1 text-sm text-gray-700 border border-green-200">
+                                              {ingredient}
+                                            </span>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.specialNote && (
+                                      <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 border border-yellow-200">
+                                        <p className="text-gray-700 italic">
+                                          <span className="font-semibold text-orange-800">Special Note:</span> {modalProduct.specialNote}
+                                        </p>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.details && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">Details:</h4>
+                                        <ul className="space-y-2">
+                                          {modalProduct.details.map((detail, idx) => (
+                                            <li key={idx} className="flex items-start space-x-2">
+                                              <span className="text-blue-500 mt-1">ℹ️</span>
+                                              <span className="text-gray-700">{detail}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.note && (
+                                      <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
+                                        <p className="text-gray-700 italic">
+                                          <span className="font-semibold text-purple-800">Note:</span> {modalProduct.note}
+                                        </p>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.yasinaNote && (
+                                      <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
+                                        <p className="text-gray-700 italic">
+                                          <span className="font-semibold text-purple-800">A Note from Yasina:</span> {modalProduct.yasinaNote}
+                                        </p>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.whyItWorks && (
+                                      <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">Why It Works:</h4>
+                                        <p className="text-gray-700">{modalProduct.whyItWorks}</p>
+                                      </div>
+                                    )}
+
+                                    {modalProduct.perfectFor && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">Perfect For:</h4>
+                                        <div className="grid md:grid-cols-2 gap-2">
+                                          {modalProduct.perfectFor.map((purpose, idx) => (
+                                            <div key={idx} className="flex items-start space-x-2">
+                                              <span className="text-purple-600 mt-1">✨</span>
+                                              <span className="text-gray-700">{purpose}</span>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                
                               </div>
-                            ))}
-                          </div>
+                            </div>
+                          
                         </div>
-                      )}
-
-                      {product.whatYouReceive && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3">What You'll Receive:</h4>
-                          <ul className="space-y-2">
-                            {product.whatYouReceive.map((item, idx) => (
-                              <li key={idx} className="flex items-start space-x-2">
-                                <span className="text-green-500 mt-1">✓</span>
-                                <span className="text-gray-700">{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {product.preRecordedCollections && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Pre-Recorded Collections:</h4>
-                          <div className="grid md:grid-cols-2 gap-3">
-                            {product.preRecordedCollections.map((collection, idx) => (
-                              <div key={idx} className="flex items-start space-x-2">
-                                <span className="text-blue-500 mt-1">🎵</span>
-                                <span className="text-gray-700">{collection}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {product.packageExamples && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Package Examples:</h4>
-                          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                            {product.packageExamples.map((example, idx) => (
-                              <span key={idx} className="bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg px-3 py-2 text-sm text-purple-900 font-medium text-center">
-                                {example}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {product.whatsIncluded && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3">What's Included:</h4>
-                          <ul className="space-y-2">
-                            {product.whatsIncluded.map((item, idx) => (
-                              <li key={idx} className="flex items-start space-x-2">
-                                <span className="text-green-500 mt-1">✓</span>
-                                <span className="text-gray-700">{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {product.whyGetOne && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Why Get a Soul Painting:</h4>
-                          <p className="text-gray-700 mb-4">
-                            Sometimes we feel disconnected from who we are or where we’re going. A Soul Painting bypasses the busy mind and brings you back into harmony with your heart and higher self.
-                          </p>
-                          <ul className="grid md:grid-cols-2 gap-3">
-                            {product.whyGetOne.map((reason, idx) => (
-                              <li key={idx} className="flex items-start space-x-2">
-                                <span className="text-pink-500 mt-1">💖</span>
-                                <span className="text-gray-700">{reason}</span>
-                              </li>
-                            ))}
-                          </ul>
-                          <p className="text-gray-700 mt-4">
-                            It’s like catching a glimpse of your soul in visual form—a reminder of who you truly are, beyond fear, beyond doubt, beyond the noise.
-                            Whenever you’re feeling out of alignment, simply return to your Soul Painting. Let it hold you, guide you, and remind you: you are already whole.
-                          </p>
-                        </div>
-                      )}
-
-                      {product.keyBenefits && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Key Benefits:</h4>
-                          <ul className="space-y-2">
-                            {product.keyBenefits.map((benefit, idx) => (
-                              <li key={idx} className="flex items-start space-x-2">
-                                <span className="text-green-500 mt-1">✓</span>
-                                <span className="text-gray-700">{benefit}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {product.ingredients && (
-                        <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6">
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Ingredients:</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {product.ingredients.map((ingredient, idx) => (
-                              <span key={idx} className="bg-white/80 rounded-full px-3 py-1 text-sm text-gray-700 border border-green-200">
-                                {ingredient}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {product.specialNote && (
-                        <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 border border-yellow-200">
-                          <p className="text-gray-700 italic">
-                            <span className="font-semibold text-orange-800">Special Note:</span> {product.specialNote}
-                          </p>
-                        </div>
-                      )}
-
-                      {product.details && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Details:</h4>
-                          <ul className="space-y-2">
-                            {product.details.map((detail, idx) => (
-                              <li key={idx} className="flex items-start space-x-2">
-                                <span className="text-blue-500 mt-1">ℹ️</span>
-                                <span className="text-gray-700">{detail}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {product.note && (
-                        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
-                          <p className="text-gray-700 italic">
-                            <span className="font-semibold text-purple-800">Note:</span> {product.note}
-                          </p>
-                        </div>
-                      )}
-
-                      {product.yasinaNote && (
-                        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
-                          <p className="text-gray-700 italic">
-                            <span className="font-semibold text-purple-800">A Note from Yasina:</span> {product.yasinaNote}
-                          </p>
-                        </div>
-                      )}
-
-                      {product.whyItWorks && (
-                        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Why It Works:</h4>
-                          <p className="text-gray-700">{product.whyItWorks}</p>
-                        </div>
-                      )}
-
-                      {product.perfectFor && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-purple-900 mb-3">Perfect For:</h4>
-                          <div className="grid md:grid-cols-2 gap-2">
-                            {product.perfectFor.map((purpose, idx) => (
-                              <div key={idx} className="flex items-start space-x-2">
-                                <span className="text-purple-600 mt-1">✨</span>
-                                <span className="text-gray-700">{purpose}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-purple-900 mb-8">Ready to Elevate Your Energy?</h2>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-            <p className="text-lg text-gray-700 mb-6">
-              Each product is created with love, intention, and deep respect for your healing journey. 
-              Whether you're seeking energetic support, physical healing, or spiritual connection, 
-              these sacred tools are here to support you every step of the way.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all transform hover:scale-105">
-                Contact for Custom Orders
-              </button>
+                      </div>
+                    </section>
+          
+                  </div>
+                </div>,
+                document.body
+              )}
             </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
     </div>
   );
-};
-
-export default ProductsPage;
+}

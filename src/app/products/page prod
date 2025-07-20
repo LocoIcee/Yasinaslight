@@ -1,0 +1,172 @@
+'use client'
+import { useState } from 'react';
+import Image from 'next/image';
+
+const products = [
+  {
+    id: 1,
+    name: "Crystal Package",
+    price: "$77",
+    image: "/assets/products/crystal-package.svg",
+    shortDescription: "Hand-selected crystals for healing and manifestation",
+    details: [
+      "Each crystal is hand-selected specifically for you based on your current needs and energy",
+      "Includes a personalized guide explaining each crystal's properties and how to use them",
+      "Perfect for beginners or those looking to expand their crystal collection",
+      "Comes with cleansing and charging instructions",
+      "Package includes 3-5 crystals depending on size and type"
+    ],
+  },
+  {
+    id: 2,
+    name: "Healing Oils",
+    price: "$44",
+    image: "/assets/products/healing-oils.svg",
+    shortDescription: "Custom-blended essential oils for various healing purposes",
+    details: [
+      "Each oil blend is created specifically for your healing intentions",
+      "Made with high-quality, therapeutic-grade essential oils",
+      "Includes detailed instructions for use and application",
+      "Available for emotional healing, physical ailments, chakra balancing, and more",
+      "Comes in a 10ml amber glass bottle with roller top for easy application",
+      "All natural ingredients with no synthetic additives"
+    ]
+  },
+  {
+    id: 3,
+    name: "Intention Coasters",
+    price: "$33",
+    image: "/assets/products/intention-coasters.svg",
+    shortDescription: "Beautifully crafted coasters infused with healing intentions",
+    details: [
+      "Each coaster is hand-crafted and infused with specific healing intentions",
+      "Made from natural materials including wood and resin",
+      "Features sacred geometry patterns and healing symbols",
+      "Perfect for placing under water glasses to infuse with positive energy",
+      "Set of 4 coasters, each with different healing properties",
+      "Includes a guide explaining how to use them for maximum benefit",
+      "Durable and water-resistant finish"
+    ]
+  },
+  {
+    id: 4,
+    name: "Custom Meditation",
+    price: "$55",
+    image: "/assets/products/custom-meditation.svg",
+    shortDescription: "Personalized guided meditation recordings tailored to your needs",
+    details: [
+      "Completely personalized meditation created just for you",
+      "Based on your specific goals, challenges, and spiritual needs",
+      "Includes consultation to understand your meditation preferences",
+      "High-quality audio recording (20-30 minutes)",
+      "Available in various styles: manifestation, healing, chakra balancing, stress relief",
+      "Delivered digitally in MP3 format",
+      "Includes written affirmations and meditation notes",
+      "Unlimited access - yours to keep forever"
+    ]
+  },
+  {
+    id: 5,
+    name: "Soul Painting",
+    price: "$111",
+    image: "/assets/products/soul-painting.svg",
+    shortDescription: "Intuitive artwork channeled specifically for your soul's journey",
+    details: [
+      "Original artwork channeled specifically for your soul's current journey",
+      "Created through intuitive connection with your energy and higher self",
+      "Each painting is unique and holds specific healing frequencies",
+      "Size: 11x14 inches on high-quality canvas or watercolor paper",
+      "Includes a detailed explanation of the symbols and messages in your painting",
+      "Perfect for meditation focus or as healing artwork for your space",
+      "Process includes initial consultation and energy reading",
+      "Completed within 2-3 weeks of order"
+    ]
+  },
+  {
+    id: 6,
+    name: "Spiritual Guidance Session",
+    price: "$88",
+    image: "/assets/products/spiritual-guidance.svg",
+    shortDescription: "One-on-one session for spiritual insight and guidance",
+    details: [
+      "Personal one-on-one session via video call or phone",
+      "Duration: 60-90 minutes depending on your needs",
+      "Includes intuitive reading and spiritual guidance",
+      "Covers areas such as life purpose, relationships, career, spiritual growth",
+      "May include card readings, energy work, or channeled messages",
+      "Recording of session provided for your reference",
+      "Follow-up email with key insights and recommended actions",
+      "Flexible scheduling to accommodate your timezone"
+    ]
+  }
+];
+
+export default function Products() {
+  const [expandedProducts, setExpandedProducts] = useState({});
+
+  const toggleProduct = (productId) => {
+    setExpandedProducts(prev => ({
+      ...prev,
+      [productId]: !prev[productId]
+    }));
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 py-12">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-purple-800 mb-4">Sacred Products</h1>
+          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+            Discover our collection of handcrafted spiritual tools and personalized healing products, 
+            each created with love and intention to support your spiritual journey.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.map((product) => (
+            <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="aspect-square relative bg-gradient-to-br from-purple-100 to-pink-100">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-contain p-8"
+                />
+              </div>
+              
+              <div className="p-6">
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="text-xl font-semibold text-purple-800">{product.name}</h3>
+                  <span className="text-2xl font-bold text-pink-600">{product.price}</span>
+                </div>
+                
+                <p className="text-gray-600 mb-4">{product.shortDescription}</p>
+                
+                <button
+                  onClick={() => toggleProduct(product.id)}
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-colors duration-300 mb-4"
+                >
+                  {expandedProducts[product.id] ? 'Show Less' : 'Learn More'}
+                </button>
+                
+                {expandedProducts[product.id] && (
+                  <div className="mt-4 p-4 bg-purple-50 rounded-lg">
+                    <h4 className="font-semibold text-purple-800 mb-2">Details:</h4>
+                    <ul className="space-y-2">
+                      {product.details.map((detail, index) => (
+                        <li key={index} className="text-sm text-gray-700 flex items-start">
+                          <span className="text-pink-500 mr-2">•</span>
+                          {detail}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
