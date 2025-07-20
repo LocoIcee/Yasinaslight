@@ -1,9 +1,24 @@
 /* Global styles for Yasina's Light website */
 
 /* Import Google Fonts (these are also loaded in the Layout component) */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
+
+
+.collage-background {
+  background-image: 
+    url('/assets/Products/CR.webp'),
+    url('/assets/Products/SPL.webp'),
+    url('/assets/Products/SP1.webp'),
+    url('/assets/Products/SP2.webp'),
+    url('/assets/Products/SP3.webp'),
+    url('/assets/Products/SP4.webp'),
+    url('/assets/Products/SP5.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  background-attachment: fixed;
+  filter: brightness(0.4);
+}
 
 /* Root variables - these mirror the constants.js file */
 :root {
