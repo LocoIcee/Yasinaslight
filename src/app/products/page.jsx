@@ -7,7 +7,7 @@ import ImageCarousel from '@/components/ui/carousel';
 
  const products = [
     {
-      headerImg: '/assets/products/IC17.jpeg',
+      headerImg: '/assets/products/ic17.jpeg',
       togLearn: true,
       id: 'intention-coasters',
       title: 'Intention Coasters',
@@ -346,7 +346,6 @@ export default function Products() {
                 <Image
                   src={product.headerImg}
                   alt={product.title}
-                  unoptimized
                   fill
                   className="object-contain p-8"
                 />
