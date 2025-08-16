@@ -346,6 +346,7 @@ export default function Products() {
                 <Image
                   src={product.headerImg}
                   alt={product.title}
+                  unoptimized
                   fill
                   className="object-contain p-8"
                 />
