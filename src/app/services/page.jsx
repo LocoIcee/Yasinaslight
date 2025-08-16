@@ -106,7 +106,7 @@ const ServicesPage = () => {
           description: 'The full, signature experience. Deep support for clarity and transformation.',
           recommended: true,
           includes: [
-            '60-minute intuitive healing session',
+            '60-minute intuitive session',
             'Reiki, Hypnotherapy or Soul Journey (depends on what you need)',
             'Energetic body scan + clearing',
             'Personalized journal prompts + energy message + EFT',
@@ -118,7 +118,7 @@ const ServicesPage = () => {
           price: '$411',
           description: 'For those ready to go deeper. Includes integration and follow-up support.',
           includes: [
-            'Everything in Tier 2',
+            'Everything in Soul Alignment Experience',
             '1 x 45-minute follow-up session (within 2–3 weeks)',
             'Custom guided meditation OR hypno audio',
             'Text support for 5 days after session'
@@ -257,7 +257,7 @@ const ServicesPage = () => {
       subtitle: 'Ancient healing through pressure point therapy',
       duration: '30 or 60 minutes',
       price: '$75',
-      description: 'Based on the theory that hands, feet, and ears are connected to organs and body systems. Promotes qi flow and overall well-being.',
+      description: 'Based on the theory that hands, and feet are connected to organs and body systems. Promotes QI flow and overall well-being.',
       icon: <Heart className="w-8 h-8" />,
       benefits: [
         'Stress reduction and anxiety relief',

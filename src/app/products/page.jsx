@@ -10,7 +10,7 @@ import ImageCarousel from '@/components/ui/carousel';
       id: 'intention-coasters',
       title: 'Intention Coasters',
       subtitle: 'Infuse Your Food & Drink with the Frequency of Your Highest Good',
-      description: `Imagine if every sip of water or bite of food could help you align with your manifestations, heal your energy, and reconnect with your soul's purpose. With Intention Coasters, this isn't just a dream—it's an energetic reality. Your thoughts, emotions, and energetic state don't just affect your mood—they imprint into everything you touch, cook, drink, or eat. According to energy studies like Dr. Emoto’s water experiment, water is especially responsive to emotional frequencies, creating beautiful crystalline structures when exposed to love, gratitude, or hope—and distorted ones when exposed to fear, anger, or stress. Now imagine what happens when you drink water, any drink or eat food while thinking about your to-do list, stress, or past hurts. That energy goes right back into your body. That’s where Intention Coasters come in.`,
+      description: `Imagine if every sip of water or bite of food could help you align with your manifestations, heal your energy, and reconnect with your soul's purpose. With Intention Coasters, this isn't just a dream—it's an energetic reality. Your thoughts, emotions, and energetic state don't just affect your mood—they imprint into everything you touch, cook, drink, or eat. According to energy studies like Dr. Emoto’s water experiment, water is especially responsive to emotional frequencies, creating beautiful crystalline structures when exposed to love, gratitude, or hope—and distorted ones when exposed to fear, anger, or stress. Now imagine what happens when you drink or eat food while thinking about your to-do list, stress, or past hurts. That energy goes right back into your body. That’s where Intention Coasters come in.`,
       images: [
       "/assets/products/IC1.jpeg",
       "/assets/products/IC2.jpeg",
@@ -24,10 +24,9 @@ import ImageCarousel from '@/components/ui/carousel';
       ],
       details: [
       "Each coaster is hand-crafted and infused with specific healing intentions",
-      "Made from natural materials including wood and resin",
       "Features sacred geometry patterns and healing symbols",
-      "Perfect for placing under water glasses to infuse with positive energy",
-      "Set of 4 coasters, each with different healing properties",
+      "Perfect for placing under cups, glasses, and plates to infuse with positive energy",
+      "Set of 7 coasters, each with different healing properties based on the chakra system",
       "Includes a guide explaining how to use them for maximum benefit",
       "Durable and water-resistant finish"
       ],
@@ -69,22 +68,21 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
     },
     {
       id: 'custom-meditations',
-      title: 'Custom Meditations & Mindful Guidance',
+      title: 'Custom Meditations & EFT',
       subtitle: 'Sacred support for your soul\'s unique journey',
       description: 'Whether you\'re moving through a season of growth, seeking inner clarity, or simply craving deeper connection, I offer soul-aligned meditations and intuitive guidance crafted with your energy in mind.',
+      images: [
+      "/assets/products/CM2.webp",
+      ],
       icon: <Moon className="w-8 h-8 text-purple-600" />,
       pricing: [
         { option: 'Custom Meditation', price: '$13 - $55', id: 'custom-meditation' }
       ],
        details: [
-      "Completely personalized meditation created just for you",
-      "Based on your specific goals, challenges, and spiritual needs",
+      "Completely personalized meditation created just for you, based on your specific goals, challenges, and spiritual needs",
       "Includes consultation to understand your meditation preferences",
-      "High-quality audio recording (20-30 minutes)",
-      "Available in various styles: manifestation, healing, chakra balancing, stress relief",
-      "Delivered digitally in MP3 format",
-      "Includes written affirmations and meditation notes",
-      "Unlimited access - yours to keep forever"
+      "High-quality audio recording",
+      "Pre-recorded meditations and EFT also available for: manifestation, healing, chakra balancing, stress relief and more",
       ],
       features: [
         'Intuitively created based on what you\'re currently navigating—emotionally, energetically, and spiritually',
@@ -141,6 +139,11 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       title: 'Soul Paintings',
       subtitle: 'A visual channeling of your soul\'s essence',
       description: 'A Soul Painting is a channeled piece of art created through direct transmission from the Universe, expressed through my hands as a reflection of your soul\'s energy. Using either a video call or a photo of you, I tune into your frequency and allow your soul\'s essence to flow onto the canvas.',
+      images: [
+      "/assets/products/IC1.jpeg",
+      "/assets/products/IC2.jpeg",
+      "/assets/products/IC3.jpeg"
+      ],
       icon: <Palette className="w-8 h-8 text-purple-600" />,
       pricing: [
         { option: '10x10 Canvas', price: 105, id: 'soul-painting-10x10' },
@@ -174,6 +177,11 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       title: 'Soul Soothe Healing Oil',
       subtitle: 'Deep Relief for Muscles, Joints & Energy Flow',
       description: 'Crafted with intention and ancient wisdom, this healing oil blend brings powerful relief to sore muscles, stiff joints, and stagnant energy. Infused with nature\'s most potent anti-inflammatory and circulatory herbs, each drop is designed to activate healing on both a physical and energetic level.',
+      images: [
+      "/assets/products/IC1.jpeg",
+      "/assets/products/IC2.jpeg",
+      "/assets/products/IC3.jpeg"
+      ],
       icon: <Heart className="w-8 h-8 text-purple-600" />,
       pricing: [
         { option: 'Healing Oil', price: 'Contact for pricing', id: 'soul-soothe-oil' }
@@ -204,6 +212,11 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       title: 'Radiance Glow Oil',
       subtitle: 'Nourish. Cleanse. Restore.',
       description: 'This luxurious multi-use skin elixir is your all-in-one daily ritual for glowing, balanced, and deeply nourished skin. Whether you use it to melt away makeup, moisturize your face and body, or protect your skin from environmental stress, Radiance Glow Oil does it all—naturally.Infused with a blend of potent plant-based oils, each ingredient is chosen for its healing, soothing, and rejuvenating properties. Lightweight yet deeply hydrating, this oil leaves your skin feeling soft, smooth, and radiant without clogging pores or leaving a greasy residue.',
+      images: [
+      "/assets/products/IC1.jpeg",
+      "/assets/products/IC2.jpeg",
+      "/assets/products/IC3.jpeg"
+      ],
       icon: <Sun className="w-8 h-8 text-purple-600" />,
       pricing: [
         { option: 'Glow Oil', price: 'Contact for pricing', id: 'radiance-glow-oil' }
@@ -364,16 +377,15 @@ export default function Products() {
                     >
                       <X className="w-6 h-6" />
                     </button>
-                     <div className="relative aspect-video mb-4">
-                      <ImageCarousel 
-                      images={modalProduct.images} 
-                      />
-                      </div>
-
                                   {/* Products Section */}
                     <section className="py-16 px-4">
                       <div className="max-w-6xl mx-auto">
-                        <div className="space-y-8">
+                          <div className="space-y-8">
+                            <div className="relative aspect-video mb-4">
+                              <ImageCarousel 
+                              images={modalProduct.images} 
+                              />
+                            </div>
                             <div key={modalProduct.id} className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-purple-100 overflow-hidden hover:shadow-2xl transition-shadow">
                               <div className="p-8">
                                 <div className="flex items-center justify-between mb-6">
