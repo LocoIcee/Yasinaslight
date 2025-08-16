@@ -78,7 +78,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       ],
       icon: <Moon className="w-8 h-8 text-purple-600" />,
       pricing: [
-        { option: 'Custom Meditation', price: '$13 - $55', id: 'custom-meditation' }
+        { option: 'Custom Meditation', price: 'Contact for pricing', id: 'custom-meditation' }
       ],
        details: [
       "Completely personalized meditation created just for you, based on your specific goals, challenges, and spiritual needs",
@@ -159,7 +159,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
         { option: '14x14 Canvas', price: 175, id: 'soul-painting-14x14' }
       ],
       details: [
-        'Each painting is done on canvas or mixed media paper',
+        'Each painting is done on canvas',
         'Shipping available worldwide',
         'Please allow 1–2 weeks for creation and channeling process',
         'I will reach out to collect your photo or schedule a brief call before painting begins'
@@ -179,13 +179,14 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       ],
       specialNote: 'This is great as a gift for someone, a painting of a soul that has moved on, for yourself and for animals as well.',
       
-      yasinaNote: `This is more than art—it’s soul medicine. Every Soul Painting is a co-creation between you, me, and the Universe. I simply become the channel so your soul can show itself to you. If you're seeking alignment, clarity, or a tangible reminder of who you truly are… this is your invitation home.`
+      yasinaNote: `This is more than art—it’s soul medicine. Every Soul Painting is a co-creation between you, me, and the Universe. I simply become the channel so your soul can show itself to you. If you're seeking alignment, clarity, or a tangible reminder of who you truly are… this is your invitation home.`,
+      noteAddon: `The colors are shown to me and the painting itself is lead by the universe in the flow it should be.  You may feel emotions, see pictures, get intuitive messages, butterflies, find peace and much more.  There is no wrong or right way to look at the picture, because each time you look at it or turn it, a new message will be seen.`
     },
     {
       togLearn: true,
-      id: 'soul-soothe-oil',
-      title: 'Soul Soothe Healing Oil',
-      subtitle: 'Deep Relief for Muscles, Joints & Energy Flow',
+      id: 'rapid-recovery-oil',
+      title: 'Rapid Recovery Oil',
+      subtitle: 'A powerful handmade healing oil designed to sooth relieve and heal',
       description: 'Crafted with intention and ancient wisdom, this healing oil blend brings powerful relief to sore muscles, stiff joints, and stagnant energy. Infused with nature\'s most potent anti-inflammatory and circulatory herbs, each drop is designed to activate healing on both a physical and energetic level.',
       images: [
       "/assets/products/IC1.jpeg",
@@ -194,17 +195,15 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       ],
       icon: <Heart className="w-8 h-8 text-purple-600" />,
       pricing: [
-        { option: 'Healing Oil', price: 'Contact for pricing', id: 'soul-soothe-oil' }
+        { option: 'Healing Oil', price: 'Contact for pricing', id: 'rapid-recovery-oil' }
       ],
        details: [
-      "Original artwork channeled specifically for your soul's current journey",
-      "Created through intuitive connection with your energy and higher self",
-      "Each painting is unique and holds specific healing frequencies",
-      "Size: 11x14 inches on high-quality canvas or watercolor paper",
-      "Includes a detailed explanation of the symbols and messages in your painting",
-      "Perfect for meditation focus or as healing artwork for your space",
-      "Process includes initial consultation and energy reading",
-      "Completed within 2-3 weeks of order"
+      "Introducing a powerful handmade healing oil blend designed to soothe, relieve and heal. Crafted with intention and ancient wisdom, this healing oil blend brings powerful relief!  ",
+      "Infused with nature's most potent anti-inflammatory and circulatory herbs, each drop is designed to activate healing on both a physical and energetic level",
+      "With the natural heat of cayenne and the anti-inflammatory power of arnica",
+      "Supports circulation and detoxification with castor oil and black seed oil, known for reducing swelling and promoting cellular repair",
+      " Soothes inflammation and strengthens tissue with neem oil—a powerful ally for chronic pain and skin conditions",
+      " Calms the nervous system and relaxes tension with lavender and frankincense, supporting both body and spirit",
       ],
       keyBenefits: [
         'Relieves muscle and joint pain with the natural heat of cayenne and the anti-inflammatory power of arnica',
@@ -289,6 +288,13 @@ export default function Products() {
     }
   }
 
+  const priceDisplay = (price) => {
+    if (typeof price[0] === 'number') {
+      return `$${price.toFixed(2)}`;
+    }
+    return price; // For 'Contact for pricing' or similar strings
+  } 
+
   useEffect(() => {
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -331,7 +337,7 @@ export default function Products() {
               <div className="p-6">
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="text-xl font-semibold text-purple-800">{product.title}</h3>
-                  <span className="text-2xl font-bold text-pink-600">{product.pricing[0].price}</span>
+                  <span className="text-2xl font-bold text-pink-600">{}</span>
                   <button
                   onClick={() => toggleProduct(product.id)}
                   className="p-2 hover:bg-purple-50 rounded-full transition-colors"
@@ -648,20 +654,6 @@ export default function Products() {
                                       </div>
                                     )}
 
-                                    {modalProduct.details && (
-                                      <div>
-                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">Details:</h4>
-                                        <ul className="space-y-2">
-                                          {modalProduct.details.map((detail, idx) => (
-                                            <li key={idx} className="flex items-start space-x-2">
-                                              <span className="text-blue-500 mt-1">ℹ️</span>
-                                              <span className="text-gray-700">{detail}</span>
-                                            </li>
-                                          ))}
-                                        </ul>
-                                      </div>
-                                    )}
-
                                     {modalProduct.note && (
                                       <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
                                         <p className="text-gray-700 italic">
@@ -674,6 +666,7 @@ export default function Products() {
                                       <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
                                         <p className="text-gray-700 italic">
                                           <span className="font-semibold text-purple-800">A Note from Yasina:</span> {modalProduct.yasinaNote}
+                                          <p className='mt-2'>{modalProduct.noteAddon}</p>
                                         </p>
                                       </div>
                                     )}
