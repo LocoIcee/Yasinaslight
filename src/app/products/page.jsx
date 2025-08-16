@@ -7,6 +7,7 @@ import ImageCarousel from '@/components/ui/carousel';
 
  const products = [
     {
+      togLearn: true,
       id: 'intention-coasters',
       title: 'Intention Coasters',
       subtitle: 'Infuse Your Food & Drink with the Frequency of Your Highest Good',
@@ -67,6 +68,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       yasinaNote: `I created these coasters after realizing how much my own thoughts—especially the unconscious, stressful ones—were being absorbed into what I ate and drank. Once I began placing my water on an intention-charged surface, everything shifted: I felt lighter, more supported, and more aligned with what I was calling in. These coasters are a gift from the universe, created to help you remember that you are the vibration that leads the way.`
     },
     {
+      togLearn: false,
       id: 'custom-meditations',
       title: 'Custom Meditations & EFT',
       subtitle: 'Sacred support for your soul\'s unique journey',
@@ -115,10 +117,16 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       whyItWorks: 'Unlike generic meditations, these are created specifically for you—your story, your energy, your needs. This deep alignment helps you relax more quickly, connect more deeply, and receive the support and clarity you\'re truly seeking.'
     },
     {
+      togLearn: true,
       id: 'crystal-packages',
       title: 'Crystal Packages',
-      subtitle: 'For Every Season, Shift, or Soul Calling',
+      subtitle: 'For a Reason, Season, or Lifetime',
       description: 'These thoughtfully curated crystal bundles are designed to support you through whatever life is bringing your way—whether you\'re navigating a block, going through a transition, or simply seeking extra energetic support.',
+       images: [
+      "/assets/products/IC1.jpeg",
+      "/assets/products/IC2.jpeg",
+      "/assets/products/IC3.jpeg"
+      ],
       icon: <Gem className="w-8 h-8 text-purple-600" />,
       pricing: [
         { option: 'Crystal Package', price: 15, id: 'crystal-package' }
@@ -135,6 +143,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       note: 'Each package is infused with intention and aligned to meet you where you are, and guide you where you\'re meant to go. They can be made for anything that is happening in your life.'
     },
     {
+      togLearn: true,
       id: 'soul-paintings',
       title: 'Soul Paintings',
       subtitle: 'A visual channeling of your soul\'s essence',
@@ -173,6 +182,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       yasinaNote: `This is more than art—it’s soul medicine. Every Soul Painting is a co-creation between you, me, and the Universe. I simply become the channel so your soul can show itself to you. If you're seeking alignment, clarity, or a tangible reminder of who you truly are… this is your invitation home.`
     },
     {
+      togLearn: true,
       id: 'soul-soothe-oil',
       title: 'Soul Soothe Healing Oil',
       subtitle: 'Deep Relief for Muscles, Joints & Energy Flow',
@@ -208,6 +218,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       ]
     },
     {
+      togLearn: true,
       id: 'radiance-glow-oil',
       title: 'Radiance Glow Oil',
       subtitle: 'Nourish. Cleanse. Restore.',
@@ -353,6 +364,7 @@ export default function Products() {
                       ))}
                     </ul>
                   </div>
+                  {product.togLearn && (
                    <div className="mt-5 w-full rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 p-[2px]">
                     <div className="w-full bg-white rounded-lg">
                       <button
@@ -363,6 +375,7 @@ export default function Products() {
                       </button>
                     </div>
                   </div>
+                )}
                   </>
                 )}
               </div>
