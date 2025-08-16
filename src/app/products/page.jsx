@@ -7,7 +7,7 @@ import ImageCarousel from '@/components/ui/carousel';
 
  const products = [
     {
-      headerImg: '/assets/products/ic17.jpeg',
+      headerImg: '/assets/products/IC17.jpeg',
       togLearn: true,
       id: 'intention-coasters',
       title: 'Intention Coasters',
