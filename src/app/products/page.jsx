@@ -7,6 +7,7 @@ import ImageCarousel from '@/components/ui/carousel';
 
  const products = [
     {
+      headerImg: '/assets/products/IC17.jpeg',
       togLearn: true,
       id: 'intention-coasters',
       title: 'Intention Coasters',
@@ -68,14 +69,13 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       yasinaNote: `I created these coasters after realizing how much my own thoughts—especially the unconscious, stressful ones—were being absorbed into what I ate and drank. Once I began placing my water on an intention-charged surface, everything shifted: I felt lighter, more supported, and more aligned with what I was calling in. These coasters are a gift from the universe, created to help you remember that you are the vibration that leads the way.`
     },
     {
+      headerImg: "/assets/products/CM2.webp",
       togLearn: false,
       id: 'custom-meditations',
       title: 'Custom Meditations & EFT',
       subtitle: 'Sacred support for your soul\'s unique journey',
       description: 'Whether you\'re moving through a season of growth, seeking inner clarity, or simply craving deeper connection, I offer soul-aligned meditations and intuitive guidance crafted with your energy in mind.',
-      images: [
-      "/assets/products/CM2.webp",
-      ],
+      images: [],
       icon: <Moon className="w-8 h-8 text-purple-600" />,
       pricing: [
         { option: 'Custom Meditation', price: 'Contact for pricing', id: 'custom-meditation' }
@@ -117,15 +117,14 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       whyItWorks: 'Unlike generic meditations, these are created specifically for you—your story, your energy, your needs. This deep alignment helps you relax more quickly, connect more deeply, and receive the support and clarity you\'re truly seeking.'
     },
     {
+      headerImg: '/assets/products/CR.webp',  
       togLearn: true,
       id: 'crystal-packages',
       title: 'Crystal Packages',
       subtitle: 'For a Reason, Season, or Lifetime',
       description: 'These thoughtfully curated crystal bundles are designed to support you through whatever life is bringing your way—whether you\'re navigating a block, going through a transition, or simply seeking extra energetic support.',
        images: [
-      "/assets/products/IC1.jpeg",
-      "/assets/products/IC2.jpeg",
-      "/assets/products/IC3.jpeg"
+      '/assets/products/CR.webp',
       ],
       icon: <Gem className="w-8 h-8 text-purple-600" />,
       pricing: [
@@ -143,15 +142,18 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       note: 'Each package is infused with intention and aligned to meet you where you are, and guide you where you\'re meant to go. They can be made for anything that is happening in your life.'
     },
     {
+      headerImg: '/assets/products/SPL.webp',
       togLearn: true,
       id: 'soul-paintings',
       title: 'Soul Paintings',
       subtitle: 'A visual channeling of your soul\'s essence',
       description: 'A Soul Painting is a channeled piece of art created through direct transmission from the Universe, expressed through my hands as a reflection of your soul\'s energy. Using either a video call or a photo of you, I tune into your frequency and allow your soul\'s essence to flow onto the canvas.',
       images: [
-      "/assets/products/IC1.jpeg",
-      "/assets/products/IC2.jpeg",
-      "/assets/products/IC3.jpeg"
+      "/assets/products/SP1.webp",
+      "/assets/products/SP2.webp",
+      "/assets/products/SP3.webp",
+      "/assets/products/SP4.webp",
+      "/assets/products/SP5.webp",
       ],
       icon: <Palette className="w-8 h-8 text-purple-600" />,
       pricing: [
@@ -183,6 +185,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       noteAddon: `The colors are shown to me and the painting itself is lead by the universe in the flow it should be.  You may feel emotions, see pictures, get intuitive messages, butterflies, find peace and much more.  There is no wrong or right way to look at the picture, because each time you look at it or turn it, a new message will be seen.`
     },
     {
+      headerImg: '/assets/products/IC17.jpeg',
       togLearn: true,
       id: 'rapid-recovery-oil',
       title: 'Rapid Recovery Oil',
@@ -205,18 +208,32 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       " Soothes inflammation and strengthens tissue with neem oil—a powerful ally for chronic pain and skin conditions",
       " Calms the nervous system and relaxes tension with lavender and frankincense, supporting both body and spirit",
       ],
-      keyBenefits: [
-        'Relieves muscle and joint pain with the natural heat of cayenne and the anti-inflammatory power of arnica',
-        'Supports circulation and detoxification with castor oil and black seed oil, known for reducing swelling and promoting cellular repair',
-        'Soothes inflammation and strengthens tissue with neem oil—a powerful ally for chronic pain and skin conditions',
-        'Calms the nervous system and relaxes tension with lavender and frankincense, supporting both body and spirit',
-        'Energetically cleansing, this oil helps release blocked energy and invites peace, ease, and flow into your body'
+      relief: [
+        'Muscle tension',
+        'Sprains & Joint pain',
+        'Bruises & Swelling',
+        'Neuropathy',
+        'Bone spurs',
+        'Plantar Fasciitis',
+        'Carpal Tunnel',
+        'Inflammation & Soreness',
+        'Supports Lymphatic Drainage',
+        'PCOS',
+        'Endometrial Pain',
+        'Osteoarthritis',
+        'Arthritis',
+        'Gout',
+        'Bug Bites',
+        '& More!'
+
       ],
+      directions: 'A little goes a long way, just put a little in your hand or dip your finger in the bottle and then rub on the spot. Mix as there will be sediment at the bottom. You can wrap the area if you want and also add heat, but this is not needed for the product to work.',
       ingredients: [
-        'Castor Oil', 'Cayenne Pepper', 'Neem Oil', 'Arnica Oil', 'Black Seed Oil', 'Lavender Essential Oil', 'Frankincense Essential Oil'
+        'Castor oil', 'Arnica oil', 'Peedanil oil', 'Black seed oil', 'Neem oil', 'Turmeric oil', 'Eucalyptus oil', 'Frankincense oil', 'Lavender oil', 'Ginger powder', 'Cayenne powder', 'Coconut oil'
       ]
     },
     {
+      headerImg: '/assets/products/IC17.jpeg',
       togLearn: true,
       id: 'radiance-glow-oil',
       title: 'Radiance Glow Oil',
@@ -327,7 +344,7 @@ export default function Products() {
             <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
               <div className="aspect-square relative bg-gradient-to-br from-purple-100 to-pink-100">
                 <Image
-                  src="/assets/products/IC17.jpeg"
+                  src={product.headerImg}
                   alt={product.title}
                   fill
                   className="object-contain p-8"
@@ -619,17 +636,22 @@ export default function Products() {
                                       </div>
                                     )}
 
-                                    {modalProduct.keyBenefits && (
+                                    {modalProduct.relief && (
                                       <div>
-                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">Key Benefits:</h4>
-                                        <ul className="space-y-2">
-                                          {modalProduct.keyBenefits.map((benefit, idx) => (
-                                            <li key={idx} className="flex items-start space-x-2">
-                                              <span className="text-green-500 mt-1">✓</span>
-                                              <span className="text-gray-700">{benefit}</span>
-                                            </li>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">This all-natural oil blend helps relieve:</h4>
+                                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                                          {modalProduct.relief.map((example, idx) => (
+                                            <span key={idx} className="bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg px-3 py-2 text-sm text-purple-900 font-medium text-center">
+                                              {example}
+                                            </span>
                                           ))}
-                                        </ul>
+                                        </div>
+                                      </div>
+                                    )}
+                                    {modalProduct.directions && (
+                                      <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-6">
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">Directions:</h4>
+                                        <p className="text-gray-700">{modalProduct.directions}</p>
                                       </div>
                                     )}
 
@@ -665,8 +687,10 @@ export default function Products() {
                                     {modalProduct.yasinaNote && (
                                       <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
                                         <p className="text-gray-700 italic">
-                                          <span className="font-semibold text-purple-800">A Note from Yasina:</span> {modalProduct.yasinaNote}
-                                          <p className='mt-2'>{modalProduct.noteAddon}</p>
+                                          <span className="font-semibold text-purple-800">A Note from Yasina:</span> 
+                                          {modalProduct.yasinaNote && (
+                                            <p className='mt-2'>{modalProduct.noteAddon}</p>
+                                          )}
                                         </p>
                                       </div>
                                     )}
