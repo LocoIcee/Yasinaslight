@@ -20,7 +20,9 @@ import ImageCarousel from '@/components/ui/carousel';
       ],
       icon: <Heart className="w-8 h-8 text-purple-600" />,
       pricing: [
-        { option: 'Healing Oil', price: 'Contact for pricing', id: 'rapid-recovery-oil' }
+        { option: 'Rapid Recovery Oil 10ml', price: 15, id: 'recovery-10' },
+        { option: 'Rapid Recovery Oil 60ml', price: 35, id: 'recovery-60' },
+        { option: 'Rapid Recovery Oil 120ml', price: 55, id: 'recovery-120' },
       ],
        details: [
       "Soothes pain and tension naturally",
@@ -69,7 +71,9 @@ import ImageCarousel from '@/components/ui/carousel';
       ],
       icon: <Sun className="w-8 h-8 text-purple-600" />,
       pricing: [
-        { option: 'Skin Harmony Oil', price: 'Contact for pricing', id: 'skin-harmony-oil' }
+        { option: 'Skin Harmony Oil 10ml', price: 11, id: 'skin-10' },
+        { option: 'Skin Harmony Oil 60ml', price: 25, id: 'skin-60' },
+        { option: 'Skin Harmony Oil 120ml', price: 40, id: 'skin-120' }
       ],
       details: [
       "Smooths fine lines and wrinkles",
@@ -122,9 +126,9 @@ import ImageCarousel from '@/components/ui/carousel';
       ],
       icon: <Sparkles className="w-8 h-8 text-purple-600" />,
       pricing: [
-        { option: 'One Coaster', price: 15, id: 'one-coaster' },
-        { option: 'Four Coasters', price: 50, id: 'four-coasters' },
-        { option: 'Seven Coasters', price: 75, id: 'seven-coasters' }
+        { option: 'One Coaster', price: 10, id: 'one-coaster' },
+        { option: 'Four Coasters', price: 35, id: 'four-coasters' },
+        { option: 'Seven Coasters', price: 55, id: 'seven-coasters' }
       ],
       details: [
       "Each coaster is hand-crafted and infused with specific healing intentions",
@@ -231,7 +235,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       ],
       icon: <Gem className="w-8 h-8 text-purple-600" />,
       pricing: [
-        { option: 'Crystal Package', price: 15, id: 'crystal-package' }
+        { option: 'Crystal Package', price: 10, id: 'crystal-package' }
       ],
       packageExamples: [
         'Job', 'Relationship', 'Feminine Issues', 'Male Issues', 'Exams', 'Stress', 'Anxiety', 'Anger', 'Grounding', 'Shielding', 'Friendship', 'Blockages and Awareness', 'New Home', 'Confidence', 'Protection (home, office, or person)', 'Breaking attachments', 'Abundance'
@@ -258,8 +262,8 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       ],
       icon: <Palette className="w-8 h-8 text-purple-600" />,
       pricing: [
-        { option: '10x10 Canvas', price: 105, id: 'soul-painting-10x10' },
-        { option: '14x14 Canvas', price: 175, id: 'soul-painting-14x14' }
+        { option: '10x10 Canvas', price: 55, id: 'soul-painting-10x10' },
+        { option: '14x14 Canvas', price: 75, id: 'soul-painting-14x14' }
       ],
       details: [
         'Each painting is done on canvas',

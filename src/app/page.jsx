@@ -43,7 +43,7 @@ const HomePage = () => {
     <>
       {/* Hero section with enhanced gradient background */}
       <div
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden py-12"
         style={{
           background: `
             radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.3) 0%, transparent 50%),
