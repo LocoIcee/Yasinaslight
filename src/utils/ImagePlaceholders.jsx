@@ -1,5 +1,4 @@
 import React from "react";
-import { colors } from "./constants";
 
 // Next.js serves assets from the /public folder using absolute paths:
 const ASSET_BASE_URL = "/assets/";
@@ -43,8 +42,6 @@ const ImagePlaceholders = {
     <div 
       className={`crystal-divider my-8 ${className}`}
       style={{
-        height: "2px",
-        background: `linear-gradient(to right, transparent, ${colors.secondary}, transparent)`,
         width,
         maxWidth: "200px",
         margin: "2rem auto"
@@ -89,7 +86,7 @@ const ImagePlaceholders = {
     <div 
       className={`absolute inset-0 opacity-20 pointer-events-none ${className}`}
       style={{
-        background: `radial-gradient(circle at top, ${colors.accent}40, transparent 70%)`,
+        background: `radial-gradient(circle at top, var(--color-accent-40), transparent 70%)`,
       }}
     ></div>
   ),
@@ -114,12 +111,10 @@ const ImagePlaceholders = {
   // Product image placeholder
   ProductImage: ({ name = "", className = "" }) => (
     <div 
-      className={`rounded-lg overflow-hidden ${className}`}
+      className={`rounded-lg overflow-hidden placeholder-surface ${className}`}
       style={{
         width: "100%",
         aspectRatio: "4/3",
-        backgroundColor: `${colors.neutral}`,
-        border: `1px dashed ${colors.secondary}`,
       }}
     >
       <div className="h-full flex flex-col items-center justify-center p-4 text-center">
@@ -132,7 +127,7 @@ const ImagePlaceholders = {
             backgroundRepeat: "no-repeat"
           }}
         ></div>
-        <p style={{ color: colors.text }} className="text-sm opacity-70">
+        <p className="text-sm opacity-70 text-body">
           {name || "Product Image Coming Soon"}
         </p>
       </div>
@@ -142,12 +137,10 @@ const ImagePlaceholders = {
   // Class image placeholder
   ClassImage: ({ name = "", className = "" }) => (
     <div 
-      className={`rounded-lg overflow-hidden ${className}`}
+      className={`rounded-lg overflow-hidden placeholder-surface ${className}`}
       style={{
         width: "100%",
         aspectRatio: "16/9",
-        backgroundColor: `${colors.neutral}`,
-        border: `1px dashed ${colors.secondary}`,
       }}
     >
       <div className="h-full flex flex-col items-center justify-center p-4 text-center">
@@ -160,7 +153,7 @@ const ImagePlaceholders = {
             backgroundRepeat: "no-repeat"
           }}
         ></div>
-        <p style={{ color: colors.text }} className="text-sm opacity-70">
+        <p className="text-sm opacity-70 text-body">
           {name || "Class Image Coming Soon"}
         </p>
       </div>
@@ -170,15 +163,10 @@ const ImagePlaceholders = {
   // Testimonial avatar placeholder
   TestimonialAvatar: ({ size = "60px", className = "" }) => (
     <div 
-      className={`rounded-full overflow-hidden ${className}`}
+      className={`rounded-full overflow-hidden bg-neutral border border-accent flex items-center justify-center ${className}`}
       style={{
         width: size,
-        height: size,
-        backgroundColor: `${colors.neutral}`,
-        border: `1px solid ${colors.accent}`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
+        height: size
       }}
     >
       <div

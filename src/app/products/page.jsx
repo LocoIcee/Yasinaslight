@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { ChevronDown, ChevronUp, Heart, Sparkles, Moon, Sun, Palette, Shield, Gem, ShoppingCart, Plus, Minus, X } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import ImageCarousel from '@/components/ui/carousel';
+import { useCart } from '@/contexts/CartContext';
 
  const products = [
   {
@@ -296,6 +297,7 @@ export default function Products() {
   const [modalProduct, setModalProduct] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState({});
   const modalRef = useRef(null);
+  const { addToCart: addItemToCart } = useCart();
 
   // Helper: Format money nicely
   const formatMoney = (n) => {
@@ -342,7 +344,19 @@ export default function Products() {
   };
 
   const openModal = (product) => {
+    if (!product) return;
+
     setModalProduct(product);
+
+    if (Array.isArray(product.pricing) && !selectedOptions[product.id]) {
+      const firstNumericOption = product.pricing.find((option) => typeof option.price === 'number');
+      if (firstNumericOption) {
+        setSelectedOptions((prev) => ({
+          ...prev,
+          [product.id]: firstNumericOption.id,
+        }));
+      }
+    }
   };
 
   const closeModal = () => {
@@ -356,13 +370,45 @@ export default function Products() {
     }));
   };
 
-  const addToCart = (product) => {
-    const selectedOption = selectedOptions[product.id];
-    if (product.pricing.length > 1 && !selectedOption) {
-      alert('Please select an option before adding to cart');
+  const handleAddToCart = (product, { fromModal = false } = {}) => {
+    if (!product) return;
+
+    const options = Array.isArray(product.pricing) ? product.pricing : [];
+    const selectedId = selectedOptions[product.id];
+    const selectedOption = options.find(
+      (option) => option.id === selectedId && typeof option.price === 'number'
+    );
+    const firstNumericOption = options.find((option) => typeof option.price === 'number');
+
+    if (options.length > 1 && !selectedOption) {
+      if (fromModal) {
+        alert('Please select an option before adding to cart.');
+      } else {
+        openModal(product);
+      }
       return;
     }
-  }
+
+    const optionToUse = selectedOption || firstNumericOption;
+
+    if (!optionToUse || typeof optionToUse.price !== 'number') {
+      alert('This item requires custom invoicing. Please contact Yasina to complete your purchase.');
+      return;
+    }
+
+    addItemToCart({
+      productId: product.id,
+      optionId: optionToUse.id,
+      optionName: optionToUse.option,
+      name: product.title,
+      price: optionToUse.price,
+      image: product.headerImg,
+    });
+
+    if (fromModal) {
+      closeModal();
+    }
+  };
 
   useEffect(() => {
   const handleClickOutside = (event) => {
@@ -392,8 +438,12 @@ export default function Products() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          {products.map((product) => {
+            const pricingOptions = Array.isArray(product.pricing) ? product.pricing : [];
+            const hasNumericPrice = pricingOptions.some((option) => typeof option.price === 'number');
+
+            return (
+              <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
               <div className="aspect-square relative ">
                 <Image
                   src={product.headerImg}
@@ -423,9 +473,16 @@ export default function Products() {
                 
                 <p className="text-gray-600 mb-4">{product.subtitle}</p>
                 <button
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-colors duration-300 mb-4"
+                  onClick={() => {
+                    if (hasNumericPrice) {
+                      handleAddToCart(product);
+                    } else {
+                      window.location.href = '/contact';
+                    }
+                  }}
+                  className={`w-full text-white py-2 px-4 rounded-lg transition-colors duration-300 mb-4 ${hasNumericPrice ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700' : 'bg-gray-400 hover:bg-gray-500'}`}
                 >
-                  Add to Cart
+                  {hasNumericPrice ? 'Add to Cart' : 'Contact to Purchase'}
                 </button>
                 
                 {expandedProducts[product.id] && (
@@ -525,7 +582,7 @@ export default function Products() {
                                       </div>
                                     </div>
                                     <button
-                                      onClick={() => addToCart(modalProduct)}
+                                      onClick={() => handleAddToCart(modalProduct, { fromModal: true })}
                                       className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-purple-800 transition-all transform hover:scale-105 flex items-center space-x-2 shadow-lg"
                                     >
                                       <ShoppingCart className="w-5 h-5" />
@@ -800,7 +857,8 @@ export default function Products() {
                 document.body
               )}
             </div>
-          ))}
+          );
+        })}
         </div>
       </div>
     </div>

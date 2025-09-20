@@ -127,7 +127,7 @@ const EventModal = ({ event, onClose, onSave, onDelete, isLoading }) => {
     <Dialog open={true} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold" style={{ color: "#563D7C" }}>
+          <DialogTitle className="text-xl font-semibold text-primary">
             {isNewEvent ? 'Create Event' : 'Edit Event'}
           </DialogTitle>
           <Button 

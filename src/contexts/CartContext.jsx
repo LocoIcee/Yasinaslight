@@ -52,24 +52,59 @@ export const CartProvider = ({ children }) => {
   };
   
   // Add item to cart
-  const addToCart = (product) => {
-    // Check if item already exists in cart
-    const existingItemIndex = cartItems.findIndex(item => item.id === product.id);
-    
+  const addToCart = (item) => {
+    if (!item) {
+      console.warn('Attempted to add an undefined cart item.');
+      return;
+    }
+
+    const {
+      productId,
+      optionId,
+      optionName,
+      name,
+      price,
+      image,
+      quantity = 1,
+    } = item;
+
+    if (!productId) {
+      console.warn('Cart items require a productId.', item);
+      return;
+    }
+
+    if (typeof price !== 'number' || Number.isNaN(price)) {
+      console.warn('Cart items require a numeric price.', item);
+      return;
+    }
+
+    const cartItemId = optionId ? `${productId}__${optionId}` : productId;
+
+    const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === cartItemId);
+
     if (existingItemIndex !== -1) {
-      // If item exists, increase quantity
       const updatedItems = [...cartItems];
       updatedItems[existingItemIndex] = {
-        ...updatedItems[existingItemIndex], 
-        quantity: updatedItems[existingItemIndex].quantity + 1
+        ...updatedItems[existingItemIndex],
+        quantity: updatedItems[existingItemIndex].quantity + quantity,
       };
       setCartItems(updatedItems);
     } else {
-      // If item doesn't exist, add it with quantity 1
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      setCartItems([
+        ...cartItems,
+        {
+          id: cartItemId,
+          productId,
+          optionId: optionId || null,
+          optionName: optionName || null,
+          name,
+          price,
+          quantity,
+          image: image || null,
+        },
+      ]);
     }
-    
-    // Open cart when item is added
+
     setIsCartOpen(true);
   };
   

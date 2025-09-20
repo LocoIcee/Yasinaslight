@@ -27,6 +27,34 @@
   --color-accent: #FFD700;
   --color-neutral: #F8F5F2;
   --color-text: #333333;
+  --alpha-10: 0.0625;
+  --alpha-20: 0.125;
+  --alpha-30: 0.188;
+  --alpha-40: 0.251;
+  --alpha-60: 0.376;
+  --alpha-65: 0.4;
+  --alpha-80: 0.502;
+  --alpha-99: 0.6;
+  --alpha-cc: 0.8;
+  --alpha-dd: 0.867;
+  --alpha-f0: 0.941;
+  --color-primary-10: rgba(86, 61, 124, var(--alpha-10));
+  --color-primary-20: rgba(86, 61, 124, var(--alpha-20));
+  --color-primary-30: rgba(86, 61, 124, var(--alpha-30));
+  --color-primary-40: rgba(86, 61, 124, var(--alpha-40));
+  --color-primary-dd: rgba(86, 61, 124, var(--alpha-dd));
+  --color-primary-f0: rgba(86, 61, 124, var(--alpha-f0));
+  --color-neutral-20: rgba(248, 245, 242, var(--alpha-20));
+  --color-neutral-40: rgba(248, 245, 242, var(--alpha-40));
+  --color-neutral-99: rgba(248, 245, 242, var(--alpha-99));
+  --color-neutral-cc: rgba(248, 245, 242, var(--alpha-cc));
+  --color-neutral-dd: rgba(248, 245, 242, var(--alpha-dd));
+  --color-accent-40: rgba(255, 215, 0, var(--alpha-40));
+  --color-text-20: rgba(51, 51, 51, var(--alpha-20));
+  --color-text-30: rgba(51, 51, 51, var(--alpha-30));
+  --color-text-60: rgba(51, 51, 51, var(--alpha-60));
+  --color-text-65: rgba(51, 51, 51, var(--alpha-65));
+  --color-text-80: rgba(51, 51, 51, var(--alpha-80));
 }
 
 /* Typography */
@@ -163,3 +191,99 @@ body {
 .animate-gentle-glow {
   animation: gentle-glow 2s infinite;
 }
+
+/* Theme helper utilities */
+.font-heading { font-family: 'Cormorant Garamond', serif; }
+.font-body { font-family: 'Open Sans', sans-serif; }
+.font-decorative { font-family: 'Tangerine', cursive; }
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-accent { color: var(--color-accent); }
+.text-neutral { color: var(--color-neutral); }
+.text-neutral-soft { color: var(--color-neutral-cc); }
+.text-neutral-bright { color: var(--color-neutral-dd); }
+.text-neutral-muted { color: var(--color-neutral-99); }
+.text-body { color: var(--color-text); }
+.text-body-soft { color: var(--color-text-80); }
+.text-body-subtle { color: var(--color-text-65); }
+.text-body-muted { color: var(--color-text-60); }
+
+.bg-primary { background-color: var(--color-primary); }
+.bg-primary-soft { background-color: var(--color-primary-20); }
+.bg-primary-tint { background-color: var(--color-primary-10); }
+.bg-neutral { background-color: var(--color-neutral); }
+.bg-neutral-soft { background-color: var(--color-neutral-40); }
+.bg-neutral-tint { background-color: var(--color-neutral-20); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-accent { background-color: var(--color-accent); }
+
+.border-primary { border-color: var(--color-primary); }
+.border-secondary { border-color: var(--color-secondary); }
+.border-accent { border-color: var(--color-accent); }
+.border-primary-soft { border-color: var(--color-primary-30); }
+.border-text-soft { border-color: var(--color-text-20); }
+.border-text-muted { border-color: var(--color-text-30); }
+
+.shadow-navbar { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+.shadow-card-soft { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); }
+
+.footer-gradient {
+  background: linear-gradient(to top, var(--color-primary), var(--color-primary-f0));
+}
+
+.hero-gradient-primary {
+  background: linear-gradient(to right, var(--color-primary), var(--color-primary-dd));
+}
+
+.bg-tree-logo {
+  background-image: url('/assets/tree.webp');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bright-logo {
+  filter: brightness(1.2);
+}
+
+.badge-accent {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.placeholder-surface {
+  background-color: var(--color-neutral);
+  border: 1px dashed var(--color-secondary);
+}
+
+.overlay-soft {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+}
+
+.nav-link {
+  color: var(--color-neutral);
+}
+
+.nav-link:hover .nav-link-underline {
+  background-color: var(--color-accent);
+}
+
+.input-surface {
+  border: 1px solid var(--color-primary-30);
+}
+
+.input-surface:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-40);
+}
+
+.card-tint {
+  background-color: var(--color-neutral-40);
+}
+
+.chip-neutral {
+  background-color: var(--color-neutral-20);
+  color: var(--color-text);
+}
+.border-neutral-soft { border-color: var(--color-neutral-40); }

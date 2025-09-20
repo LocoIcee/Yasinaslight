@@ -1,5 +1,4 @@
 import React from "react";
-import { colors } from "./constants";
 
 const PlaceholderImage = ({ 
   width = "100%", 
@@ -13,30 +12,21 @@ const PlaceholderImage = ({
 }) => {
   return (
     <div 
-      className={`flex items-center justify-center ${className}`}
+      className={`placeholder-surface flex items-center justify-center ${rounded ? 'rounded-lg' : ''} ${className}`.trim()}
       style={{
-        width: width,
-        height: height,
-        backgroundColor: `${colors.neutral}`,
-        border: `1px dashed ${colors.secondary}`,
-        borderRadius: rounded ? "0.5rem" : "0",
-        aspectRatio: aspectRatio,
+        width,
+        height,
+        aspectRatio,
         ...style
       }}
     >
       <div className="flex flex-col items-center justify-center p-4 text-center">
         {useTreeLogo && (
           <div
-            className="w-12 h-12 mb-2 opacity-50"
-            style={{
-              backgroundImage: "url(/assets/tree.webp)",
-              backgroundSize: "contain",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat"
-            }}
+            className="w-12 h-12 mb-2 opacity-50 bg-tree-logo"
           ></div>
         )}
-        <p style={{ color: colors.text }} className="text-sm opacity-70">
+        <p className="text-sm opacity-70 text-body">
           {text}
         </p>
       </div>

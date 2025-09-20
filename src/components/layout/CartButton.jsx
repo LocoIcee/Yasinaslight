@@ -1,6 +1,5 @@
 import React from 'react';
 import { useCart } from '@/contexts/CartContext';
-import { colors } from '@/utils/constants';
 
 const CartButton = () => {
   const { toggleCart, totalItems } = useCart();
@@ -13,11 +12,7 @@ const CartButton = () => {
   return (
     <li className="ml-2">
       <button
-        className="relative flex items-center justify-center p-2 rounded-full transition-all hover:bg-opacity-80"
-        style={{
-          backgroundColor: colors.primary,
-          color: colors.neutral,
-        }}
+        className="relative flex items-center justify-center p-2 rounded-full transition-all hover:bg-opacity-80 bg-primary text-neutral"
         onClick={toggleCart}
         aria-label="Shopping Cart"
       >
@@ -40,11 +35,7 @@ const CartButton = () => {
         
         {/* Item count badge */}
         <span 
-          className="absolute -top-1 -right-1 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"
-          style={{ 
-            backgroundColor: colors.accent,
-            color: colors.text
-          }}
+          className="absolute -top-1 -right-1 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center badge-accent"
         >
           {totalItems}
         </span>

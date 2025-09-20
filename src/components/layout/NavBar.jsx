@@ -3,8 +3,6 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-// Colors from constants.js
-import { colors } from "@/utils/constants";
 import ImagePlaceholders from "@/utils/ImagePlaceholders";
 import CartButton from "@/components/layout/CartButton";
 import { useAuth } from "@/contexts/AuthContext";
@@ -37,11 +35,7 @@ const NavBar = () => {
 
   return (
     <div
-      className="w-full px-6 py-4 flex justify-between items-center"
-      style={{
-        backgroundColor: colors.primary,
-        boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-      }}
+      className="w-full px-6 py-4 flex justify-between items-center bg-primary shadow-navbar text-neutral"
     >
       {/* Logo - smaller version for nav */}
       <div className="flex items-center gap-3">
@@ -49,11 +43,7 @@ const NavBar = () => {
           <ImagePlaceholders.Logo width="100%" height="100%" />
         </div>
         <span 
-          className="text-xl hidden md:block" 
-          style={{ 
-            color: colors.neutral,
-            fontFamily: "'Cormorant Garamond', serif",
-          }}
+          className="text-xl hidden md:block font-heading text-neutral"
         >
           Yasina's Light
         </span>
@@ -76,19 +66,12 @@ const NavBar = () => {
               <li key={index}>
                 <Link
                   href={item.path}
-                  className="relative px-2 py-2 inline-block text-sm hover:opacity-90 transition-all group"
-                  style={{ 
-                    color: colors.neutral,
-                    position: "relative", 
-                  }}
+                  className="relative px-2 py-2 inline-block text-sm hover:opacity-90 transition-all group nav-link"
                 >
                   {item.name}
                   {item.hasDropdown && <span className="ml-1">▾</span>}
                   <div
-                    className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"
-                    style={{ 
-                      backgroundColor: colors.accent,
-                    }}
+                    className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 nav-link-underline"
                   ></div>
                 </Link>
               </li>
@@ -113,8 +96,8 @@ const NavBar = () => {
             ) : (
               <li className="flex items-center">
                 <div className="mr-2 flex items-center">
-                  <User size={16} className="mr-1" style={{ color: colors.neutral }} />
-                  <span className="text-xs truncate max-w-[100px]" style={{ color: colors.neutral }}>
+                  <User size={16} className="mr-1 text-neutral" />
+                  <span className="text-xs truncate max-w-[100px] text-neutral">
                     {currentUser.displayName || currentUser.email.split('@')[0]}
                   </span>
                 </div>
@@ -122,8 +105,7 @@ const NavBar = () => {
                   variant="ghost" 
                   size="sm"
                   onClick={handleLogout}
-                  className="flex items-center space-x-1"
-                  style={{ color: colors.neutral }}
+                  className="flex items-center space-x-1 text-neutral"
                 >
                   <LogOut size={16} />
                   <span>Logout</span>
