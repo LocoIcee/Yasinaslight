@@ -66,7 +66,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
         { name: 'Crown Chakra', sanskrit: 'Sahasrara', color: '⚪', theme: 'Spiritual connection, enlightenment, divine consciousness' }
       ],
       note: `Not sure which chakra is your main manifestation center? Contact me and I'll guide you to the one that's most aligned with your soul's journey.`,
-      yasinaNote: `I created these coasters after realizing how much my own thoughts—especially the unconscious, stressful ones—were being absorbed into what I ate and drank. Once I began placing my water on an intention-charged surface, everything shifted: I felt lighter, more supported, and more aligned with what I was calling in. These coasters are a gift from the universe, created to help you remember that you are the vibration that leads the way.`
+      yasinaNote: `I created these coasters after realizing how much my own thoughts especially the unconscious, stressful ones—were being absorbed into what I ate and drank. Once I began placing my water on an intention-charged surface, everything shifted: I felt lighter, more supported, and more aligned with what I was calling in. These coasters are a gift from the universe, created to help you remember that you are the vibration that leads the way.`
     },
     {
       headerImg: "/assets/products/CM2.webp",
@@ -229,16 +229,18 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       ],
       directions: 'A little goes a long way, just put a little in your hand or dip your finger in the bottle and then rub on the spot. Mix as there will be sediment at the bottom. You can wrap the area if you want and also add heat, but this is not needed for the product to work.',
       ingredients: [
-        'Castor oil', 'Arnica oil', 'Peedanil oil', 'Black seed oil', 'Neem oil', 'Turmeric oil', 'Eucalyptus oil', 'Frankincense oil', 'Lavender oil', 'Ginger powder', 'Cayenne powder', 'Coconut oil'
+         'Arnica oil','Peedanil Talia oil','Black seed oil', 
+        'Neem oil','Turmeric oil','Eucalyptus oil','Frankincense oil', 
+        'Lavender oil','Ginger powder','Cayenne powder','Coconut oil','Castor oil'
       ]
     },
     {
       headerImg: '/assets/products/IC17.jpeg',
       togLearn: true,
-      id: 'radiance-glow-oil',
-      title: 'Radiance Glow Oil',
+      id: 'skin-harmony-oil',
+      title: 'Skin Harmony Oil',
       subtitle: 'Nourish. Cleanse. Restore.',
-      description: 'This luxurious multi-use skin elixir is your all-in-one daily ritual for glowing, balanced, and deeply nourished skin. Whether you use it to melt away makeup, moisturize your face and body, or protect your skin from environmental stress, Radiance Glow Oil does it all—naturally.Infused with a blend of potent plant-based oils, each ingredient is chosen for its healing, soothing, and rejuvenating properties. Lightweight yet deeply hydrating, this oil leaves your skin feeling soft, smooth, and radiant without clogging pores or leaving a greasy residue.',
+      description: 'Skin Harmony is a luxurious, all in one face and body oil formulated with a powerful synergy of 11 botanical oils. Lightweight yet deeply nourishing, it’s designed to hydrate, repair, protect, and restore balance to your skin. This versatile blend works as a daily moisturizer, natural makeup remover, and full body glow oil, making it a must have in any skincare ritual. With its rich profile of antioxidants, essential fatty acids, and natural anti inflammatory compounds, Skin Harmony supports youthful, radiant, and healthy skin while uplifting your senses with a subtle herbal and floral aroma. Discover Skin Harmony, your ultimate skincare essential. This luxurious oil is designed to do it all hydrate, repair, protect, and even gently remove makeup leaving your skin soft, radiant, and glowing from head to toe.',
       images: [
       "/assets/products/IC1.jpeg",
       "/assets/products/IC2.jpeg",
@@ -246,15 +248,18 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       ],
       icon: <Sun className="w-8 h-8 text-purple-600" />,
       pricing: [
-        { option: 'Glow Oil', price: 'Contact for pricing', id: 'radiance-glow-oil' }
+        { option: 'Skin Harmony Oil', price: 'Contact for pricing', id: 'skin-harmony-oil' }
       ],
       details: [
-      "Each oil blend is created specifically for your healing intentions",
-      "Made with high-quality, therapeutic-grade essential oils",
-      "Includes detailed instructions for use and application",
-      "Available for emotional healing, physical ailments, chakra balancing, and more",
-      "Comes in a 10ml amber glass bottle with roller top for easy application",
-      "All natural ingredients with no synthetic additives"
+      "Smooths fine lines and wrinkles",
+      "Fades marks, scars, and uneven tone",
+      "Calms and clears acne prone skin",
+      "AGently removes makeup without stripping",
+      "Moisturizes face & body for all day glow",
+      "Sun protection and damage control",
+      "Dull, tired looking skin",
+      "stretch marks and uneven texture",
+      "Overall skin renewal and radiance"
       ],
       keyBenefits: [
         'Gently removes makeup (even waterproof) while calming the skin with lavender, frankincense, and peppermint',
@@ -264,7 +269,17 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
         'Heals and nourishes with coconut oil, leaving skin soft and visibly refreshed'
       ],
       ingredients: [
-        'Neem Oil', 'Black Seed Oil', 'Frankincense', 'Lavender Essential Oil', 'Coconut Oil', 'Peppermint', 'Rosehip Oil', 'Raspberry Seed Oil'
+        'Castor oil', 'Coconut oil', 'Rose Hip oil', 'Red Raspberry oil',
+        'Black Seed oil', 'Neem Oil', 'Arnica oil', 'Tumeric oil', 'Myrrh oil',
+        'Lavender oil', 'Spearmint oil', 'Juniper Oil', 'Frankincense'  
+      ],
+      formulated: [
+        'Castor & Coconut Oils provide deep hydration and silky softness.', 
+        'Arnica & Turmeric Oils calm irritation, ease inflammation, and support skin repair (with turmeric that won’t stain the skin).',
+        'Rosehip & Red Raspberry Oils brighten dullness, fade scars, and protect with rich antioxidants.',
+        'Frankincense & Myrrh Oils smooth fine lines, wrinkles, and marks for a youthful glow.',
+        'Lavender & Spearmint Oils refresh, soothe, and uplift the senses while calming the skin.',
+        'Neem & Blackseed Oils help combat acne, reduce redness, and strengthen skin’s natural barrier.'
       ]
     }
   ];
@@ -276,10 +291,15 @@ export default function Products() {
   const modalRef = useRef(null);
   
   const toggleProduct = (productId) => {
-    setExpandedProducts(prev => ({
-      ...prev,
-      [productId]: !prev[productId]
-    }));
+    setExpandedProducts(prev => {
+      const isCurrentlyOpen = !!prev[productId];
+      // If the clicked card is already open, close all.
+      if (isCurrentlyOpen) {
+        return {};
+      }
+      // Otherwise, open only this card and close any others.
+      return { [productId]: true };
+    });
   };
 
   const openModal = (product) => {
@@ -525,7 +545,7 @@ export default function Products() {
                                         <ul className="grid md:grid-cols-2 gap-3">
                                           {modalProduct.whyTheyMatter.map((unique, idx) => (
                                             <li key={idx} className="flex items-start space-x-2">
-                                              <span className="text-amber-500 mt-1">💎</span>
+                                              <span className="text-purple-600 mt-1 text-lg">•</span>
                                               <span className="text-gray-700">{unique}</span>
                                             </li>
                                           ))}
@@ -624,7 +644,7 @@ export default function Products() {
                                         <ul className="grid md:grid-cols-2 gap-3">
                                           {modalProduct.whyGetOne.map((reason, idx) => (
                                             <li key={idx} className="flex items-start space-x-2">
-                                              <span className="text-pink-500 mt-1">💖</span>
+                                              <span className="text-purple-600 mt-1 text-lg">•</span>
                                               <span className="text-gray-700">{reason}</span>
                                             </li>
                                           ))}
@@ -667,6 +687,24 @@ export default function Products() {
                                         </div>
                                       </div>
                                     )}
+                                    
+                                    {modalProduct.formulated && (
+                                      <div>
+                                        <h4 className="text-lg font-semibold text-purple-900 mb-3">Formulated With:</h4>
+                                        <ul className="grid md:grid-cols-2 gap-3">
+                                          {modalProduct.formulated.map((reason, idx) => (
+                                            <li key={idx} className="flex items-start space-x-2">
+                                              <span className="text-purple-600 mt-1 text-lg">•</span>
+                                              <span className="text-gray-700">{reason}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                        <p className="text-gray-700 mt-4">
+                                          Lightweight yet rich in essential fatty acids, Skin Harmony absorbs 
+                                          beautifully without leaving a greasy feel—perfect for daily use, morning or night.
+                                        </p>
+                                      </div>
+                                    )}
 
                                     {modalProduct.specialNote && (
                                       <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 border border-yellow-200">
@@ -687,11 +725,10 @@ export default function Products() {
                                     {modalProduct.yasinaNote && (
                                       <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
                                         <p className="text-gray-700 italic">
-                                          <span className="font-semibold text-purple-800">A Note from Yasina:</span> 
-                                          {modalProduct.yasinaNote && (
-                                            <p className='mt-2'>{modalProduct.noteAddon}</p>
-                                          )}
+                                          <span className="font-semibold text-purple-800">A Note from Yasina: </span> 
+                                          <span className='mt-2'>{modalProduct.yasinaNote}</span>
                                         </p>
+                                        <p className='mt-2'>{modalProduct.noteAddon}</p>
                                       </div>
                                     )}
 
