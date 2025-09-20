@@ -184,7 +184,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       images: [],
       icon: <Moon className="w-8 h-8 text-purple-600" />,
       pricing: [
-        { option: 'Custom Meditation', price: 'Contact for pricing', id: 'custom-meditation' }
+        { option: 'Custom Meditation', price: '$10+', id: 'custom-meditation' }
       ],
        details: [
       "Completely personalized meditation created just for you, based on your specific goals, challenges, and spiritual needs",
@@ -296,7 +296,39 @@ export default function Products() {
   const [modalProduct, setModalProduct] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState({});
   const modalRef = useRef(null);
-  
+
+  // Helper: Format money nicely
+  const formatMoney = (n) => {
+    if (typeof n !== 'number' || isNaN(n)) return '';
+    // Show whole dollars when possible, otherwise two decimals
+    return n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`;
+  };
+
+  // Helper: Summarize pricing for product card
+  const getPriceSummary = (pricing = []) => {
+    // Extract numeric prices (ignore strings like "Contact for pricing")
+    const numeric = pricing
+      .map(p => (typeof p.price === 'number' ? p.price : null))
+      .filter(v => v !== null);
+
+    if (numeric.length === 0) {
+      // No numeric prices available
+      const first = pricing[0]?.price;
+      return typeof first === 'string' ? first : 'See details';
+    }
+
+    const min = Math.min(...numeric);
+    const max = Math.max(...numeric);
+
+    if (numeric.length === pricing.length) {
+      // All are numeric
+      return min === max ? formatMoney(min) : `${formatMoney(min)}–${formatMoney(max)}`;
+    }
+
+    // Mixed numeric and non-numeric (e.g., some options are "Contact for pricing")
+    return `From ${formatMoney(min)}`;
+  };
+
   const toggleProduct = (productId) => {
     setExpandedProducts(prev => {
       const isCurrentlyOpen = !!prev[productId];
@@ -331,13 +363,6 @@ export default function Products() {
       return;
     }
   }
-
-  const priceDisplay = (price) => {
-    if (typeof price[0] === 'number') {
-      return `$${price.toFixed(2)}`;
-    }
-    return price; // For 'Contact for pricing' or similar strings
-  } 
 
   useEffect(() => {
   const handleClickOutside = (event) => {
@@ -381,7 +406,9 @@ export default function Products() {
               <div className="p-6">
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="text-xl font-semibold text-purple-800">{product.title}</h3>
-                  <span className="text-2xl font-bold text-pink-600">{}</span>
+                  <span className="text-2xl font-bold text-pink-600">
+                    {getPriceSummary(product.pricing)}
+                  </span>
                   <button
                   onClick={() => toggleProduct(product.id)}
                   className="p-2 hover:bg-purple-50 rounded-full transition-colors"
