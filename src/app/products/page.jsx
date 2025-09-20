@@ -6,17 +6,119 @@ import { createPortal } from 'react-dom';
 import ImageCarousel from '@/components/ui/carousel';
 
  const products = [
+  {
+      headerImg: '/assets/products/RRP.png',
+      togLearn: true,
+      id: 'rapid-recovery-oil',
+      title: 'Rapid Recovery Oil',
+      subtitle: 'A powerful handmade healing oil designed to sooth relieve and heal',
+      description: 'Crafted with intention and ancient wisdom, this healing oil blend brings powerful relief to sore muscles, stiff joints, and stagnant energy. Infused with nature\'s most potent anti-inflammatory and circulatory herbs, each drop is designed to activate healing on both a physical and energetic level.',
+      images: [
+      "/assets/products/RRS.png",
+      "/assets/products/RRM.png",
+      "/assets/products/RRL.png"
+      ],
+      icon: <Heart className="w-8 h-8 text-purple-600" />,
+      pricing: [
+        { option: 'Healing Oil', price: 'Contact for pricing', id: 'rapid-recovery-oil' }
+      ],
+       details: [
+      "Soothes pain and tension naturally",
+      "Promotes circulation and faster healing",
+      "Reduces inflammation and swelling",
+      "Supports relaxation of body and mind",
+      "Restores balance on a physical + energetic level",
+      ],
+      relief: [
+        'Muscle tension',
+        'Sprains & Joint pain',
+        'Bruises & Swelling',
+        'Neuropathy',
+        'Bone spurs',
+        'Plantar Fasciitis',
+        'Carpal Tunnel',
+        'Inflammation & Soreness',
+        'Supports Lymphatic Drainage',
+        'PCOS',
+        'Endometrial Pain',
+        'Osteoarthritis',
+        'Arthritis',
+        'Gout',
+        'Bug Bites',
+        '& More!'
+
+      ],
+      directions: 'A little goes a long way, just put a little in your hand or dip your finger in the bottle and then rub on the spot. Mix as there will be sediment at the bottom. You can wrap the area if you want and also add heat, but this is not needed for the product to work.',
+      ingredients: [
+         'Arnica oil','Peedanil Talia oil','Black seed oil', 
+        'Neem oil','Turmeric oil','Eucalyptus oil','Frankincense oil', 
+        'Lavender oil','Ginger powder','Cayenne powder','Coconut oil','Castor oil'
+      ]
+    },
     {
-      headerImg: '/assets/products/IC17.jpeg',
+      headerImg: '/assets/products/SHP.png',
+      togLearn: true,
+      id: 'skin-harmony-oil',
+      title: 'Skin Harmony Oil',
+      subtitle: 'Nourish. Cleanse. Restore.',
+      description: 'Skin Harmony is a luxurious, all in one face and body oil formulated with a powerful synergy of 11 botanical oils. Lightweight yet deeply nourishing, it’s designed to hydrate, repair, protect, and restore balance to your skin. This versatile blend works as a daily moisturizer, natural makeup remover, and full body glow oil, making it a must have in any skincare ritual. With its rich profile of antioxidants, essential fatty acids, and natural anti inflammatory compounds, Skin Harmony supports youthful, radiant, and healthy skin while uplifting your senses with a subtle herbal and floral aroma. Discover Skin Harmony, your ultimate skincare essential. This luxurious oil is designed to do it all hydrate, repair, protect, and even gently remove makeup leaving your skin soft, radiant, and glowing from head to toe.',
+      images: [
+      "/assets/products/SHS.png",
+      "/assets/products/SHM.png",
+      "/assets/products/SHL.png"
+      ],
+      icon: <Sun className="w-8 h-8 text-purple-600" />,
+      pricing: [
+        { option: 'Skin Harmony Oil', price: 'Contact for pricing', id: 'skin-harmony-oil' }
+      ],
+      details: [
+      "Smooths fine lines and wrinkles",
+      "Fades marks, scars, and uneven tone",
+      "Calms and clears acne prone skin",
+      "Gently removes makeup without stripping",
+      "Moisturizes face & body for all day glow",
+      "Sun protection and damage control",
+      "Dull, tired looking skin",
+      "stretch marks and uneven texture",
+      "Overall skin renewal and radiance"
+      ],
+      keyBenefits: [
+        'Gently removes makeup (even waterproof) while calming the skin with lavender, frankincense, and peppermint',
+        'Daily moisturizer for face and body, balancing oil production and improving skin elasticity',
+        'Soothes inflammation and reduces redness with neem and black seed oil',
+        'Brightens and protects with rosehip and raspberry seed oil, rich in antioxidants and natural SPF properties',
+        'Heals and nourishes with coconut oil, leaving skin soft and visibly refreshed'
+      ],
+      ingredients: [
+        'Castor oil', 'Coconut oil', 'Rose Hip oil', 'Red Raspberry oil',
+        'Black Seed oil', 'Neem Oil', 'Arnica oil', 'Tumeric oil', 'Myrrh oil',
+        'Lavender oil', 'Spearmint oil', 'Juniper Oil', 'Frankincense'  
+      ],
+      formulated: [
+        'Castor & Coconut Oils provide deep hydration and silky softness.', 
+        'Arnica & Turmeric Oils calm irritation, ease inflammation, and support skin repair (with turmeric that won’t stain the skin).',
+        'Rosehip & Red Raspberry Oils brighten dullness, fade scars, and protect with rich antioxidants.',
+        'Frankincense & Myrrh Oils smooth fine lines, wrinkles, and marks for a youthful glow.',
+        'Lavender & Spearmint Oils refresh, soothe, and uplift the senses while calming the skin.',
+        'Neem & Blackseed Oils help combat acne, reduce redness, and strengthen skin’s natural barrier.'
+      ]
+    },
+    {
+      headerImg: '/assets/products/ICP.png',
       togLearn: true,
       id: 'intention-coasters',
       title: 'Intention Coasters',
       subtitle: 'Infuse Your Food & Drink with the Frequency of Your Highest Good',
       description: `Imagine if every sip of water or bite of food could help you align with your manifestations, heal your energy, and reconnect with your soul's purpose. With Intention Coasters, this isn't just a dream—it's an energetic reality. Your thoughts, emotions, and energetic state don't just affect your mood—they imprint into everything you touch, cook, drink, or eat. According to energy studies like Dr. Emoto’s water experiment, water is especially responsive to emotional frequencies, creating beautiful crystalline structures when exposed to love, gratitude, or hope—and distorted ones when exposed to fear, anger, or stress. Now imagine what happens when you drink or eat food while thinking about your to-do list, stress, or past hurts. That energy goes right back into your body. That’s where Intention Coasters come in.`,
       images: [
-      "/assets/products/IC1.jpeg",
-      "/assets/products/IC2.jpeg",
-      "/assets/products/IC3.jpeg"
+      "/assets/products/ICA.png",
+      "/assets/products/IC1.png",
+      "/assets/products/IC2.png",
+      "/assets/products/IC3.png",
+      "/assets/products/IC4.png",
+      "/assets/products/IC5.png",
+      "/assets/products/IC6.png",
+      "/assets/products/IC7.png",
       ],
       icon: <Sparkles className="w-8 h-8 text-purple-600" />,
       pricing: [
@@ -69,7 +171,7 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       yasinaNote: `I created these coasters after realizing how much my own thoughts especially the unconscious, stressful ones—were being absorbed into what I ate and drank. Once I began placing my water on an intention-charged surface, everything shifted: I felt lighter, more supported, and more aligned with what I was calling in. These coasters are a gift from the universe, created to help you remember that you are the vibration that leads the way.`
     },
     {
-      headerImg: "/assets/products/CM2.webp",
+      headerImg: "/assets/products/CMP.png",
       togLearn: false,
       id: 'custom-meditations',
       title: 'Custom Meditations & EFT',
@@ -117,14 +219,15 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       whyItWorks: 'Unlike generic meditations, these are created specifically for you—your story, your energy, your needs. This deep alignment helps you relax more quickly, connect more deeply, and receive the support and clarity you\'re truly seeking.'
     },
     {
-      headerImg: '/assets/products/CR.webp',  
+      headerImg: '/assets/products/CP.png',  
       togLearn: true,
       id: 'crystal-packages',
       title: 'Crystal Packages',
       subtitle: 'For a Reason, Season, or Lifetime',
       description: 'These thoughtfully curated crystal bundles are designed to support you through whatever life is bringing your way—whether you\'re navigating a block, going through a transition, or simply seeking extra energetic support.',
        images: [
-      '/assets/products/CR.webp',
+      '/assets/products/C1.png',
+      '/assets/products/C2.png'
       ],
       icon: <Gem className="w-8 h-8 text-purple-600" />,
       pricing: [
@@ -142,18 +245,16 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       note: 'Each package is infused with intention and aligned to meet you where you are, and guide you where you\'re meant to go. They can be made for anything that is happening in your life.'
     },
     {
-      headerImg: '/assets/products/SPL.webp',
+      headerImg: '/assets/products/SPP.png',
       togLearn: true,
       id: 'soul-paintings',
       title: 'Soul Paintings',
       subtitle: 'A visual channeling of your soul\'s essence',
       description: 'A Soul Painting is a channeled piece of art created through direct transmission from the Universe, expressed through my hands as a reflection of your soul\'s energy. Using either a video call or a photo of you, I tune into your frequency and allow your soul\'s essence to flow onto the canvas.',
       images: [
-      "/assets/products/SP1.webp",
-      "/assets/products/SP2.webp",
-      "/assets/products/SP3.webp",
-      "/assets/products/SP4.webp",
-      "/assets/products/SP5.webp",
+      "/assets/products/SP1.png",
+      "/assets/products/SP2.png",
+      "/assets/products/SP3.png"
       ],
       icon: <Palette className="w-8 h-8 text-purple-600" />,
       pricing: [
@@ -183,104 +284,6 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
       
       yasinaNote: `This is more than art—it’s soul medicine. Every Soul Painting is a co-creation between you, me, and the Universe. I simply become the channel so your soul can show itself to you. If you're seeking alignment, clarity, or a tangible reminder of who you truly are… this is your invitation home.`,
       noteAddon: `The colors are shown to me and the painting itself is lead by the universe in the flow it should be.  You may feel emotions, see pictures, get intuitive messages, butterflies, find peace and much more.  There is no wrong or right way to look at the picture, because each time you look at it or turn it, a new message will be seen.`
-    },
-    {
-      headerImg: '/assets/products/IC17.jpeg',
-      togLearn: true,
-      id: 'rapid-recovery-oil',
-      title: 'Rapid Recovery Oil',
-      subtitle: 'A powerful handmade healing oil designed to sooth relieve and heal',
-      description: 'Crafted with intention and ancient wisdom, this healing oil blend brings powerful relief to sore muscles, stiff joints, and stagnant energy. Infused with nature\'s most potent anti-inflammatory and circulatory herbs, each drop is designed to activate healing on both a physical and energetic level.',
-      images: [
-      "/assets/products/IC1.jpeg",
-      "/assets/products/IC2.jpeg",
-      "/assets/products/IC3.jpeg"
-      ],
-      icon: <Heart className="w-8 h-8 text-purple-600" />,
-      pricing: [
-        { option: 'Healing Oil', price: 'Contact for pricing', id: 'rapid-recovery-oil' }
-      ],
-       details: [
-      "Introducing a powerful handmade healing oil blend designed to soothe, relieve and heal. Crafted with intention and ancient wisdom, this healing oil blend brings powerful relief!  ",
-      "Infused with nature's most potent anti-inflammatory and circulatory herbs, each drop is designed to activate healing on both a physical and energetic level",
-      "With the natural heat of cayenne and the anti-inflammatory power of arnica",
-      "Supports circulation and detoxification with castor oil and black seed oil, known for reducing swelling and promoting cellular repair",
-      " Soothes inflammation and strengthens tissue with neem oil—a powerful ally for chronic pain and skin conditions",
-      " Calms the nervous system and relaxes tension with lavender and frankincense, supporting both body and spirit",
-      ],
-      relief: [
-        'Muscle tension',
-        'Sprains & Joint pain',
-        'Bruises & Swelling',
-        'Neuropathy',
-        'Bone spurs',
-        'Plantar Fasciitis',
-        'Carpal Tunnel',
-        'Inflammation & Soreness',
-        'Supports Lymphatic Drainage',
-        'PCOS',
-        'Endometrial Pain',
-        'Osteoarthritis',
-        'Arthritis',
-        'Gout',
-        'Bug Bites',
-        '& More!'
-
-      ],
-      directions: 'A little goes a long way, just put a little in your hand or dip your finger in the bottle and then rub on the spot. Mix as there will be sediment at the bottom. You can wrap the area if you want and also add heat, but this is not needed for the product to work.',
-      ingredients: [
-         'Arnica oil','Peedanil Talia oil','Black seed oil', 
-        'Neem oil','Turmeric oil','Eucalyptus oil','Frankincense oil', 
-        'Lavender oil','Ginger powder','Cayenne powder','Coconut oil','Castor oil'
-      ]
-    },
-    {
-      headerImg: '/assets/products/IC17.jpeg',
-      togLearn: true,
-      id: 'skin-harmony-oil',
-      title: 'Skin Harmony Oil',
-      subtitle: 'Nourish. Cleanse. Restore.',
-      description: 'Skin Harmony is a luxurious, all in one face and body oil formulated with a powerful synergy of 11 botanical oils. Lightweight yet deeply nourishing, it’s designed to hydrate, repair, protect, and restore balance to your skin. This versatile blend works as a daily moisturizer, natural makeup remover, and full body glow oil, making it a must have in any skincare ritual. With its rich profile of antioxidants, essential fatty acids, and natural anti inflammatory compounds, Skin Harmony supports youthful, radiant, and healthy skin while uplifting your senses with a subtle herbal and floral aroma. Discover Skin Harmony, your ultimate skincare essential. This luxurious oil is designed to do it all hydrate, repair, protect, and even gently remove makeup leaving your skin soft, radiant, and glowing from head to toe.',
-      images: [
-      "/assets/products/IC1.jpeg",
-      "/assets/products/IC2.jpeg",
-      "/assets/products/IC3.jpeg"
-      ],
-      icon: <Sun className="w-8 h-8 text-purple-600" />,
-      pricing: [
-        { option: 'Skin Harmony Oil', price: 'Contact for pricing', id: 'skin-harmony-oil' }
-      ],
-      details: [
-      "Smooths fine lines and wrinkles",
-      "Fades marks, scars, and uneven tone",
-      "Calms and clears acne prone skin",
-      "AGently removes makeup without stripping",
-      "Moisturizes face & body for all day glow",
-      "Sun protection and damage control",
-      "Dull, tired looking skin",
-      "stretch marks and uneven texture",
-      "Overall skin renewal and radiance"
-      ],
-      keyBenefits: [
-        'Gently removes makeup (even waterproof) while calming the skin with lavender, frankincense, and peppermint',
-        'Daily moisturizer for face and body, balancing oil production and improving skin elasticity',
-        'Soothes inflammation and reduces redness with neem and black seed oil',
-        'Brightens and protects with rosehip and raspberry seed oil, rich in antioxidants and natural SPF properties',
-        'Heals and nourishes with coconut oil, leaving skin soft and visibly refreshed'
-      ],
-      ingredients: [
-        'Castor oil', 'Coconut oil', 'Rose Hip oil', 'Red Raspberry oil',
-        'Black Seed oil', 'Neem Oil', 'Arnica oil', 'Tumeric oil', 'Myrrh oil',
-        'Lavender oil', 'Spearmint oil', 'Juniper Oil', 'Frankincense'  
-      ],
-      formulated: [
-        'Castor & Coconut Oils provide deep hydration and silky softness.', 
-        'Arnica & Turmeric Oils calm irritation, ease inflammation, and support skin repair (with turmeric that won’t stain the skin).',
-        'Rosehip & Red Raspberry Oils brighten dullness, fade scars, and protect with rich antioxidants.',
-        'Frankincense & Myrrh Oils smooth fine lines, wrinkles, and marks for a youthful glow.',
-        'Lavender & Spearmint Oils refresh, soothe, and uplift the senses while calming the skin.',
-        'Neem & Blackseed Oils help combat acne, reduce redness, and strengthen skin’s natural barrier.'
-      ]
     }
   ];
 
@@ -349,7 +352,7 @@ export default function Products() {
 }, [modalProduct]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-teal-50 py-12">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-purple-800 mb-4">Sacred Products</h1>
@@ -362,7 +365,7 @@ export default function Products() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product) => (
             <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-              <div className="aspect-square relative bg-gradient-to-br from-purple-100 to-pink-100">
+              <div className="aspect-square relative ">
                 <Image
                   src={product.headerImg}
                   alt={product.title}
