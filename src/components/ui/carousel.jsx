@@ -81,21 +81,21 @@ const ImageCarousel = ({ images, onClose }) => {
     <div className="w-full h-full relative">
       {/* Main image container */}
       <div 
-        className="w-full relative overflow-hidden rounded-lg"
+        className="w-full relative overflow-hidden rounded-xl bg-white/80"
         style={{ 
           height: "100%",
-          minHeight: "300px"
+          minHeight: "280px"
         }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="h-full w-full bg-gray-100">
+        <div className="h-full w-full flex items-center justify-center bg-gray-100">
           {/\.(mp4|webm|ogg)$/i.test(images[currentIndex]) ? (
             <video
               src={images[currentIndex]}
               controls
-              className="w-full h-full object-cover"
+              className="max-h-[420px] w-full object-cover"
               style={{
                 transition: "opacity 0.3s ease",
                 opacity: isAnimating ? 0.7 : 1
@@ -105,7 +105,7 @@ const ImageCarousel = ({ images, onClose }) => {
             <img
               src={images[currentIndex]}
               alt={`Image ${currentIndex + 1}`}
-              className="w-full h-full object-cover"
+              className="max-h-[420px] w-full object-cover"
               style={{
                 transition: "opacity 0.3s ease",
                 opacity: isAnimating ? 0.7 : 1

@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from "react";
-import PlaceholderImage from "@/utils/PlaceholderImage";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -79,147 +78,91 @@ const ContactPage = () => {
       <div className="container mx-auto py-16 px-4">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Contact Information */}
-          <div className="lg:col-span-2">
-            <h2 
-              className="text-2xl mb-6 font-heading text-primary"
-            >
-              Contact Information
-            </h2>
-
-            {/* Address Card */}
-            <div 
-              className="mb-8 p-6 rounded-lg shadow-sm bg-neutral-soft"
-            >
-              <div className="flex items-start">
-                <div 
-                  className="mr-4 p-3 rounded-full bg-primary-tint"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 
-                    className="text-lg font-medium mb-1 text-primary"
-                  >
-                    Location
-                  </h3>
-                  <p className="text-sm mb-1 text-body">
-                    Yasina's Light Healing Center
-                  </p>
-                  <p className="text-sm mb-1 text-body">
-                    123 Harmony Way, Suite 4B
-                  </p>
-                  <p className="text-sm text-body">
-                    Los Angeles, CA 90210
-                  </p>
-                </div>
-              </div>
+          <div className="lg:col-span-2 space-y-8">
+            <div className="space-y-3">
+              <h2 className="text-2xl font-heading text-primary">
+                A Sacred Space Online
+              </h2>
+              <p className="text-body">
+                All offerings are held virtually or by arrangement. Reach out anytime and we&apos;ll co-create the container that feels most supportive for you.
+              </p>
             </div>
 
-            {/* Email Card */}
-            <div 
-              className="mb-8 p-6 rounded-lg shadow-sm bg-neutral-soft"
-            >
-              <div className="flex items-start">
-                <div 
-                  className="mr-4 p-3 rounded-full bg-primary-tint"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 
-                    className="text-lg font-medium mb-1 text-primary"
-                  >
-                    Email
-                  </h3>
-                  <p className="text-sm text-body">
-                    <a 
+            <div className="grid gap-6">
+              <div className="bg-white/90 p-6 rounded-xl shadow-sm border border-neutral-soft">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-primary-tint">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-primary"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-heading text-primary mb-2">Email</h3>
+                    <p className="text-body mb-2">
+                      I personally read every message and respond within 1-2 business days.
+                    </p>
+                    <a
+                      className="inline-flex items-center text-secondary underline"
                       href="mailto:info@yasinaslight.com"
-                      className="text-secondary underline"
                     >
                       info@yasinaslight.com
                     </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Phone Card */}
-            <div 
-              className="mb-8 p-6 rounded-lg shadow-sm bg-neutral-soft"
-            >
-              <div className="flex items-start">
-                <div 
-                  className="mr-4 p-3 rounded-full bg-primary-tint"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 
-                    className="text-lg font-medium mb-1 text-primary"
-                  >
-                    Phone
-                  </h3>
-                  <p className="text-sm text-body">
-                    <a 
-                      href="tel:+13105551234"
-                      className="text-secondary underline"
-                    >
-                      (310) 555-1234
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Hours Card */}
-            <div 
-              className="mb-8 p-6 rounded-lg shadow-sm bg-neutral-soft"
-            >
-              <div className="flex items-start">
-                <div 
-                  className="mr-4 p-3 rounded-full bg-primary-tint"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 
-                    className="text-lg font-medium mb-2 text-primary"
-                  >
-                    Office Hours
-                  </h3>
-                  <div className="grid grid-cols-2 gap-1 text-body">
-                    <p className="text-sm">Monday - Friday:</p>
-                    <p className="text-sm">9:00 AM - 6:00 PM</p>
-                    <p className="text-sm">Saturday:</p>
-                    <p className="text-sm">10:00 AM - 4:00 PM</p>
-                    <p className="text-sm">Sunday:</p>
-                    <p className="text-sm">Closed</p>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Map Placeholder */}
-            <div className="mt-10">
-              <h3 
-                className="text-lg font-medium mb-4 text-primary"
-              >
-                Find Us
-              </h3>
-              <PlaceholderImage 
-                height="250px" 
-                text="Google Map will be embedded here"
-                className="bg-primary-tint border border-primary-soft"
-              />
+              <div className="bg-white/90 p-6 rounded-xl shadow-sm border border-primary-soft">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-primary-tint">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-primary"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8c-1.657 0-3 1.343-3 3v1H7a1 1 0 00-1 1v4h12v-4a1 1 0 00-1-1h-2v-1c0-1.657-1.343-3-3-3z"
+                      />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17H9" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-heading text-primary mb-2">Session Availability</h3>
+                    <p className="text-body">
+                      Sessions are offered Monday through Saturday with select evening appointments. Share your preferred windows and I&apos;ll send through aligned times.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-primary-tint p-6 rounded-xl border border-primary-soft">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-white shadow-sm">
+                    <span className="text-2xl">✨</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-heading text-primary mb-2">Working Together</h3>
+                    <p className="text-body">
+                      Most experiences are hosted virtually so you can receive support wherever you are in the world. For pop-ups or in-person immersions, join the newsletter to be the first to know.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -380,8 +323,7 @@ const ContactPage = () => {
                     Booking Information
                   </h3>
                   <p className="mb-4 text-body">
-                    To schedule an appointment, please use the contact form above, call during office hours, or email directly. 
-                    I'm typically able to accommodate appointments within 1-2 weeks of request.
+                    To schedule an appointment, send a note through the form above or email directly. I typically accommodate sessions within 1-2 weeks of your request and will confirm details personally.
                   </p>
                 </div>
 

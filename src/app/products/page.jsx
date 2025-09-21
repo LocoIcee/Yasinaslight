@@ -516,8 +516,11 @@ export default function Products() {
 
               {/* Modal */}
               {modalProduct && createPortal(
-                <div className="fixed inset-0 z-50 flex items-center justify-center px-4 overflow-y-auto backdrop-blur-md bg-black/10">
-                  <div ref={modalRef} className="bg-white/80 backdrop-blur-xl rounded-xl w-[80vw] max-w-7xl max-h-[80vh] p-6 relative overflow-y-auto">
+                <div className="fixed inset-0 z-50 flex items-center justify-center px-0 sm:px-4 py-6 sm:py-4 overflow-y-auto backdrop-blur-md bg-black/10">
+                  <div
+                    ref={modalRef}
+                    className="bg-white/90 backdrop-blur-xl w-full h-full sm:h-auto sm:w-[85vw] lg:max-w-5xl sm:max-h-[90vh] relative overflow-y-auto rounded-none sm:rounded-2xl p-4 sm:p-6"
+                  >
                     <button
                       onClick={closeModal}
                       className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
@@ -525,17 +528,18 @@ export default function Products() {
                       <X className="w-6 h-6" />
                     </button>
                                   {/* Products Section */}
-                    <section className="py-16 px-4">
+                    <section className="py-10 sm:py-16 px-4">
                       <div className="max-w-6xl mx-auto">
                           <div className="space-y-8">
-                            <div className="relative aspect-video mb-4">
+                            <div className="relative mb-4 rounded-2xl overflow-hidden shadow-lg">
                               <ImageCarousel 
-                              images={modalProduct.images} 
+                              images={modalProduct.images}
+                              onClose={closeModal}
                               />
                             </div>
-                            <div key={modalProduct.id} className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-purple-100 overflow-hidden hover:shadow-2xl transition-shadow">
-                              <div className="p-8">
-                                <div className="flex items-center justify-between mb-6">
+                            <div key={modalProduct.id} className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border border-purple-100 overflow-hidden hover:shadow-2xl transition-shadow">
+                              <div className="p-5 sm:p-8">
+                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                                   <div className="flex items-center space-x-4">
                                     <div className="p-3 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full">
                                       {modalProduct.icon}
@@ -546,11 +550,11 @@ export default function Products() {
                                     </div>
                                   </div>
                                 </div>
-                                
+
                                 <p className="text-gray-700 mb-6 leading-relaxed">{modalProduct.description}</p>
-                                
+
                                 {/* Pricing and Add to Cart */}
-                                <div className="bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-6 mb-6">
+                                <div className="bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-5 sm:p-6 mb-6">
                                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                     <div className="space-y-2">
                                       <h4 className="text-lg font-semibold text-purple-900">Pricing Options:</h4>
