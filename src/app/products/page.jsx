@@ -21,9 +21,9 @@ import { useCart } from '@/contexts/CartContext';
       ],
       icon: <Heart className="w-8 h-8 text-purple-600" />,
       pricing: [
-        { option: 'Rapid Recovery Oil 10ml', price: 15, id: 'recovery-10' },
-        { option: 'Rapid Recovery Oil 60ml', price: 35, id: 'recovery-60' },
-        { option: 'Rapid Recovery Oil 120ml', price: 55, id: 'recovery-120' },
+        { option: 'Rapid Recovery Oil 10ml', price: 11, id: 'recovery-10' },
+        { option: 'Rapid Recovery Oil 60ml', price: 25, id: 'recovery-60' },
+        { option: 'Rapid Recovery Oil 120ml', price: 40, id: 'recovery-120' },
       ],
        details: [
       "Soothes pain and tension naturally",
@@ -72,9 +72,9 @@ import { useCart } from '@/contexts/CartContext';
       ],
       icon: <Sun className="w-8 h-8 text-purple-600" />,
       pricing: [
-        { option: 'Skin Harmony Oil 10ml', price: 11, id: 'skin-10' },
-        { option: 'Skin Harmony Oil 60ml', price: 25, id: 'skin-60' },
-        { option: 'Skin Harmony Oil 120ml', price: 40, id: 'skin-120' }
+        { option: 'Skin Harmony Oil 10ml', price: 15, id: 'skin-10' },
+        { option: 'Skin Harmony Oil 60ml', price: 35, id: 'skin-60' },
+        { option: 'Skin Harmony Oil 120ml', price: 55, id: 'skin-120' }
       ],
       details: [
       "Smooths fine lines and wrinkles",
