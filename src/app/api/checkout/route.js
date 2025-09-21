@@ -5,7 +5,7 @@ export const runtime = 'nodejs';
 
 const SQUARE_API_BASE_URL = process.env.SQUARE_API_BASE_URL || 'https://connect.squareup.com';
 const SQUARE_API_VERSION = process.env.SQUARE_API_VERSION || '2024-09-19';
-const DEFAULT_CURRENCY = process.env.SQUARE_CURRENCY || 'USD';
+const DEFAULT_CURRENCY = process.env.SQUARE_CURRENCY || 'CAD';
 const DEFAULT_REDIRECT_PATH = '/checkout/success';
 
 export async function POST(request) {
