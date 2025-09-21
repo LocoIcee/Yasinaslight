@@ -61,7 +61,7 @@ export async function POST(request) {
       },
       checkout_options: {
         redirect_url: redirectUrl,
-        ask_for_shipping_address: false,
+        ask_for_shipping_address: true,
       },
     };
 
