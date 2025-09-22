@@ -286,11 +286,11 @@ const ClassesPage = () => {
                 Want to host a private class for your group or team?
               </p>
               <p className="text-sm" style={{ color: colors.text }}>
-                Email us at <a href="mailto:hello@yasinaslight.com" className="underline">hello@yasinaslight.com</a>
+                Email us at <a href="mailto:info@yasinaslight.com" className="underline">info@yasinaslight.com</a>
               </p>
             </div>
             <a
-              href="mailto:hello@yasinaslight.com?subject=Private%20Class%20Inquiry"
+              href="mailto:info@yasinaslight.com?subject=Private%20Class%20Inquiry"
               className="rounded-full px-5 py-2 text-sm transition-all hover:shadow"
               style={{ backgroundColor: colors.secondary, color: colors.neutral }}
             >
