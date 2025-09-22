@@ -51,11 +51,11 @@ const ClassesPage = () => {
       setStatusMessage({ type: "error", text: "Please enter a valid email." });
       return;
     }
+
     if (!isCaptchaConfigured) {
-      setStatusMessage({ type: "error", text: "Notifications are paused while we finish bot protection setup. Please try again soon." });
+      setStatusMessage({ type: "error", text: "Notifications are paused while we finish security setup. Please check back soon." });
       return;
     }
-
     setIsSubmitting(true);
     setStatusMessage(null);
 
@@ -186,7 +186,7 @@ const ClassesPage = () => {
                   className="mb-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700"
                   role="alert"
                 >
-                  Notifications are disabled while we complete security setup. Please check back soon.
+                  Notifications are disabled while we finalize security configuration. Please check back soon.
                 </p>
               )}
               {isCaptchaConfigured && (

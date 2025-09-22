@@ -59,12 +59,13 @@ const ContactPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    resetFeedback();
+
     if (!isCaptchaConfigured) {
-      setStatusMessage({ type: "error", text: "This form is temporarily unavailable while we finish bot protection setup. Please try again later." });
+      setStatusMessage({ type: "error", text: "This form is temporarily unavailable while we finish security setup. Please try again later." });
       return;
     }
 
-    resetFeedback();
     setIsSubmitting(true);
 
     try {
@@ -250,7 +251,7 @@ const ContactPage = () => {
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 {!isCaptchaConfigured && (
                   <p className="mb-4 text-sm text-red-600" role="alert">
-                    The contact form is temporarily disabled while we finalize security configuration. Please check back shortly.
+                    This form is temporarily unavailable while we finalize security configuration. Please check back shortly.
                   </p>
                 )}
                 {isCaptchaConfigured && (
