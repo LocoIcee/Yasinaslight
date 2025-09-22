@@ -1,50 +1,145 @@
 'use client';
 import React, { useState } from "react";
 
+import useHcaptcha from "@/hooks/useHcaptcha";
+
+const SERVICE_OPTIONS = [
+  { value: "general", label: "General Inquiry" },
+  { value: "reiki", label: "Reiki Healing" },
+  { value: "reflexology", label: "Reflexology" },
+  { value: "intuitive-counseling", label: "Intuitive Counseling" },
+  { value: "chakra-balancing", label: "Chakra Balancing" },
+  { value: "crystal-healing", label: "Crystal Healing" },
+  { value: "meditation-guidance", label: "Meditation & Mindfulness" }
+];
+
+const CONTACT_SUCCESS_MESSAGE = "Thank you for your message. I'll respond as soon as possible!";
+
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-    serviceInterest: "general"
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [serviceInterest, setServiceInterest] = useState("general");
+  const [submitted, setSubmitted] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+  const rawHcaptchaSiteKey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY?.trim();
+  const hcaptchaSiteKey = rawHcaptchaSiteKey ? rawHcaptchaSiteKey : null;
+  const { execute, isReady: isHcaptchaReady, containerId: hcaptchaContainerId, reset: resetHcaptcha } = useHcaptcha(hcaptchaSiteKey);
+  const isCaptchaConfigured = Boolean(hcaptchaSiteKey);
+
+  const resetFeedback = () => {
+    if (submitted) {
+      setSubmitted(false);
+    }
+    if (statusMessage) {
+      setStatusMessage(null);
+    }
+    if (isCaptchaConfigured) {
+      resetHcaptcha();
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleFieldChange = (setter) => (event) => {
+    setter(event.target.value);
+    resetFeedback();
+  };
+
+  const resetForm = () => {
+    setName("");
+    setEmail("");
+    setPhone("");
+    setSubject("");
+    setMessage("");
+    setServiceInterest("general");
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In a real implementation, this would send the form data to a server
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message. I'll respond as soon as possible!");
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-      serviceInterest: "general"
-    });
-  };
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
-  // Available services for the dropdown
-  const services = [
-    { value: "general", label: "General Inquiry" },
-    { value: "reiki", label: "Reiki Healing" },
-    { value: "reflexology", label: "Reflexology" },
-    { value: "intuitive-counseling", label: "Intuitive Counseling" },
-    { value: "chakra-balancing", label: "Chakra Balancing" },
-    { value: "crystal-healing", label: "Crystal Healing" },
-    { value: "meditation-guidance", label: "Meditation & Mindfulness" }
-  ];
+    if (!accessKey) {
+      setStatusMessage({ type: "error", text: "The contact form is not configured yet. Please try again later." });
+      return;
+    }
+
+    if (!isCaptchaConfigured) {
+      setStatusMessage({ type: "error", text: "This form is temporarily unavailable while we finish bot protection setup. Please try again later." });
+      return;
+    }
+
+    resetFeedback();
+    setIsSubmitting(true);
+
+    try {
+      const trimmedName = name.trim();
+      const trimmedEmail = email.trim();
+      const trimmedSubject = subject.trim();
+      const trimmedMessage = message.trim();
+      const trimmedPhone = phone.trim();
+
+      if (!trimmedName || !trimmedEmail || !trimmedSubject || !trimmedMessage) {
+        throw new Error("Please fill in all required fields before sending.");
+      }
+
+      let captchaToken = null;
+
+      if (isCaptchaConfigured) {
+        captchaToken = await execute("contact_form");
+      }
+
+      const payload = new FormData();
+      payload.append("access_key", accessKey);
+      payload.append("subject", trimmedSubject || "New Contact Message");
+      payload.append("name", trimmedName);
+      payload.append("email", trimmedEmail);
+      payload.append("reply_to", trimmedEmail);
+      payload.append(
+        "message",
+        `Name: ${trimmedName}\nEmail: ${trimmedEmail}\nPhone: ${trimmedPhone || "Not provided"}\nService Interest: ${serviceInterest}\n\n${trimmedMessage}`
+      );
+      payload.append("form_source", "Contact Page");
+
+      if (captchaToken) {
+        payload.append("h-captcha-response", captchaToken);
+        payload.append("captcha_provider", "hcaptcha");
+      }
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          Accept: "application/json"
+        },
+        body: payload
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        console.error("Web3Forms contact error", data);
+        throw new Error(data.message || "Something went wrong while sending your message.");
+      }
+
+      setStatusMessage({ type: "success", text: CONTACT_SUCCESS_MESSAGE });
+      resetForm();
+      if (isCaptchaConfigured) {
+        resetHcaptcha();
+      }
+      setSubmitted(true);
+    } catch (error) {
+      setStatusMessage({ type: "error", text: error.message || "We could not send your message. Please try again." });
+      setSubmitted(false);
+      if (isCaptchaConfigured) {
+        resetHcaptcha();
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-teal-50">
@@ -176,132 +271,183 @@ const ContactPage = () => {
             
             <form onSubmit={handleSubmit}>
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                {/* Name and Email */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label 
-                      htmlFor="name" 
-                      className="block mb-2 text-sm font-medium text-primary"
+                {!isCaptchaConfigured && (
+                  <p className="mb-4 text-sm text-red-600" role="alert">
+                    The contact form is temporarily disabled while we finalize security configuration. Please check back shortly.
+                  </p>
+                )}
+                {isCaptchaConfigured && (
+                  <div id={hcaptchaContainerId} style={{ display: "none" }} />
+                )}
+                {submitted ? (
+                  <div className="space-y-4 text-center">
+                    <p
+                      className="text-primary text-base font-medium"
+                      role="status"
+                      aria-live="polite"
                     >
-                      Your Name*
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-2 rounded-md bg-white input-surface focus:outline-none focus-visible:outline-none"
-                    />
+                      {statusMessage?.text || "Thank you for your message. I'll respond as soon as possible!"}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSubmitted(false);
+                        setStatusMessage(null);
+                        if (isCaptchaConfigured) {
+                          resetHcaptcha();
+                        }
+                      }}
+                      className="inline-flex items-center justify-center rounded-md border border-secondary px-4 py-2 text-secondary transition-all hover:bg-secondary/10"
+                    >
+                      Send another message
+                    </button>
                   </div>
-                  <div>
-                    <label 
-                      htmlFor="email" 
-                      className="block mb-2 text-sm font-medium text-primary"
-                    >
-                      Email Address*
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-2 rounded-md bg-white input-surface focus:outline-none focus-visible:outline-none"
-                    />
-                  </div>
-                </div>
+                ) : (
+                  <>
+                    {/* Name and Email */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label
+                          htmlFor="name"
+                          className="block mb-2 text-sm font-medium text-primary"
+                        >
+                          Your Name*
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={name}
+                          onChange={handleFieldChange(setName)}
+                          required
+                          className="w-full px-4 py-2 rounded-md bg-white input-surface focus:outline-none focus-visible:outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="email"
+                          className="block mb-2 text-sm font-medium text-primary"
+                        >
+                          Email Address*
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={email}
+                          onChange={handleFieldChange(setEmail)}
+                          required
+                          className="w-full px-4 py-2 rounded-md bg-white input-surface focus:outline-none focus-visible:outline-none"
+                        />
+                      </div>
+                    </div>
 
-                {/* Phone and Service Interest */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label 
-                      htmlFor="phone" 
-                      className="block mb-2 text-sm font-medium text-primary"
-                    >
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-2 rounded-md bg-white input-surface focus:outline-none focus-visible:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label 
-                      htmlFor="serviceInterest" 
-                      className="block mb-2 text-sm font-medium text-primary"
-                    >
-                      Service of Interest
-                    </label>
-                    <select
-                      id="serviceInterest"
-                      name="serviceInterest"
-                      value={formData.serviceInterest}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-2 rounded-md bg-white input-surface focus:outline-none focus-visible:outline-none"
-                    >
-                      {services.map((service) => (
-                        <option key={service.value} value={service.value}>
-                          {service.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
+                    {/* Phone and Service Interest */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label
+                          htmlFor="phone"
+                          className="block mb-2 text-sm font-medium text-primary"
+                        >
+                          Phone Number
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={phone}
+                          onChange={handleFieldChange(setPhone)}
+                          className="w-full px-4 py-2 rounded-md bg-white input-surface focus:outline-none focus-visible:outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="serviceInterest"
+                          className="block mb-2 text-sm font-medium text-primary"
+                        >
+                          Service of Interest
+                        </label>
+                        <select
+                          id="serviceInterest"
+                          name="serviceInterest"
+                          value={serviceInterest}
+                          onChange={handleFieldChange(setServiceInterest)}
+                          className="w-full px-4 py-2 rounded-md bg-white input-surface focus:outline-none focus-visible:outline-none"
+                        >
+                          {SERVICE_OPTIONS.map((service) => (
+                            <option key={service.value} value={service.value}>
+                              {service.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
 
-                {/* Subject */}
-                <div className="mb-4">
-                  <label 
-                    htmlFor="subject" 
-                    className="block mb-2 text-sm font-medium text-primary"
-                  >
-                    Subject*
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-2 rounded-md bg-white input-surface focus:outline-none focus-visible:outline-none"
-                  />
-                </div>
+                    {/* Subject */}
+                    <div className="mb-4">
+                      <label
+                        htmlFor="subject"
+                        className="block mb-2 text-sm font-medium text-primary"
+                      >
+                        Subject*
+                      </label>
+                      <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        value={subject}
+                        onChange={handleFieldChange(setSubject)}
+                        required
+                        className="w-full px-4 py-2 rounded-md bg-white input-surface focus:outline-none focus-visible:outline-none"
+                      />
+                    </div>
 
-                {/* Message */}
-                <div className="mb-6">
-                  <label 
-                    htmlFor="message" 
-                    className="block mb-2 text-sm font-medium text-primary"
-                  >
-                    Message*
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    rows="5"
-                    className="w-full px-4 py-2 rounded-md bg-white input-surface focus:outline-none focus-visible:outline-none"
-                  ></textarea>
-                </div>
+                    {/* Message */}
+                    <div className="mb-6">
+                      <label
+                        htmlFor="message"
+                        className="block mb-2 text-sm font-medium text-primary"
+                      >
+                        Message*
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={message}
+                        onChange={handleFieldChange(setMessage)}
+                        required
+                        rows={5}
+                        className="w-full px-4 py-2 rounded-md bg-white input-surface focus:outline-none focus-visible:outline-none"
+                      ></textarea>
+                    </div>
 
-                {/* Submit Button */}
-                <div>
-                  <button
-                    type="submit"
-                    className="w-full md:w-auto px-6 py-3 rounded-md transition-all hover:shadow-md bg-secondary text-neutral"
-                  >
-                    Send Message
-                  </button>
-                </div>
+                    {/* Submit Button */}
+                    <div className="space-y-3">
+                      <button
+                        type="submit"
+                        disabled={
+                          isSubmitting || !isCaptchaConfigured || !isHcaptchaReady
+                        }
+                        className={`w-full md:w-auto px-6 py-3 rounded-md transition-all bg-secondary text-neutral ${
+                          isSubmitting || !isCaptchaConfigured || !isHcaptchaReady
+                            ? "opacity-75 cursor-not-allowed"
+                            : "hover:shadow-md"
+                        }`}
+                      >
+                        {isSubmitting ? "Sending..." : "Send Message"}
+                      </button>
+                      {statusMessage && statusMessage.type === "error" && (
+                        <p
+                          className="text-sm text-red-600"
+                          role="status"
+                          aria-live="polite"
+                        >
+                          {statusMessage.text}
+                        </p>
+                      )}
+                    </div>
+                  </>
+                )}
               </div>
             </form>
 

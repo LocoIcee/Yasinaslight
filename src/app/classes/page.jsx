@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from "react";
 
+import useHcaptcha from "@/hooks/useHcaptcha";
+
 const ClassesPage = () => {
   // Brand palette
   const colors = {
@@ -13,12 +15,105 @@ const ClassesPage = () => {
 
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Fake submit handler (wire up later to backend or a form tool)
-  const handleNotify = (e) => {
+  const rawHcaptchaSiteKey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY?.trim();
+  const hcaptchaSiteKey = rawHcaptchaSiteKey ? rawHcaptchaSiteKey : null;
+  const { execute, isReady: isHcaptchaReady, containerId: hcaptchaContainerId, reset: resetHcaptcha } = useHcaptcha(
+    hcaptchaSiteKey
+  );
+  const isCaptchaConfigured = Boolean(hcaptchaSiteKey);
+
+  const resetFeedback = () => {
+    if (submitted) {
+      setSubmitted(false);
+    }
+    if (statusMessage) {
+      setStatusMessage(null);
+    }
+    if (isCaptchaConfigured) {
+      resetHcaptcha();
+    }
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+    resetFeedback();
+  };
+
+  // Notify via Web3Forms backend
+  const handleNotify = async (e) => {
     e.preventDefault();
-    if (!email.trim()) return;
-    setSubmitted(true);
+    const trimmedEmail = email.trim();
+
+    if (!trimmedEmail) {
+      setStatusMessage({ type: "error", text: "Please enter a valid email." });
+      return;
+    }
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+
+    if (!accessKey) {
+      setStatusMessage({ type: "error", text: "Notifications are unavailable right now. Please try again later." });
+      return;
+    }
+
+    if (!isCaptchaConfigured) {
+      setStatusMessage({ type: "error", text: "Notifications are paused while we finish bot protection setup. Please try again soon." });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setStatusMessage(null);
+
+    try {
+      let captchaToken = null;
+
+      if (isCaptchaConfigured) {
+        captchaToken = await execute("classes_notify");
+      }
+
+      const payload = new FormData();
+      payload.append("access_key", accessKey);
+      payload.append("subject", "New Classes Notification Request");
+      payload.append("email", trimmedEmail);
+      payload.append("message", "Please notify me when classes open.");
+      payload.append("form_source", "Classes Page");
+
+      if (captchaToken) {
+        payload.append("h-captcha-response", captchaToken);
+        payload.append("captcha_provider", "hcaptcha");
+      }
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          Accept: "application/json"
+        },
+        body: payload
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        console.error("Web3Forms notify error", data);
+        throw new Error(data.message || "Unable to save your request right now.");
+      }
+
+      setSubmitted(true);
+      setStatusMessage({ type: "success", text: `You're on the list! We'll email ${trimmedEmail} as soon as classes open.` });
+      setEmail("");
+      if (isCaptchaConfigured) {
+        resetHcaptcha();
+      }
+    } catch (error) {
+      setStatusMessage({ type: "error", text: error.message || "Unable to save your request right now." });
+      if (isCaptchaConfigured) {
+        resetHcaptcha();
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -109,24 +204,50 @@ const ClassesPage = () => {
 
             {/* Notify form */}
             <form onSubmit={handleNotify} className="mt-8">
+              {!isCaptchaConfigured && (
+                <p
+                  className="mb-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700"
+                  role="alert"
+                >
+                  Notifications are disabled while we complete security setup. Please check back soon.
+                </p>
+              )}
+              {isCaptchaConfigured && (
+                <div id={hcaptchaContainerId} style={{ display: "none" }} />
+              )}
               {submitted ? (
                 <div
-                  className="rounded-xl p-4 text-center"
+                  className="rounded-xl p-4 text-center space-y-4"
                   style={{
                     backgroundColor: `${colors.secondary}15`,
                     border: `1px solid ${colors.secondary}40`,
                     color: colors.text,
                   }}
                 >
-                  You&apos;re on the list! We&apos;ll email <strong>{email}</strong> as soon as classes open.
+                  <p role="status" aria-live="polite">
+                    {statusMessage?.text || "You're on the list! We'll email you as soon as classes open."}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSubmitted(false);
+                      setStatusMessage(null);
+                      if (isCaptchaConfigured) {
+                        resetHcaptcha();
+                      }
+                    }}
+                    className="inline-flex items-center justify-center rounded-md border border-secondary px-4 py-2 text-sm font-medium text-secondary transition-all hover:bg-secondary/10"
+                  >
+                    Notify another email
+                  </button>
                 </div>
               ) : (
-                <div className="flex flex-col items-center gap-3 sm:flex-row">
+                <div className="flex w-full flex-col items-center gap-3 sm:flex-row">
                   <input
                     type="email"
                     required
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={handleEmailChange}
                     placeholder="Your email for early access"
                     className="w-full flex-1 rounded-lg px-4 py-3 outline-none"
                     style={{
@@ -137,16 +258,38 @@ const ClassesPage = () => {
                   />
                   <button
                     type="submit"
-                    className="w-full sm:w-auto rounded-lg px-6 py-3 font-medium transition-all hover:scale-[1.01]"
+                    disabled={
+                      isSubmitting || !isCaptchaConfigured || !isHcaptchaReady
+                    }
+                    className="w-full sm:w-auto rounded-lg px-6 py-3 font-medium transition-all"
                     style={{
                       backgroundColor: colors.primary,
                       color: colors.neutral,
                       boxShadow: "0 6px 16px rgba(86,61,124,0.25)",
+                      opacity:
+                        isSubmitting || !isCaptchaConfigured || !isHcaptchaReady
+                          ? 0.75
+                          : 1,
+                      cursor:
+                        isSubmitting || !isCaptchaConfigured || !isHcaptchaReady
+                          ? "not-allowed"
+                          : "pointer",
                     }}
                   >
-                    Notify Me
+                    {isSubmitting ? "Sending..." : "Notify Me"}
                   </button>
                 </div>
+              )}
+              {statusMessage && !submitted && (
+                <p
+                  className={`mt-3 text-center text-sm ${
+                    statusMessage.type === "success" ? "text-green-600" : "text-red-600"
+                  }`}
+                  role="status"
+                  aria-live="polite"
+                >
+                  {statusMessage.text}
+                </p>
               )}
               <p className="mt-3 text-center text-xs" style={{ color: `${colors.text}80` }}>
                 No spam—just one email when we open registration.
