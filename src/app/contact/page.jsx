@@ -59,13 +59,6 @@ const ContactPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-
-    if (!accessKey) {
-      setStatusMessage({ type: "error", text: "The contact form is not configured yet. Please try again later." });
-      return;
-    }
-
     if (!isCaptchaConfigured) {
       setStatusMessage({ type: "error", text: "This form is temporarily unavailable while we finish bot protection setup. Please try again later." });
       return;
@@ -85,49 +78,33 @@ const ContactPage = () => {
         throw new Error("Please fill in all required fields before sending.");
       }
 
-      let captchaToken = null;
+      const captchaToken = await execute("contact_form");
 
-      if (isCaptchaConfigured) {
-        captchaToken = await execute("contact_form");
-      }
-
-      const payload = new FormData();
-      payload.append("access_key", accessKey);
-      payload.append("subject", trimmedSubject || "New Contact Message");
-      payload.append("name", trimmedName);
-      payload.append("email", trimmedEmail);
-      payload.append("reply_to", trimmedEmail);
-      payload.append(
-        "message",
-        `Name: ${trimmedName}\nEmail: ${trimmedEmail}\nPhone: ${trimmedPhone || "Not provided"}\nService Interest: ${serviceInterest}\n\n${trimmedMessage}`
-      );
-      payload.append("form_source", "Contact Page");
-
-      if (captchaToken) {
-        payload.append("h-captcha-response", captchaToken);
-        payload.append("captcha_provider", "hcaptcha");
-      }
-
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/forms/contact", {
         method: "POST",
         headers: {
-          Accept: "application/json"
+          "Content-Type": "application/json"
         },
-        body: payload
+        body: JSON.stringify({
+          name: trimmedName,
+          email: trimmedEmail,
+          phone: trimmedPhone,
+          subject: trimmedSubject,
+          message: trimmedMessage,
+          serviceInterest,
+          captchaToken
+        })
       });
 
       const data = await response.json();
 
-      if (!data.success) {
-        console.error("Web3Forms contact error", data);
-        throw new Error(data.message || "Something went wrong while sending your message.");
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Something went wrong while sending your message.");
       }
 
       setStatusMessage({ type: "success", text: CONTACT_SUCCESS_MESSAGE });
       resetForm();
-      if (isCaptchaConfigured) {
-        resetHcaptcha();
-      }
+      resetHcaptcha();
       setSubmitted(true);
     } catch (error) {
       setStatusMessage({ type: "error", text: error.message || "We could not send your message. Please try again." });

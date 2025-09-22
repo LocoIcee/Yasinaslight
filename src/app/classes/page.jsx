@@ -42,7 +42,7 @@ const ClassesPage = () => {
     resetFeedback();
   };
 
-  // Notify via Web3Forms backend
+  // Notify via internal API endpoint
   const handleNotify = async (e) => {
     e.preventDefault();
     const trimmedEmail = email.trim();
@@ -51,13 +51,6 @@ const ClassesPage = () => {
       setStatusMessage({ type: "error", text: "Please enter a valid email." });
       return;
     }
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-
-    if (!accessKey) {
-      setStatusMessage({ type: "error", text: "Notifications are unavailable right now. Please try again later." });
-      return;
-    }
-
     if (!isCaptchaConfigured) {
       setStatusMessage({ type: "error", text: "Notifications are paused while we finish bot protection setup. Please try again soon." });
       return;
@@ -67,45 +60,29 @@ const ClassesPage = () => {
     setStatusMessage(null);
 
     try {
-      let captchaToken = null;
+      const captchaToken = await execute("classes_notify");
 
-      if (isCaptchaConfigured) {
-        captchaToken = await execute("classes_notify");
-      }
-
-      const payload = new FormData();
-      payload.append("access_key", accessKey);
-      payload.append("subject", "New Classes Notification Request");
-      payload.append("email", trimmedEmail);
-      payload.append("message", "Please notify me when classes open.");
-      payload.append("form_source", "Classes Page");
-
-      if (captchaToken) {
-        payload.append("h-captcha-response", captchaToken);
-        payload.append("captcha_provider", "hcaptcha");
-      }
-
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/forms/notify", {
         method: "POST",
         headers: {
-          Accept: "application/json"
+          "Content-Type": "application/json"
         },
-        body: payload
+        body: JSON.stringify({
+          email: trimmedEmail,
+          captchaToken
+        })
       });
 
       const data = await response.json();
 
-      if (!data.success) {
-        console.error("Web3Forms notify error", data);
-        throw new Error(data.message || "Unable to save your request right now.");
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Unable to save your request right now.");
       }
 
       setSubmitted(true);
       setStatusMessage({ type: "success", text: `You're on the list! We'll email ${trimmedEmail} as soon as classes open.` });
       setEmail("");
-      if (isCaptchaConfigured) {
-        resetHcaptcha();
-      }
+      resetHcaptcha();
     } catch (error) {
       setStatusMessage({ type: "error", text: error.message || "Unable to save your request right now." });
       if (isCaptchaConfigured) {
