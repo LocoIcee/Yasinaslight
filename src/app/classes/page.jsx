@@ -214,7 +214,7 @@ const ClassesPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-neutral-50">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-purple-50 via-blue-50 to-teal-50">
       <div
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
