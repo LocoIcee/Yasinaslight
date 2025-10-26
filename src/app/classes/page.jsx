@@ -7,60 +7,144 @@ import { colors, fonts } from "@/utils/constants";
 
 const CLASS_OFFERINGS = [
   {
-    id: "chakra",
-    title: "Chakra Alignment Series",
-    label: "Chakra Classes",
-    price: "$225",
-    duration: "3-week series | 90 min sessions",
+    id: "reiki-overview",
+    title: "Reiki",
+    label: "Reiki Overview",
+    price: "One-on-One or Group",
+    duration: "Custom Scheduling Available",
     description:
-      "Reclaim harmony in your energetic body through guided practices, reflective journaling, and sound healing activations tailored to each chakra.",
+      'Reiki is a popular, effective and simple form of energy work used in hospitals across the country. "Reiki" means universal life force energy. During this workshop you will learn the Usui method of channeling Reiki energy for healing purposes. Reiki has been widely used to help support healing on both physical and emotional levels.',
+    outcomes: [],
+  },
+  {
+    id: "reiki-level-1",
+    title: "Reiki Level 1",
+    label: "Reiki Level 1",
+    price: "175 + GST",
+    duration: "Initiation Workshop",
+    description:
+      "Reiki level 1 is an initiation into Reiki. It is the beginning of opening the energy channels in the body to help you connect to the universe's energy. Students begin practicing self Reiki before moving on to healing others. Workshop includes:",
     outcomes: [
-      "Understand the purpose and emotional landscape of each chakra",
-      "Receive personalized balancing techniques and meditations",
-      "Learn crystal, color, and affirmation support for daily alignment",
+      "History of Usui Reiki",
+      "Introduction to the human energy system, aura and chakras",
+      "Receiving the level 1 Usui Reiki Attunements",
+      "Assessment of the energy field using a pendulum and scanning",
+      "Hands on experience to do a treatment on yourself and others in the class",
+      "The hand positions and what they do",
+      "Shielding & clearing of your energy field",
+      "Certificate for Level 1 and Manual",
     ],
   },
   {
-    id: "angel",
-    title: "Angel Connections Workshop",
-    label: "Angel Connections",
-    price: "$180",
-    duration: "Single intensive | 2.5 hours",
+    id: "reiki-level-2",
+    title: "Reiki Level 2",
+    label: "Reiki Level 2",
+    price: "200 + GST",
+    duration: "Prerequisite: Level 1",
     description:
-      "Build a sacred relationship with your angelic team while strengthening your intuitive channel through ritual, breath, and energetic protection.",
+      "Reiki level 2 is where you begin to learn how to practice Reiki on others. It includes the ability to provide distance Reiki or sending healing energy to individuals wherever they may be. It also gives you the ability to send mental and emotional healing to your past, present and future as well as others. This level is considered the practitioner level of Reiki, allowing you to start charging for your Reiki services. Workshop includes:",
     outcomes: [
-      "Identify your guardian team and their unique signatures",
-      "Practice safe channeling and message discernment",
-      "Create morning/evening rituals to stay connected",
+      "Teachings of the first three Usui Reiki symbols for distance and mental healing, emotional healing and for more powerful healing",
+      "Hands on experience of the different types of distance healing",
+      "Learning how to work on others",
+      "Reiki ethics when working on others",
+      "Introduction to Reiki and crystals",
+      "Scanning of the energy field",
+      "Clearing your environment of unwanted energy",
+      "Healing unwanted habits",
+      "Level 2 Usui Reiki attunement",
+      "Practice",
+      "Certificate for Level 2 and Manual",
     ],
   },
   {
-    id: "reiki",
-    title: "Reiki Immersion",
-    label: "Reiki Classes",
-    price: "$260",
-    duration: "Level I & II | 2 full-day immersions",
+    id: "reiki-level-3",
+    title: "Reiki Level 3 & Masters",
+    label: "Reiki Level 3",
+    price: "300 + GST",
+    duration: "Prerequisite: Level 1 & 2",
     description:
-      "Step into your healer lineage with attunements, practice clinics, and practical tools to offer Reiki confidently for yourself and others.",
+      "Reiki level 3 is considered the teachers level. You have gathered enough energy and knowledge to train new Reiki practitioners. You become a Reiki master at the highest level and can use your gift to heal or train others. Workshop includes:",
     outcomes: [
-      "Receive Level I & II attunements with lineage certification",
-      "Understand ethics, hand placements, and session flow",
-      "Practice sending distance Reiki and creating sacred space",
+      "Teachings of the Usui Reiki Master symbol",
+      "Teachings of the Tibetan Reiki Master symbol",
+      "Finding a symbol that can become just yours to add to your treatments",
+      "Hands-on experience in using the symbol",
+      "Learn how to Pass Attunements for teaching, including Healing attunements",
+      "Master Tibetan Reiki attunement",
+      "Master Usui Reiki attunement",
+      "Practice Passing attunements",
+      "How to perform distance attunements",
+      "Certificate for level 3 and Manual",
     ],
   },
   {
-    id: "card",
-    title: "Card Reading Mastery",
-    label: "Card Reading",
-    price: "$160",
-    duration: "Half-day retreat | 4 hours",
+    id: "reverse-vision-board",
+    title: "Reverse Vision Board",
+    label: "Reverse Vision Board",
+    price: "50 + GST",
+    duration: "Group Workshop",
     description:
-      "Develop a grounded, heart-led card reading style with spreads that empower clarity, compassion, and actionable insight for every querent.",
+      "Unlike a traditional vision board that is used to envision the life you want, a reverse vision board is all about facing your fears and how you feel about success! How do you feel about work, life, love? etc. Why not face those fears and look in your mirror so you can actually move on? After the creation of your poster you will discuss the symbolism and connotation behind the images you chose. You will also receive a 2 card reading from Yasina and she will lead the group through a releasing ceremony. Break through your barriers and live the life you want! Posters and a few magazines will be provided, please bring in more magazines if possible.",
+    outcomes: [],
+  },
+  {
+    id: "meditation-class",
+    title: "Meditation Class",
+    label: "Meditation Class",
+    price: "25 + GST",
+    duration: "Guided Group Session",
+    description:
+      "We will be using breath, sound and movement to release tension, open our bodies, quiet our minds and optimize our flow of life force energy. I will do a guided meditation to relax and center those in the class. You will also get advice on which meditation technique is for you.",
+    outcomes: [],
+  },
+  {
+    id: "spirit-guides",
+    title: "Connecting with Your Spirit Guides",
+    label: "Spirit Guides",
+    price: "50 + GST",
+    duration: "Intuitive Workshop",
+    description:
+      'We were born with our own "support team" to direct us on our life path, known as our Spirit Guides. We will learn various ways to connect with and communicate with our own Guides.',
+    outcomes: [],
+  },
+  {
+    id: "card-readings",
+    title: "Introduction to Card Readings",
+    label: "Card Readings",
+    price: "50 + GST",
+    duration: "Workshop Intensives",
+    description: "Workshop includes:",
     outcomes: [
-      "Interpret spreads without memorizing every card",
-      "Blend intuition with symbolism for cohesive narratives",
-      "Craft compassionate client communication and boundaries",
+      "How to pick a deck",
+      "How to focus",
+      "Setting intentions",
+      "Using questions",
+      "Shuffle and pick",
+      "Getting the message",
+      "Trusting",
+      "Getting ego to step away and learning to be the conduit for information",
     ],
+  },
+  {
+    id: "archangel-class",
+    title: "Archangel Class",
+    label: "Archangel Class",
+    price: "40 + GST",
+    duration: "Meet 3 Archangels",
+    description:
+      "Come meet 3 archangels! They change for each class! Learn how and when to invoke them, what they do, how to feel or see signs of them and each person will get a two card message reading from the angels!",
+    outcomes: [],
+  },
+  {
+    id: "intro-to-chakras",
+    title: "Introduction to Chakra's",
+    label: "Chakra Class",
+    price: "40 + GST",
+    duration: "Chakra Cleanse & Teachings",
+    description:
+      "Come learn about your chakra's. We will go over each chakra, the sounds they react to, the angels associated to them, the smells, crystals and elements for each chakra as well. We will do a chakra cleanse and you will learn how to balance yourself when you feel off.",
+    outcomes: [],
   },
 ];
 
@@ -230,21 +314,18 @@ const ClassesPage = () => {
       <header className="relative px-4 py-20 md:py-28">
         <div className="mx-auto flex max-w-5xl flex-col gap-10 rounded-3xl border border-white/30 bg-white/70 p-10 shadow-xl backdrop-blur lg:flex-row lg:p-14">
           <div className="flex-1 text-center lg:text-left">
-            <p
-              className="text-sm uppercase tracking-[0.3em]"
-              style={{ color: `${colors.text}80`, fontFamily: fonts.body }}
-            >
-              Classes & Gatherings
+            <p className="text-sm uppercase tracking-[0.3em]" style={{ color: `${colors.text}80`, fontFamily: fonts.body }}>
+              Classes
             </p>
             <h1
               className="mt-4 text-4xl leading-tight md:text-5xl"
               style={{ color: colors.primary, fontFamily: fonts.heading }}
             >
-              Expand your light through soulful study, practice, and community.
+              Classes - One on One or in a Group
             </h1>
             <p className="mt-5 text-base md:text-lg" style={{ color: `${colors.text}b3`, fontFamily: fonts.body }}>
-              Each offering weaves intuitive guidance, grounded teachings, and heart-led rituals so you leave
-              empowered to share your gifts with confidence.
+              Explore Yasina&apos;s Reiki attunements, spiritual development classes, and creative healing workshops.
+              Every session can be tailored for private study or shared with a group.
             </p>
           </div>
           <div
