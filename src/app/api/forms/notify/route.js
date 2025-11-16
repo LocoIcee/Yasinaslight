@@ -41,6 +41,7 @@ export async function POST(request) {
       subject: "New Classes Notification Request",
       text: textBody,
       html: htmlBody,
+      replyTo: trimmedEmail,
     });
 
     return jsonSuccess();

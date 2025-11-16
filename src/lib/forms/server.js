@@ -38,7 +38,7 @@ export async function verifyCaptchaToken(token, remoteIp) {
   return response.json();
 }
 
-export async function sendEmail({ to, subject, text, html }) {
+export async function sendEmail({ to, subject, text, html, replyTo }) {
   if (!RESEND_API_KEY) {
     throw new Error("RESEND_API_KEY is not configured.");
   }
@@ -51,19 +51,25 @@ export async function sendEmail({ to, subject, text, html }) {
     throw new Error("Email recipient is not configured.");
   }
 
+  const payload = {
+    from: RESEND_FROM_EMAIL,
+    to: Array.isArray(to) ? to : [to],
+    subject,
+    text,
+    html,
+  };
+
+  if (replyTo) {
+    payload.reply_to = Array.isArray(replyTo) ? replyTo : [replyTo];
+  }
+
   const response = await fetch(RESEND_API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${RESEND_API_KEY}`,
     },
-    body: JSON.stringify({
-      from: RESEND_FROM_EMAIL,
-      to: Array.isArray(to) ? to : [to],
-      subject,
-      text,
-      html,
-    }),
+    body: JSON.stringify(payload),
   });
 
   const data = await response.json();

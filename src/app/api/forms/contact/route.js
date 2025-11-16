@@ -60,6 +60,7 @@ export async function POST(request) {
       subject: emailSubject,
       text: textBody,
       html: htmlBody,
+      replyTo: trimmedEmail,
     });
 
     return jsonSuccess();
