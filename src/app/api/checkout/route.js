@@ -43,14 +43,21 @@ export async function POST(request) {
         return NextResponse.json({ error: 'Item price must be greater than 0.' }, { status: 400 });
       }
 
-      lineItems.push({
+      const customNote = typeof item.customNote === 'string' ? item.customNote.trim() : '';
+      const lineItem = {
         name: item.optionName ? `${item.name} – ${item.optionName}` : item.name,
         quantity: String(item.quantity),
         base_price_money: {
           amount,
           currency: DEFAULT_CURRENCY,
         },
-      });
+      };
+
+      if (customNote) {
+        lineItem.note = customNote.slice(0, 500);
+      }
+
+      lineItems.push(lineItem);
     }
 
     const payload = {

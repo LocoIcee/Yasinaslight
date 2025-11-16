@@ -3,6 +3,7 @@ import React from "react";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import Cart from "@/components/layout/Cart";
+import FloatingCartButton from "@/components/layout/FloatingCartButton";
 import { CartProvider } from "@/contexts/CartContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 
@@ -39,6 +40,7 @@ const Layout = ({ children }) => {
         <NavBar />
         <main className="flex-grow">{children}</main>
         <Footer />
+        <FloatingCartButton />
         <Cart />
       </CartProvider>
     </AuthProvider>

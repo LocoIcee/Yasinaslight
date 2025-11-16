@@ -66,6 +66,7 @@ export const CartProvider = ({ children }) => {
       price,
       image,
       quantity = 1,
+      customNote,
     } = item;
 
     if (!productId) {
@@ -78,7 +79,11 @@ export const CartProvider = ({ children }) => {
       return;
     }
 
-    const cartItemId = optionId ? `${productId}__${optionId}` : productId;
+    const sanitizedCustomNote =
+      typeof customNote === 'string' ? customNote.trim() : '';
+    const baseCartItemId = optionId ? `${productId}__${optionId}` : productId;
+    const noteKey = sanitizedCustomNote ? `__note:${sanitizedCustomNote}` : '';
+    const cartItemId = `${baseCartItemId}${noteKey}`;
 
     const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === cartItemId);
 
@@ -101,6 +106,7 @@ export const CartProvider = ({ children }) => {
           price,
           quantity,
           image: image || null,
+          customNote: sanitizedCustomNote || null,
         },
       ]);
     }

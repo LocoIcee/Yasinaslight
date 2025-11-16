@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom';
 import ImageCarousel from '@/components/ui/carousel';
 import { useCart } from '@/contexts/CartContext';
 
- const products = [
+const products = [
   {
       headerImg: '/assets/products/RRP.png',
       togLearn: true,
@@ -292,10 +292,44 @@ Want to amplify a specific chakra or manifestation? Use the coaster aligned to y
     }
   ];
 
+const customFieldConfig = {
+  'crystal-packages': {
+    label: 'What topic or intention should this crystal bundle support?',
+    placeholder: 'Example: Career transition confidence, heartbreak healing, fertility support…',
+    helperText: 'Share any context you’d like so Yasina can curate the exact crystals you need.',
+    requiredMessage: 'Please describe the topic for this crystal package.',
+  },
+  'soul-paintings': {
+    label: 'How should Yasina contact you to channel your Soul Painting?',
+    placeholder: 'Best email, phone number, and any preferred times.',
+    helperText: 'She’ll reach out to gather a photo or schedule a brief call before painting.',
+    requiredMessage: 'Please provide contact information for your Soul Painting.',
+  },
+  'intention-coasters': {
+    label: 'Which chakras or intentions should these coasters focus on?',
+    placeholder: 'List specific chakras, manifestations, or energetic themes.',
+    helperText: 'Each set can be tuned to the chakras/intentions you name.',
+    requiredMessage: 'Please share the chakras or intentions for your coasters.',
+  },
+};
+
 export default function Products() {
   const [expandedProducts, setExpandedProducts] = useState({});
   const [modalProduct, setModalProduct] = useState(null);
-  const [selectedOptions, setSelectedOptions] = useState({});
+  const [selectedOptions, setSelectedOptions] = useState(() => {
+    const defaults = {};
+    products.forEach((product) => {
+      const firstNumericOption = product.pricing?.find(
+        (option) => typeof option.price === 'number'
+      );
+      if (firstNumericOption) {
+        defaults[product.id] = firstNumericOption.id;
+      }
+    });
+    return defaults;
+  });
+  const [customInputs, setCustomInputs] = useState({});
+  const [customFieldErrors, setCustomFieldErrors] = useState({});
   const modalRef = useRef(null);
   const { addToCart: addItemToCart } = useCart();
 
@@ -370,6 +404,64 @@ export default function Products() {
     }));
   };
 
+  const updateCustomInput = (productId, value) => {
+    setCustomInputs(prev => ({
+      ...prev,
+      [productId]: value,
+    }));
+
+    setCustomFieldErrors(prev => {
+      if (!prev[productId]) {
+        return prev;
+      }
+      if (value.trim()) {
+        const { [productId]: _removed, ...rest } = prev;
+        return rest;
+      }
+      return prev;
+    });
+  };
+
+  const renderCustomField = (productId, variant = 'card') => {
+    const config = customFieldConfig[productId];
+    if (!config) return null;
+
+    const value = customInputs[productId] ?? '';
+    const error = customFieldErrors[productId];
+    const baseWrapperClasses =
+      variant === 'modal'
+        ? 'bg-white/80 border border-purple-100 rounded-xl p-4 mb-6'
+        : 'mb-4';
+
+    return (
+      <div className={`${baseWrapperClasses} space-y-2`}>
+        <label className="block text-sm font-semibold text-purple-800">
+          {config.label}
+          <span className="text-pink-600 ml-1">*</span>
+        </label>
+        <textarea
+          rows={variant === 'modal' ? 3 : 2}
+          value={value}
+          required
+          aria-invalid={Boolean(error)}
+          onChange={(event) => updateCustomInput(productId, event.target.value)}
+          placeholder={config.placeholder}
+          className={`w-full rounded-lg border px-3 py-2 text-sm transition-colors placeholder:text-gray-400 ${
+            error
+              ? 'border-pink-500 focus:border-pink-500 focus:ring-pink-200'
+              : 'border-purple-200 focus:border-purple-400 focus:ring-purple-100'
+          } bg-white`}
+        />
+        {config.helperText && (
+          <p className="text-xs text-gray-600">{config.helperText}</p>
+        )}
+        {error && (
+          <p className="text-xs text-pink-600 font-medium">{error}</p>
+        )}
+      </div>
+    );
+  };
+
   const handleAddToCart = (product, { fromModal = false } = {}) => {
     if (!product) return;
 
@@ -380,16 +472,31 @@ export default function Products() {
     );
     const firstNumericOption = options.find((option) => typeof option.price === 'number');
 
-    if (options.length > 1 && !selectedOption) {
-      if (fromModal) {
-        alert('Please select an option before adding to cart.');
-      } else {
-        openModal(product);
-      }
+    const fieldConfig = customFieldConfig[product.id];
+    const customInputValue =
+      typeof customInputs[product.id] === 'string'
+        ? customInputs[product.id].trim()
+        : '';
+
+    if (fieldConfig && !customInputValue) {
+      setCustomFieldErrors((prev) => ({
+        ...prev,
+        [product.id]:
+          fieldConfig.requiredMessage ||
+          'Please provide the requested information for this item.',
+      }));
       return;
     }
 
-    const optionToUse = selectedOption || firstNumericOption;
+    let optionToUse = selectedOption;
+
+    if (!optionToUse && firstNumericOption) {
+      optionToUse = firstNumericOption;
+      setSelectedOptions((prev) => ({
+        ...prev,
+        [product.id]: firstNumericOption.id,
+      }));
+    }
 
     if (!optionToUse || typeof optionToUse.price !== 'number') {
       alert('This item requires custom invoicing. Please contact Yasina to complete your purchase.');
@@ -403,6 +510,7 @@ export default function Products() {
       name: product.title,
       price: optionToUse.price,
       image: product.headerImg,
+      customNote: customInputValue || null,
     });
 
     if (fromModal) {
@@ -441,6 +549,7 @@ export default function Products() {
           {products.map((product) => {
             const pricingOptions = Array.isArray(product.pricing) ? product.pricing : [];
             const hasNumericPrice = pricingOptions.some((option) => typeof option.price === 'number');
+            const selectedOptionId = selectedOptions[product.id];
 
             return (
               <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -472,6 +581,39 @@ export default function Products() {
                 </div>
                 
                 <p className="text-gray-600 mb-4">{product.subtitle}</p>
+                {pricingOptions.length > 1 && hasNumericPrice && (
+                  <div className="mb-4">
+                    <p className="text-sm font-semibold text-purple-700 mb-2">
+                      Choose an option:
+                    </p>
+                    <div className="space-y-2">
+                      {pricingOptions.map((option) => {
+                        const isNumeric = typeof option.price === 'number';
+                        const isSelected = selectedOptionId === option.id;
+                        const priceLabel = isNumeric ? formatMoney(option.price) : option.price;
+
+                        return (
+                          <button
+                            type="button"
+                            key={option.id ?? option.option}
+                            onClick={() => isNumeric && selectOption(product.id, option.id)}
+                            disabled={!isNumeric}
+                            aria-pressed={isSelected}
+                            className={`w-full flex items-center justify-between rounded-lg border px-3 py-2 text-sm transition-colors ${
+                              isSelected
+                                ? 'border-purple-500 bg-purple-50 text-purple-900'
+                                : 'border-gray-200 text-gray-700 hover:border-purple-300'
+                            } ${isNumeric ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'}`}
+                          >
+                            <span className="font-medium text-left pr-2">{option.option}</span>
+                            <span className="font-semibold">{priceLabel}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+                {renderCustomField(product.id, 'card')}
                 <button
                   onClick={() => {
                     if (hasNumericPrice) {
@@ -558,31 +700,44 @@ export default function Products() {
                                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                     <div className="space-y-2">
                                       <h4 className="text-lg font-semibold text-purple-900">Pricing Options:</h4>
-                                      <div className="space-y-2">
-                                        {modalProduct.pricing.map((price, idx) => (
-                                          <div key={idx} className="flex items-center space-x-3">
-                                            {modalProduct.pricing.length > 1 && (
-                                              <input
-                                                type="radio"
-                                                id={`${modalProduct.id}-${price.id}`}
-                                                name={`${modalProduct.id}-option`}
-                                                value={price.id}
-                                                checked={selectedOptions[modalProduct.id] === price.id}
-                                                onChange={() => selectOption(modalProduct.id, price.id)}
-                                                className="text-purple-600 focus:ring-purple-500"
-                                              />
-                                            )}
-                                            <label 
-                                              htmlFor={`${modalProduct.id}-${price.id}`}
-                                              className="flex items-center space-x-2 cursor-pointer"
+                                      <div className="grid gap-3 sm:grid-cols-2">
+                                        {modalProduct.pricing.map((priceOption) => {
+                                          const isNumeric = typeof priceOption.price === 'number';
+                                          const isSelected =
+                                            selectedOptions[modalProduct.id] === priceOption.id;
+                                          const priceLabel = isNumeric
+                                            ? formatMoney(priceOption.price)
+                                            : priceOption.priceRange
+                                              ? priceOption.priceRange
+                                              : priceOption.price;
+
+                                          return (
+                                            <button
+                                              type="button"
+                                              key={priceOption.id ?? priceOption.option}
+                                              onClick={() => isNumeric && selectOption(modalProduct.id, priceOption.id)}
+                                              disabled={!isNumeric}
+                                              aria-pressed={isSelected}
+                                              className={`text-left rounded-2xl border-2 p-4 transition-all ${
+                                                isSelected
+                                                  ? 'border-purple-600 bg-white shadow-lg ring-2 ring-purple-100'
+                                                  : 'border-transparent bg-white/70 hover:border-purple-200 hover:bg-white'
+                                              } ${isNumeric ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'}`}
                                             >
-                                              <span className="text-purple-800 font-medium">{price.option}:</span>
-                                              <span className="text-2xl font-bold text-purple-900">
-                                                {typeof price.price === 'number' ? `$${price.price}` : price.priceRange ? `$${price.priceRange}` : price.price}
-                                              </span>
-                                            </label>
-                                          </div>
-                                        ))}
+                                              <p className="text-sm font-semibold text-purple-700 mb-1">
+                                                {priceOption.option}
+                                              </p>
+                                              <p className="text-2xl font-bold text-purple-900">
+                                                {priceLabel}
+                                              </p>
+                                              {!isNumeric && (
+                                                <p className="text-xs text-gray-500 mt-1">
+                                                  Contact Yasina to price this option.
+                                                </p>
+                                              )}
+                                            </button>
+                                          );
+                                        })}
                                       </div>
                                     </div>
                                     <button
@@ -594,6 +749,7 @@ export default function Products() {
                                     </button>
                                   </div>
                                 </div>
+                                {renderCustomField(modalProduct.id, 'modal')}
                                 
                                
                                 <div className="border-t border-purple-100 pt-6 space-y-6">

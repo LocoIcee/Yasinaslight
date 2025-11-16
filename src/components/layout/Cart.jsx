@@ -142,6 +142,11 @@ const Cart = () => {
                         {item.optionName}
                       </span>
                     )}
+                    {item.customNote && (
+                      <span className="text-xs text-body-subtle mt-1 whitespace-pre-wrap">
+                        Special instructions: {item.customNote}
+                      </span>
+                    )}
 
                     <div className="mt-auto flex justify-between items-center">
                       <div className="flex items-center border border-text-muted rounded">
@@ -217,6 +222,7 @@ const Cart = () => {
                         name: item.name,
                         price: item.price,
                         quantity: item.quantity,
+                        customNote: item.customNote,
                       })),
                     }),
                   });
