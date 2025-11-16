@@ -42,6 +42,7 @@ export async function POST(request) {
       text: textBody,
       html: htmlBody,
       replyTo: trimmedEmail,
+      fromName: trimmedEmail,
     });
 
     return jsonSuccess();

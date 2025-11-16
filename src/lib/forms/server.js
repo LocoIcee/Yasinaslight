@@ -38,7 +38,7 @@ export async function verifyCaptchaToken(token, remoteIp) {
   return response.json();
 }
 
-export async function sendEmail({ to, subject, text, html, replyTo }) {
+export async function sendEmail({ to, subject, text, html, replyTo, fromName }) {
   if (!RESEND_API_KEY) {
     throw new Error("RESEND_API_KEY is not configured.");
   }
@@ -51,8 +51,10 @@ export async function sendEmail({ to, subject, text, html, replyTo }) {
     throw new Error("Email recipient is not configured.");
   }
 
+  const normalizedFromName = fromName ? String(fromName).trim() : "";
+
   const payload = {
-    from: RESEND_FROM_EMAIL,
+    from: normalizedFromName ? `${normalizedFromName} <${RESEND_FROM_EMAIL}>` : RESEND_FROM_EMAIL,
     to: Array.isArray(to) ? to : [to],
     subject,
     text,

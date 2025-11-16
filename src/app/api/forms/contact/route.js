@@ -55,12 +55,15 @@ export async function POST(request) {
       <p>${formatMultiline(trimmedMessage)}</p>
     `;
 
+    const fromDisplayName = trimmedName ? `${trimmedName} (${trimmedEmail})` : trimmedEmail;
+
     await sendEmail({
       to: CONTACT_RECIPIENT_EMAIL,
       subject: emailSubject,
       text: textBody,
       html: htmlBody,
       replyTo: trimmedEmail,
+      fromName: fromDisplayName,
     });
 
     return jsonSuccess();
