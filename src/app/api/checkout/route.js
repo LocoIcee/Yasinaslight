@@ -28,6 +28,7 @@ export async function POST(request) {
     const redirectUrl = process.env.SQUARE_CHECKOUT_REDIRECT_URL || `${origin}${DEFAULT_REDIRECT_PATH}`;
 
     const lineItems = [];
+    const aggregatedNotes = [];
 
     for (const item of items) {
       if (typeof item?.price !== 'number' || typeof item?.quantity !== 'number') {
@@ -55,16 +56,24 @@ export async function POST(request) {
 
       if (customNote) {
         lineItem.note = customNote.slice(0, 500);
+        aggregatedNotes.push(
+          `${lineItem.name}: ${customNote}`.slice(0, 150)
+        );
       }
 
       lineItems.push(lineItem);
     }
+
+    const orderNote = aggregatedNotes.length > 0
+      ? aggregatedNotes.join(' | ').slice(0, 500)
+      : undefined;
 
     const payload = {
       idempotency_key: randomUUID(),
       order: {
         location_id: locationId,
         line_items: lineItems,
+        ...(orderNote ? { note: orderNote } : {}),
       },
       checkout_options: {
         redirect_url: redirectUrl,
